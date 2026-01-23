@@ -5,7 +5,7 @@ export function UniversalIngestionPage() {
     { 
       name: 'ServiceNow', 
       status: 'active', 
-      lastSync: '2 min ago',
+      lastSync: 'há 2 min',
       records: '1,247',
       logo: '🔄'
     },
@@ -19,21 +19,21 @@ export function UniversalIngestionPage() {
     { 
       name: 'Jira', 
       status: 'syncing', 
-      lastSync: 'syncing...',
+      lastSync: 'sincronizando...',
       records: '2,341',
       logo: '🎯'
     },
     { 
       name: 'GitHub', 
       status: 'active', 
-      lastSync: '1 min ago',
+      lastSync: 'há 1 min',
       records: '5,678',
       logo: '💻'
     },
     { 
       name: 'GitLab', 
       status: 'error', 
-      lastSync: '1 hour ago',
+      lastSync: 'há 1 hora',
       records: '0',
       logo: '🦊'
     },
@@ -56,24 +56,24 @@ export function UniversalIngestionPage() {
               <Database className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Universal Ingestion Hub</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Centralized data pipeline from all tools</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Hub de Ingestão Universal</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Pipeline de dados centralizado de todas as ferramentas</p>
             </div>
           </div>
           <button className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2">
             <Link className="w-4 h-4" />
-            <span>Add Integration</span>
+            <span>Adicionar Integração</span>
           </button>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total Integrations', value: '12', color: '#00D9FF' },
-          { label: 'Active Sources', value: '9', color: '#10B981' },
-          { label: 'Records Synced', value: '10.3k', color: '#A855F7' },
-          { label: 'Sync Success Rate', value: '98.7%', color: '#F59E0B' },
+          { label: 'Total de Integrações', value: '12', color: '#00D9FF' },
+          { label: 'Fontes Ativas', value: '9', color: '#10B981' },
+          { label: 'Registros Sincronizados', value: '10.3k', color: '#A855F7' },
+          { label: 'Taxa de Sucesso', value: '98.7%', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="text-sm text-[#94A3B8] mb-2">{stat.label}</div>
@@ -83,7 +83,7 @@ export function UniversalIngestionPage() {
       </div>
 
       {/* Integration Cards */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {integrations.map((integration, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-5 hover:border-[#94A3B8]/50 transition-colors">
             <div className="flex items-start justify-between mb-4">
@@ -108,7 +108,7 @@ export function UniversalIngestionPage() {
             </div>
 
             <div className="flex items-center justify-between pt-4 border-t border-[#1E293B]">
-              <div className="text-sm text-[#94A3B8]">Records</div>
+              <div className="text-sm text-[#94A3B8]">Registros</div>
               <div className="text-lg text-[#F1F5F9] font-semibold">{integration.records}</div>
             </div>
           </div>

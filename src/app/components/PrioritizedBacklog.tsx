@@ -86,9 +86,9 @@ function Column({ title, cards, color }: ColumnProps) {
           <span className="text-xs text-[#94A3B8]">({cards.length})</span>
         </div>
         <div className="text-xs text-[#94A3B8]">
-          {title === 'Prioritized Backlog (AI-Driven)' && 'AI optimized priority'}
-          {title === 'In Progress (Sprint 26)' && 'Current sprint'}
-          {title === 'Deployed to UAT' && 'Ready for testing'}
+          {title === 'Backlog Priorizado (IA)' && 'Prioridade otimizada por IA'}
+          {title === 'Em Progresso (Sprint 26)' && 'Sprint atual'}
+          {title === 'Deploy em UAT' && 'Pronto para testes'}
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export function PrioritizedBacklog() {
       avatar: 'AS',
       priority: 'high',
       effort: '5.5d',
-      badge: { text: 'Legacy', color: '#00D9FF' },
+      badge: { text: 'Legado', color: '#00D9FF' },
     },
     {
       id: '2',
@@ -127,7 +127,7 @@ export function PrioritizedBacklog() {
       avatar: 'SL',
       priority: 'medium',
       effort: '8.2d',
-      badge: { text: 'High Priority', color: '#EF4444' },
+      badge: { text: 'Alta Prioridade', color: '#EF4444' },
     },
   ];
 
@@ -186,15 +186,15 @@ export function PrioritizedBacklog() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Prioritized Backlog</h2>
-          <p className="text-sm text-[#94A3B8]">AI-driven work item orchestration</p>
+          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Backlog Priorizado</h2>
+          <p className="text-sm text-[#94A3B8]">Orquestração de itens com IA</p>
         </div>
         <div className="flex items-center gap-2">
           <button className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#1E293B] text-[#F1F5F9] rounded-lg text-sm transition-colors">
-            Filter
+            Filtrar
           </button>
           <button className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors">
-            + New Card
+            + Novo Card
           </button>
         </div>
       </div>
@@ -202,17 +202,17 @@ export function PrioritizedBacklog() {
       {/* Columns */}
       <div className="flex gap-6 overflow-x-auto pb-4">
         <Column 
-          title="Prioritized Backlog (AI-Driven)" 
+          title="Backlog Priorizado (IA)" 
           cards={prioritizedBacklog} 
           color="#A855F7"
         />
         <Column 
-          title="In Progress (Sprint 26)" 
+          title="Em Progresso (Sprint 26)" 
           cards={inProgress} 
           color="#00D9FF"
         />
         <Column 
-          title="Deployed to UAT" 
+          title="Deploy em UAT" 
           cards={deployed} 
           color="#10B981"
         />

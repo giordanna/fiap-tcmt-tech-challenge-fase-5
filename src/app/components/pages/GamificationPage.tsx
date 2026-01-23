@@ -11,32 +11,32 @@ export function GamificationPage() {
 
   const achievements = [
     { 
-      name: 'Clean Code Champion',
-      description: '20 PRs with 0 code smells',
+      name: 'Campeão de Código Limpo',
+      description: '20 PRs sem code smells',
       icon: Star,
       color: '#00D9FF',
       completed: true,
       progress: 100,
     },
     {
-      name: 'Agile Master',
-      description: '25 sprints completed on time',
+      name: 'Mestre Ágil',
+      description: '25 sprints concluídos no prazo',
       icon: Zap,
       color: '#A855F7',
       completed: true,
       progress: 100,
     },
     {
-      name: 'DevOps Hero',
-      description: '50 successful deployments',
+      name: 'Herói DevOps',
+      description: '50 deploys com sucesso',
       icon: Trophy,
       color: '#F59E0B',
       completed: false,
       progress: 68,
     },
     {
-      name: 'Code Reviewer Pro',
-      description: '100 code reviews completed',
+      name: 'Revisor de Código Pro',
+      description: '100 revisões de código concluídas',
       icon: Award,
       color: '#10B981',
       completed: false,
@@ -54,20 +54,20 @@ export function GamificationPage() {
               <Trophy className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Gamification</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Team achievements and leaderboard</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Gamificação</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Conquistas e ranking do time</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total XP', value: '15.2k', icon: TrendingUp, color: '#00D9FF' },
-          { label: 'Badges Earned', value: '47', icon: Award, color: '#A855F7' },
-          { label: 'Team Rank', value: '#12', icon: Users, color: '#10B981' },
-          { label: 'Achievements', value: '85%', icon: Star, color: '#F59E0B' },
+          { label: 'XP Total', value: '15.2k', icon: TrendingUp, color: '#00D9FF' },
+          { label: 'Medalhas Conquistadas', value: '47', icon: Award, color: '#A855F7' },
+          { label: 'Ranking do Time', value: '#12', icon: Users, color: '#10B981' },
+          { label: 'Conquistas', value: '85%', icon: Star, color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="flex items-center gap-2 mb-3">
@@ -82,7 +82,7 @@ export function GamificationPage() {
       <div className="grid grid-cols-2 gap-6">
         {/* Leaderboard */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Leaderboard</h2>
+          <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Ranking</h2>
           <div className="space-y-3">
             {leaderboard.map((player) => (
               <div 
@@ -106,7 +106,7 @@ export function GamificationPage() {
                 </div>
                 <div className="text-right">
                   <div className="text-lg text-[#00D9FF] font-bold">{player.points}</div>
-                  <div className="text-xs text-[#94A3B8]">{player.badges} badges</div>
+                  <div className="text-xs text-[#94A3B8]">{player.badges} medalhas</div>
                 </div>
               </div>
             ))}
@@ -131,7 +131,7 @@ export function GamificationPage() {
                       <h3 className="text-sm text-[#F1F5F9] font-semibold">{achievement.name}</h3>
                       {achievement.completed && (
                         <span className="text-xs bg-[#10B981]/20 text-[#10B981] px-2 py-0.5 rounded-full">
-                          Completed
+                          Concluído
                         </span>
                       )}
                     </div>

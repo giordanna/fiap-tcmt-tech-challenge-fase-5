@@ -121,7 +121,7 @@ export function GovernancePage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="text-sm text-[#94A3B8] mb-2">{stat.label}</div>
@@ -131,7 +131,7 @@ export function GovernancePage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Calendar */}
         <div className="col-span-2 bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
           <div className="mb-6">

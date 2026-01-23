@@ -56,7 +56,7 @@ function Gauge({ value, max, label, icon: Icon, color, unit = '' }: GaugeProps) 
       {/* Label */}
       <div className="text-center">
         <div className="text-sm text-[#F1F5F9] font-semibold">{label}</div>
-        <div className="text-xs text-[#94A3B8] mt-1">Target: {max}{unit}</div>
+        <div className="text-xs text-[#94A3B8] mt-1">Meta: {max}{unit}</div>
       </div>
     </div>
   );
@@ -64,18 +64,18 @@ function Gauge({ value, max, label, icon: Icon, color, unit = '' }: GaugeProps) 
 
 export function MetricsGauges() {
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <Gauge
         value={8.5}
         max={10}
-        label="NPS Score"
+        label="Pontuação NPS"
         icon={TrendingUp}
         color="#10B981"
       />
       <Gauge
         value={92}
         max={100}
-        label="Deployment Success"
+        label="Sucesso de Deploy"
         icon={Activity}
         color="#00D9FF"
         unit="%"
@@ -83,15 +83,15 @@ export function MetricsGauges() {
       <Gauge
         value={18}
         max={24}
-        label="Deploy Frequency"
+        label="Frequência de Deploy"
         icon={GitBranch}
         color="#A855F7"
-        unit="/day"
+        unit="/dia"
       />
       <Gauge
         value={0.8}
         max={1}
-        label="MTTR (hours)"
+        label="MTTR (horas)"
         icon={Clock}
         color="#F59E0B"
         unit="h"

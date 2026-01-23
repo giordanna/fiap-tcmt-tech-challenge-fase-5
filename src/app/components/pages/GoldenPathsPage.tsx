@@ -46,24 +46,24 @@ export function GoldenPathsPage() {
               <Workflow className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Golden Paths</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Infrastructure self-service catalog</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Caminhos Padrão</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Catálogo de infraestrutura self-service</p>
             </div>
           </div>
           <button className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2">
             <Rocket className="w-4 h-4" />
-            <span>Create New Path</span>
+            <span>Criar Novo Caminho</span>
           </button>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total Golden Paths', value: '24', color: '#A855F7' },
-          { label: 'Active Deployments', value: '142', color: '#00D9FF' },
-          { label: 'Avg Deploy Time', value: '11m', color: '#10B981' },
-          { label: 'Success Rate', value: '99.2%', color: '#F59E0B' },
+          { label: 'Total de Caminhos', value: '24', color: '#A855F7' },
+          { label: 'Deploys Ativos', value: '142', color: '#00D9FF' },
+          { label: 'Tempo Médio de Deploy', value: '11m', color: '#10B981' },
+          { label: 'Taxa de Sucesso', value: '99.2%', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="text-sm text-[#94A3B8] mb-2">{stat.label}</div>
@@ -73,7 +73,7 @@ export function GoldenPathsPage() {
       </div>
 
       {/* Golden Paths Grid */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {paths.map((path, i) => (
           <div 
             key={i} 
@@ -98,11 +98,11 @@ export function GoldenPathsPage() {
 
             <div className="flex items-center gap-6 pt-4 border-t border-[#1E293B]">
               <div>
-                <div className="text-xs text-[#94A3B8] mb-1">Uses</div>
+                <div className="text-xs text-[#94A3B8] mb-1">Usos</div>
                 <div className="text-lg text-[#F1F5F9] font-semibold">{path.uses}</div>
               </div>
               <div>
-                <div className="text-xs text-[#94A3B8] mb-1">Avg Time</div>
+                <div className="text-xs text-[#94A3B8] mb-1">Tempo Médio</div>
                 <div className="text-lg text-[#F1F5F9] font-semibold">{path.avgTime}</div>
               </div>
               <button 
@@ -112,7 +112,7 @@ export function GoldenPathsPage() {
                   color: path.color
                 }}
               >
-                Deploy
+                Implantar
               </button>
             </div>
           </div>

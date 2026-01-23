@@ -3,25 +3,25 @@ import { Trophy, Award, Star, Zap } from 'lucide-react';
 export function GamificationWidgets() {
   const badges = [
     { 
-      name: 'Clean Code Champion', 
+      name: 'Campeão de Código Limpo', 
       icon: Star, 
       progress: 85, 
       color: '#00D9FF',
-      description: '17/20 PRs with 0 code smells'
+      description: '17/20 PRs sem code smells'
     },
     { 
-      name: 'Agile Master', 
+      name: 'Mestre Ágil', 
       icon: Zap, 
       progress: 92, 
       color: '#A855F7',
-      description: '23/25 sprints completed on time'
+      description: '23/25 sprints concluídos no prazo'
     },
     { 
-      name: 'DevOps Hero', 
+      name: 'Herói DevOps', 
       icon: Trophy, 
       progress: 68, 
       color: '#F59E0B',
-      description: '34/50 successful deployments'
+      description: '34/50 deploys com sucesso'
     },
   ];
 
@@ -33,8 +33,8 @@ export function GamificationWidgets() {
           <Award className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h3 className="text-[#F1F5F9] font-semibold">Team Achievements</h3>
-          <p className="text-xs text-[#94A3B8] mt-0.5">Platform Engineering Team</p>
+          <h3 className="text-[#F1F5F9] font-semibold">Conquistas do Time</h3>
+          <p className="text-xs text-[#94A3B8] mt-0.5">Time de Engenharia de Plataforma</p>
         </div>
       </div>
 
@@ -82,15 +82,15 @@ export function GamificationWidgets() {
       <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-[#1E293B]">
         <div className="text-center">
           <div className="text-2xl text-[#00D9FF] font-bold">47</div>
-          <div className="text-xs text-[#94A3B8] mt-1">Total Badges</div>
+          <div className="text-xs text-[#94A3B8] mt-1">Total de Medalhas</div>
         </div>
         <div className="text-center">
           <div className="text-2xl text-[#A855F7] font-bold">12</div>
-          <div className="text-xs text-[#94A3B8] mt-1">Team Rank</div>
+          <div className="text-xs text-[#94A3B8] mt-1">Ranking do Time</div>
         </div>
         <div className="text-center">
           <div className="text-2xl text-[#10B981] font-bold">3.2k</div>
-          <div className="text-xs text-[#94A3B8] mt-1">XP Points</div>
+          <div className="text-xs text-[#94A3B8] mt-1">Pontos XP</div>
         </div>
       </div>
     </div>

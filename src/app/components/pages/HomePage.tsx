@@ -20,7 +20,7 @@ export function HomePage() {
       <PrioritizedBacklog />
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column - AI Copilot & Gamification */}
         <div className="space-y-6">
           <AICopilotWidget />
@@ -29,7 +29,7 @@ export function HomePage() {
         </div>
 
         {/* Middle & Right Columns - FinOps & Pipeline */}
-        <div className="col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           <FinOpsChart />
           <DeliveryPipeline />
         </div>

@@ -8,64 +8,83 @@ import {
   Zap,
   Target,
   Calendar,
-  Shield
+  Shield,
+  X
 } from 'lucide-react';
 
 interface SidebarProps {
   currentPage: string;
   onNavigate: (page: string) => void;
+  onClose?: () => void;
 }
 
-export function Sidebar({ currentPage, onNavigate }: SidebarProps) {
+export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
   const navItems = [
     { id: 'home', icon: GitBranch, label: 'Agile Engine', badge: 'Azure Boards' },
     { id: 'strategy', icon: Target, label: 'Estratégia & Priorização', badge: 'Pugh' },
     { id: 'planning', icon: Calendar, label: 'Planejamento & Capacidade', badge: '32h/40h' },
     { id: 'governance', icon: Shield, label: 'Governança & GMUD', badge: 'ServiceNow' },
-    { id: 'ingestion', icon: Database, label: 'Universal Ingestion Hub' },
-    { id: 'golden-paths', icon: Workflow, label: 'Golden Paths' },
-    { id: 'finops', icon: DollarSign, label: 'FinOps & Observability' },
-    { id: 'gamification', icon: Trophy, label: 'Gamification' },
-    { id: 'roi', icon: BarChart3, label: 'Executive ROI Dashboard' },
+    { id: 'ingestion', icon: Database, label: 'Hub de Ingestão' },
+    { id: 'golden-paths', icon: Workflow, label: 'Caminhos Padrão' },
+    { id: 'finops', icon: DollarSign, label: 'FinOps & Observabilidade' },
+    { id: 'gamification', icon: Trophy, label: 'Gamificação' },
+    { id: 'roi', icon: BarChart3, label: 'Painel de ROI' },
   ];
 
   return (
-    <aside className="w-20 bg-[#0F1624] border-r border-[#1E293B] flex flex-col items-center py-6 gap-6 overflow-y-auto">
-      {/* Logo */}
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#A855F7] flex items-center justify-center mb-4 cursor-pointer"
-        onClick={() => onNavigate('home')}
-      >
-        <Zap className="w-7 h-7 text-white" />
+    <aside className="w-64 min-h-screen bg-[#0F1624] border-r border-[#1E293B] flex flex-col py-6 overflow-y-auto">
+      {/* Header with Logo and Close Button */}
+      <div className="flex items-center justify-between px-4 mb-6">
+        <div 
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => onNavigate('home')}
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#A855F7] flex items-center justify-center flex-shrink-0">
+            <Zap className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <div className="text-lg font-semibold text-[#F1F5F9]">ValueFlow</div>
+            <div className="text-xs text-[#94A3B8]">Platform</div>
+          </div>
+        </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden w-8 h-8 rounded-lg bg-[#1E293B] flex items-center justify-center text-[#94A3B8] hover:text-[#F1F5F9] transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
       {/* Navigation Items */}
-      <nav className="flex flex-col gap-3 w-full px-3">
+      <nav className="flex-1 flex flex-col gap-1 px-3">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => onNavigate(item.id)}
-            className={`w-14 h-14 rounded-lg flex items-center justify-center transition-all relative group
-              ${currentPage === item.id ? 'bg-[#00D9FF]/10 text-[#00D9FF]' : 'text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F1F5F9]'}
+            className={`w-full px-3 py-3 rounded-lg flex items-center gap-3 transition-all text-left
+              ${currentPage === item.id 
+                ? 'bg-[#00D9FF]/10 text-[#00D9FF]' 
+                : 'text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F1F5F9]'
+              }
             `}
           >
-            <item.icon className="w-6 h-6" />
-            {item.badge && (
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#A855F7] rounded-full border-2 border-[#0F1624]"></div>
-            )}
-            
-            {/* Tooltip */}
-            <div className="absolute left-20 bg-[#131827] border border-[#1E293B] rounded-lg px-3 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50 shadow-xl">
-              <div className="text-sm text-[#F1F5F9]">{item.label}</div>
+            <item.icon className="w-5 h-5 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-medium truncate">{item.label}</div>
               {item.badge && (
-                <div className="text-xs text-[#00D9FF] mt-0.5">{item.badge}</div>
+                <div className="text-xs text-[#00D9FF] truncate">{item.badge}</div>
               )}
             </div>
           </button>
         ))}
       </nav>
 
-      {/* Bottom spacer */}
-      <div className="flex-1"></div>
+      {/* Footer */}
+      <div className="px-4 pt-4 border-t border-[#1E293B] mt-4">
+        <div className="text-xs text-[#94A3B8] text-center">v1.0.0</div>
+      </div>
     </aside>
   );
 }

@@ -24,7 +24,7 @@ export function ExecutiveSummary() {
       highlight: true,
     },
     {
-      label: 'Delivery Performance',
+      label: 'Desempenho de Entrega',
       value: '98.2%',
       change: '+5.3%',
       trend: 'up',
@@ -33,8 +33,8 @@ export function ExecutiveSummary() {
       subtitle: 'Taxa de sucesso',
     },
     {
-      label: 'Value Stream Velocity',
-      value: '12.4 days',
+      label: 'Velocidade do Fluxo',
+      value: '12.4 dias',
       change: '-38%',
       trend: 'up',
       icon: TrendingUp,
@@ -47,15 +47,15 @@ export function ExecutiveSummary() {
     <div className="bg-gradient-to-r from-[#131827] to-[#0F1624] border border-[#1E293B] rounded-2xl p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Executive Summary</h2>
+          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Resumo Executivo</h2>
           <p className="text-sm text-[#94A3B8]">KPIs para apresentação ao board</p>
         </div>
         <button className="px-4 py-2 bg-[#00D9FF]/10 hover:bg-[#00D9FF]/20 border border-[#00D9FF]/30 text-[#00D9FF] rounded-lg transition-colors text-sm">
-          Exportar Report
+          Exportar relatório
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((metric, i) => (
           <div 
             key={i}

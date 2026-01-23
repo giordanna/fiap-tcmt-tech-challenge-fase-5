@@ -99,7 +99,7 @@ export function PlanningPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Capacidade Total', value: '192h', sublabel: '6 devs × 32h', color: '#00D9FF' },
           { label: 'Alocação Atual', value: '173h', sublabel: '90% utilizado', color: '#10B981' },
@@ -136,6 +136,9 @@ export function PlanningPage() {
                   borderRadius: '8px',
                   color: '#F1F5F9'
                 }}
+                labelStyle={{ color: '#94A3B8' }}
+                itemStyle={{ color: '#F1F5F9' }}
+                cursor={{ fill: 'rgba(30, 41, 59, 0.5)' }}
                 formatter={(value: number) => `${value}h`}
               />
               <Legend wrapperStyle={{ fontSize: '12px' }} />

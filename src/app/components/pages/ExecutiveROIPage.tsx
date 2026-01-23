@@ -31,27 +31,27 @@ export function ExecutiveROIPage() {
             <BarChart3 className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Executive ROI Dashboard</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Business value and cost optimization metrics</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Painel de ROI Executivo</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Métricas de valor de negócio e otimização de custos</p>
           </div>
         </div>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Total ROI', value: 'R$ 385k', change: '+24%', icon: DollarSign, color: '#10B981' },
-          { label: 'Cost Savings', value: 'R$ 68k/mo', change: '+12%', icon: TrendingUp, color: '#00D9FF' },
-          { label: 'Team Velocity', value: '+47%', change: '+8%', icon: Users, color: '#A855F7' },
-          { label: 'Time to Market', value: '-38%', change: 'faster', icon: Clock, color: '#F59E0B' },
+          { label: 'ROI Total', value: '+247%', icon: TrendingUp, color: '#10B981' },
+          { label: 'Economia de Custos', value: 'R$ 385k', icon: DollarSign, color: '#00D9FF' },
+          { label: 'Velocidade do Time', value: '+38%', sublabel: 'mais rápido', icon: Users, color: '#A855F7' },
+          { label: 'Time to Market', value: '-42%', sublabel: 'mais rápido', icon: Clock, color: '#F59E0B' },
         ].map((kpi, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="text-sm text-[#94A3B8]">{kpi.label}</div>
-              <kpi.icon className="w-5 h-5" style={{ color: kpi.color }} />
+              {kpi.icon && <kpi.icon className="w-5 h-5" style={{ color: kpi.color }} />}
             </div>
             <div className="text-3xl font-bold text-[#F1F5F9] mb-1">{kpi.value}</div>
-            <div className="text-sm" style={{ color: kpi.color }}>{kpi.change}</div>
+            <div className="text-sm" style={{ color: kpi.color }}>{kpi.sublabel}</div>
           </div>
         ))}
       </div>
@@ -74,6 +74,9 @@ export function ExecutiveROIPage() {
                     borderRadius: '8px',
                     color: '#F1F5F9'
                   }}
+                  labelStyle={{ color: '#94A3B8' }}
+                  itemStyle={{ color: '#F1F5F9' }}
+                  cursor={{ fill: 'rgba(30, 41, 59, 0.5)' }}
                   formatter={(value: number) => `R$ ${value.toLocaleString()}`}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px' }} />
@@ -100,6 +103,8 @@ export function ExecutiveROIPage() {
                     borderRadius: '8px',
                     color: '#F1F5F9'
                   }}
+                  labelStyle={{ color: '#94A3B8' }}
+                  itemStyle={{ color: '#F1F5F9' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px' }} />
                 <Line 
@@ -126,27 +131,27 @@ export function ExecutiveROIPage() {
 
       {/* Value Stream Metrics */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <h3 className="text-lg text-[#F1F5F9] font-semibold mb-6">Value Stream Impact</h3>
-        <div className="grid grid-cols-3 gap-6">
+        <h3 className="text-lg text-[#F1F5F9] font-semibold mb-6">Impacto no Fluxo de Valor</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              metric: 'Lead Time Reduction',
-              before: '12.5 days',
-              after: '4.2 days',
+              metric: 'Redução de Lead Time',
+              before: '12.5 dias',
+              after: '4.2 dias',
               improvement: '-66%',
               color: '#00D9FF',
             },
             {
-              metric: 'Deployment Frequency',
-              before: '2x/week',
-              after: '18x/day',
-              improvement: '+6,300%',
+              metric: 'Frequência de Deploy',
+              before: '2x/semana',
+              after: '18x/dia',
+              improvement: '+6.300%',
               color: '#10B981',
             },
             {
-              metric: 'MTTR Improvement',
-              before: '4.8 hours',
-              after: '0.8 hours',
+              metric: 'Melhoria do MTTR',
+              before: '4.8 horas',
+              after: '0.8 horas',
               improvement: '-83%',
               color: '#A855F7',
             },
@@ -155,11 +160,11 @@ export function ExecutiveROIPage() {
               <h4 className="text-sm text-[#94A3B8] mb-3">{metric.metric}</h4>
               <div className="flex items-center justify-between mb-2">
                 <div>
-                  <div className="text-xs text-[#94A3B8]">Before</div>
+                  <div className="text-xs text-[#94A3B8]">Antes</div>
                   <div className="text-lg text-[#F1F5F9]">{metric.before}</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs text-[#94A3B8]">After</div>
+                  <div className="text-xs text-[#94A3B8]">Depois</div>
                   <div className="text-lg text-[#F1F5F9]">{metric.after}</div>
                 </div>
               </div>

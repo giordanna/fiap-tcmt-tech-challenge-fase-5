@@ -23,19 +23,19 @@ export function FinOpsPage() {
             <DollarSign className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">FinOps & Observability</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Cost optimization and monitoring</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">FinOps & Observabilidade</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Otimização de custos e monitoramento</p>
           </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Monthly Spend', value: 'R$ 32.5k', change: '-8%', color: '#10B981' },
-          { label: 'Optimizations Found', value: '7', change: 'new', color: '#00D9FF' },
-          { label: 'Potential Savings', value: 'R$ 2.1k', change: '+12%', color: '#A855F7' },
-          { label: 'Cost Anomalies', value: '2', change: 'active', color: '#F59E0B' },
+          { label: 'Gasto Mensal', value: 'R$ 32.5k', change: '-8%', color: '#10B981' },
+          { label: 'Otimizações Encontradas', value: '7', change: 'novo', color: '#00D9FF' },
+          { label: 'Economia Potencial', value: 'R$ 2.1k', change: '+12%', color: '#A855F7' },
+          { label: 'Anomalias de Custo', value: '2', change: 'ativo', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="text-sm text-[#94A3B8] mb-2">{stat.label}</div>
@@ -54,12 +54,12 @@ export function FinOpsPage() {
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-lg text-[#F1F5F9] font-semibold mb-1">Cost Anomaly Detection</h3>
-            <p className="text-sm text-[#94A3B8]">AI-powered spending pattern analysis</p>
+            <h3 className="text-lg text-[#F1F5F9] font-semibold mb-1">Detecção de Anomalias de Custo</h3>
+            <p className="text-sm text-[#94A3B8]">Análise de padrões de gasto com IA</p>
           </div>
           <div className="flex items-center gap-2 bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-3 py-1.5 rounded-lg">
             <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />
-            <span className="text-sm text-[#F59E0B] font-semibold">2 Anomalies</span>
+            <span className="text-sm text-[#F59E0B] font-semibold">2 Anomalias</span>
           </div>
         </div>
 
@@ -86,6 +86,8 @@ export function FinOpsPage() {
                   borderRadius: '8px',
                   color: '#F1F5F9'
                 }}
+                labelStyle={{ color: '#94A3B8' }}
+                itemStyle={{ color: '#F1F5F9' }}
               />
               <Area 
                 type="monotone" 
