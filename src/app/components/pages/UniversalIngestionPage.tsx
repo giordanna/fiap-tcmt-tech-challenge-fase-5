@@ -82,6 +82,7 @@ export function UniversalIngestionPage() {
             </div>
           </div>
           <button 
+            id="btn-add-integration"
             onClick={() => setIsIntegrationModalOpen(true)}
             className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
           >
@@ -136,6 +137,7 @@ export function UniversalIngestionPage() {
               <div className="flex items-center gap-3">
                 <div className="text-lg text-[#F1F5F9] font-semibold">{integration.records}</div>
                 <button 
+                  id={i === 0 ? "btn-config-integration-0" : undefined}
                   onClick={() => handleConfigClick(integration)}
                   className="p-1.5 hover:bg-[#1E293B] rounded-lg text-[#94A3B8] hover:text-[#00D9FF] transition-colors"
                   title="Configurar Integração"

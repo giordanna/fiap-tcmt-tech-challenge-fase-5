@@ -138,6 +138,7 @@ export function FinOpsPage() {
                 <button 
                   onClick={() => setIsDetailsModalOpen(true)}
                   className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors"
+                  id="btn-view-anomaly"
                 >
                   Ver Detalhes →
                 </button>
@@ -158,6 +159,7 @@ export function FinOpsPage() {
                 <button 
                   onClick={() => setIsCostSavingModalOpen(true)}
                   className="text-xs text-[#10B981] hover:text-[#34D399] transition-colors"
+                  id="btn-apply-savings"
                 >
                   Aplicar Agora →
                 </button>

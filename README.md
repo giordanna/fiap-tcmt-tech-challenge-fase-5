@@ -28,7 +28,19 @@ O protótipo é totalmente responsivo:
 
 ## 🎯 Jornadas de Usuário Mockadas
 
-### 1. Copiloto Ágil - Ação de Notificação
+### 1. Onboarding: Tour Guiado (Cross-Platform)
+
+**Localização**: Inicia automaticamente no primeiro acesso ou via Configuração (Header)
+
+| Etapa                    | Descrição                                                                     |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| 1. Welcome Modal         | Apresentação da proposta de valor com opção de iniciar tour                   |
+| 2. Navegação Guiada      | O tour navega automaticamente entre páginas (Home -> Strategy -> Planning...) |
+| 3. Destaque de Elementos | Tooltips posicionados destacam botões e KPIs críticos em cada tela            |
+
+---
+
+### 2. Copiloto Ágil - Ação de Notificação
 
 **Localização**: Home → Widget "Copiloto Ágil"
 
@@ -39,7 +51,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 2. Deploy via Golden Path
+### 3. Deploy via Golden Path
 
 **Localização**: Sidebar → "Caminhos Padrão"
 
@@ -52,7 +64,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 3. Repriorização de Backlog com IA
+### 4. Repriorização de Backlog com IA
 
 **Localização**: Home → "Backlog Priorizado"
 
@@ -64,7 +76,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 4. Criação de Novo Projeto (Estratégia)
+### 5. Criação de Novo Projeto (Estratégia)
 
 **Localização**: Estratégia & Priorização → Botão "Novo Projeto"
 
@@ -76,18 +88,18 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 5. Gestão de Dependências e Capacidade (Planejamento)
+### 6. Gestão de Dependências e Capacidade (Planejamento)
 
 **Localização**: Planejamento & Capacidade
 
-| Ação                  | Descrição                                                                                       |
-| --------------------- | ----------------------------------------------------------------------------------------------- |
-| **Nova Solicitação**  | Clique em "+ Nova Solicitação" -> Modal para abrir ticket para DBA/Infra/Sec                    |
-| **Redistribuição IA** | Clique em "Ver Sugestões..." no card de Insight -> Modal para aceitar redistribuição de tarefas |
+| Ação                  | Descrição                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| **Nova Solicitação**  | Clique em "+ Nova Solicitação" → Modal para abrir ticket para DBA/Infra/Sec                    |
+| **Redistribuição IA** | Clique em "Ver Sugestões..." no card de Insight → Modal para aceitar redistribuição de tarefas |
 
 ---
 
-### 6. Agendamento de GMUD (Governança)
+### 7. Agendamento de GMUD (Governança)
 
 **Localização**: Governança & GMUD → Botão "+ Nova GMUD"
 
@@ -98,7 +110,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 7. FinOps: Economia Automática
+### 8. FinOps: Economia Automática
 
 **Localização**: FinOps & Observabilidade → Widget "Economia de Custo" → Botão "Aplicar Agora"
 
@@ -109,7 +121,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 8. Adicionar Integração (Ingestão)
+### 9. Adicionar Integração (Ingestão)
 
 **Localização**: Hub de Ingestão → Botão "Adicionar Integração"
 
@@ -120,7 +132,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 9. Criação de Golden Path (Platform Eng)
+### 10. Criação de Golden Path (Platform Eng)
 
 **Localização**: Caminhos Padrão → Botão "Criar Novo Caminho"
 
@@ -131,7 +143,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 10. Delivery Pipeline: Deploy Seguro (Home)
+### 11. Delivery Pipeline: Deploy Seguro (Home)
 
 **Localização**: Widget "Pipeline de Deploy" → Botão "Deploy para Produção"
 
@@ -142,7 +154,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 11. Criação de Card no Backlog (Home)
+### 12. Criação de Card no Backlog (Home)
 
 **Localização**: Widget "Backlog Priorizado" → Botão "+ Novo Card"
 
@@ -153,7 +165,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 12. Exportação de Relatório Executivo (Home)
+### 13. Exportação de Relatório Executivo (Home)
 
 **Localização**: Widget "Resumo Executivo" → Botão "Exportar relatório"
 
@@ -164,7 +176,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 13. Análise Detalhada de Estratégia (Estratégia)
+### 14. Análise Detalhada de Estratégia (Estratégia)
 
 **Localização**: Estratégia & Priorização → Card "Recomendação Executiva" → Botão "Ver Análise Detalhada"
 
@@ -175,7 +187,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 14. Detalhes de Anomalia FinOps (FinOps)
+### 15. Detalhes de Anomalia FinOps (FinOps)
 
 **Localização**: FinOps & Observabilidade → Widget "Recomendação IA" → Botão "Ver Detalhes ->"
 
@@ -186,7 +198,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 15. Configuração de Integração (Ingestão)
+### 16. Configuração de Integração (Ingestão)
 
 **Localização**: Hub de Ingestão → Card de Integração → Ícone "Engrenagem"
 
@@ -197,7 +209,7 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 16. Planejamento de Capacidade (Planejamento)
+### 17. Planejamento de Capacidade (Planejamento)
 
 **Localização**: Planejamento & Capacidade → Card "Insight: Daniel Lima" → Botão "Ver Sugestões"
 
@@ -208,25 +220,14 @@ O protótipo é totalmente responsivo:
 
 ---
 
-### 17. Nova Solicitação de Dependência (Planejamento)
+### 18. Nova Solicitação de Dependência (Planejamento)
 
 **Localização**: Planejamento & Capacidade → Botão "Nova Solicitação"
 
 | Etapa                | Descrição                                  |
 | -------------------- | ------------------------------------------ |
-| 1. Criar Solicitação | Modal para abrir ticket para Infra/DBA/Sec |
+| 1. Criar Solicitação | Modal para abrir ticket para DBA/Infra/Sec |
 | 2. Priorização       | Definição de SLA e impacto no projeto      |
-
----
-
-### 18. Agendamento de GMUD (Governança)
-
-**Localização**: Governança & GMUD → Botão "+ Nova GMUD"
-
-| Etapa        | Descrição                                                  |
-| ------------ | ---------------------------------------------------------- |
-| 1. Agendar   | Modal com validação automática de janelas de freezing      |
-| 2. Confirmar | Integração simulada com ServiceNow para abertura de change |
 
 ---
 

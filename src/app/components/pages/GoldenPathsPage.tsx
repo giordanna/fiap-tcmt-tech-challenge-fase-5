@@ -129,6 +129,7 @@ export function GoldenPathsPage() {
             </div>
           </div>
           <button 
+            id="btn-new-path"
             onClick={() => setIsNewPathModalOpen(true)}
             className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2"
           >

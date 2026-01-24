@@ -132,6 +132,7 @@ export function GovernancePage() {
             </div>
           </div>
           <button 
+            id="btn-new-gmud"
             onClick={() => setIsGMUDModalOpen(true)}
             className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors"
           >

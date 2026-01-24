@@ -95,6 +95,7 @@ export function DeliveryPipeline() {
 
       {/* Action Button */}
       <button 
+        id="btn-deploy-prod"
         onClick={() => setIsDeployModalOpen(true)}
         className="w-full bg-gradient-to-r from-[#00D9FF] to-[#00B8D4] hover:from-[#00C4E6] hover:to-[#00A3BF] text-[#0A0E1A] py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 font-semibold shadow-lg shadow-[#00D9FF]/20"
       >

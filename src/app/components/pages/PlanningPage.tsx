@@ -200,6 +200,7 @@ export function PlanningPage() {
             <p className="text-sm text-[#94A3B8]">Rastreamento de solicitações para DBAs e Infraestrutura</p>
           </div>
           <button 
+            id="btn-new-request"
             onClick={() => setIsRequestModalOpen(true)}
             className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
           >

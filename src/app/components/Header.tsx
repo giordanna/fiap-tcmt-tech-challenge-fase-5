@@ -7,7 +7,7 @@ export function Header() {
       <div className="w-12 lg:hidden" />
       
       {/* Search Bar - hidden on mobile */}
-      <div className="hidden sm:block flex-1 max-w-2xl">
+      <div id="header-search" className="hidden sm:block flex-1 max-w-2xl">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
           <input
@@ -31,7 +31,11 @@ export function Header() {
         </button>
 
         {/* Settings */}
-        <button className="w-10 h-10 rounded-lg bg-[#1E293B] flex items-center justify-center text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#1E293B]/80 transition-colors">
+        <button 
+          onClick={() => window.dispatchEvent(new Event('restart-onboarding'))}
+          className="w-10 h-10 rounded-lg bg-[#1E293B] flex items-center justify-center text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#1E293B]/80 transition-colors"
+          title="Reiniciar Tour de Onboarding"
+        >
           <Settings className="w-5 h-5" />
         </button>
 

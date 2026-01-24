@@ -12,6 +12,7 @@ import { GoldenPathsPage } from '@/app/components/pages/GoldenPathsPage';
 import { FinOpsPage } from '@/app/components/pages/FinOpsPage';
 import { GamificationPage } from '@/app/components/pages/GamificationPage';
 import { ExecutiveROIPage } from '@/app/components/pages/ExecutiveROIPage';
+import { OnboardingTour } from '@/app/components/OnboardingTour';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <ToastProvider>
+      <OnboardingTour onNavigate={handleNavigate} />
       <div className="dark min-h-screen bg-[#0A0E1A] flex">
         {/* Mobile Menu Button - only show when menu is closed */}
         {!mobileMenuOpen && (

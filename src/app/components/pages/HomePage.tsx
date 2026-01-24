@@ -11,7 +11,9 @@ export function HomePage() {
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Executive Summary - Single Pane of Glass */}
-      <ExecutiveSummary />
+      <div id="executive-summary">
+        <ExecutiveSummary />
+      </div>
 
       {/* DORA Metrics Row */}
       <MetricsGauges />

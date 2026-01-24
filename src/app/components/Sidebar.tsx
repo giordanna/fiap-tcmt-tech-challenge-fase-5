@@ -58,7 +58,7 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
       </div>
 
       {/* Navigation Items */}
-      <nav className="flex-1 flex flex-col gap-1 px-3">
+      <nav id="sidebar-nav" className="flex-1 flex flex-col gap-1 px-3">
         {navItems.map((item) => (
           <button
             key={item.id}

@@ -231,6 +231,7 @@ export function PrioritizedBacklog() {
             Filtrar
           </button>
           <button 
+            id="btn-new-card"
             onClick={() => setIsNewCardModalOpen(true)}
             className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors"
           >

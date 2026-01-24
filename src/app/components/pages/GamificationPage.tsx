@@ -131,6 +131,7 @@ export function GamificationPage() {
             {achievements.map((achievement, i) => (
               <div 
                 key={i} 
+                id={i === 0 ? "card-achievement-0" : undefined}
                 onClick={() => handleAchievementClick(achievement)}
                 className="p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg cursor-pointer hover:border-[#94A3B8]/30 hover:bg-[#0A0E1A]/80 transition-all"
               >
