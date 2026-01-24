@@ -145,12 +145,6 @@ export function ExecutiveSummary() {
 
             {/* Subtitle */}
             <div className="text-xs text-[#94A3B8]">{metric.subtitle}</div>
-
-            {/* Decorative gradient */}
-            <div 
-              className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"
-              style={{ backgroundColor: metric.color }}
-            ></div>
           </div>
         ))}
       </div>
