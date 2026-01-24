@@ -1,4 +1,4 @@
-import { Database, Link, RefreshCw, CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { Database, Link, RefreshCw, CheckCircle2, XCircle, Clock, Settings } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -7,7 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 export function UniversalIngestionPage() {
   const { showToast } = useToast();
   const [isIntegrationModalOpen, setIsIntegrationModalOpen] = useState(false);
+  const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
+  const [selectedConfigIntegration, setSelectedConfigIntegration] = useState<any>(null);
   const [selectedProvider, setSelectedProvider] = useState('');
+
+  const handleConfigClick = (integration: any) => {
+    setSelectedConfigIntegration(integration);
+    setIsConfigModalOpen(true);
+  };
 
   const integrations = [
     { 
@@ -126,11 +133,78 @@ export function UniversalIngestionPage() {
 
             <div className="flex items-center justify-between pt-4 border-t border-[#1E293B]">
               <div className="text-sm text-[#94A3B8]">Registros</div>
-              <div className="text-lg text-[#F1F5F9] font-semibold">{integration.records}</div>
+              <div className="flex items-center gap-3">
+                <div className="text-lg text-[#F1F5F9] font-semibold">{integration.records}</div>
+                <button 
+                  onClick={() => handleConfigClick(integration)}
+                  className="p-1.5 hover:bg-[#1E293B] rounded-lg text-[#94A3B8] hover:text-[#00D9FF] transition-colors"
+                  title="Configurar Integração"
+                >
+                  <Settings className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
+
+      <Modal isOpen={isConfigModalOpen} onClose={() => setIsConfigModalOpen(false)} title={`Configurar ${selectedConfigIntegration?.name || ''}`}>
+        <div className="space-y-4">
+          <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h4 className="text-sm text-[#F1F5F9] font-semibold">Status da Conexão</h4>
+                <p className="text-xs text-[#94A3B8]">Última sincronização: {selectedConfigIntegration?.lastSync}</p>
+              </div>
+              <div className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                selectedConfigIntegration?.status === 'active' ? 'bg-[#10B981]/20 text-[#10B981]' : 
+                selectedConfigIntegration?.status === 'error' ? 'bg-[#EF4444]/20 text-[#EF4444]' : 
+                'bg-[#00D9FF]/20 text-[#00D9FF]'
+              }`}>
+                {selectedConfigIntegration?.status.toUpperCase()}
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <div>
+                <label className="block text-xs text-[#94A3B8] mb-1">Frequência de Sync</label>
+                <select className="w-full bg-[#1E293B] border border-[#1E293B] rounded px-2 py-1 text-sm text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]">
+                  <option>Tempo Real (Webhook)</option>
+                  <option>A cada 15 min</option>
+                  <option>A cada 1 hora</option>
+                </select>
+              </div>
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-sm text-[#F1F5F9]">Mapeamento de Campos Automático (IA)</span>
+                <div className="w-10 h-5 bg-[#00D9FF] rounded-full relative cursor-pointer">
+                  <div className="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-2 pt-2">
+            <button
+              onClick={() => {
+                setIsConfigModalOpen(false);
+                showToast('Configurações salvas com sucesso', 'success');
+              }}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
+            >
+              Salvar Alterações
+            </button>
+            <button
+              onClick={() => {
+                setIsConfigModalOpen(false);
+                showToast('Teste de conexão realizado: OK', 'success');
+              }}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Testar Conexão
+            </button>
+          </div>
+        </div>
+      </Modal>
 
       <Modal isOpen={isIntegrationModalOpen} onClose={() => setIsIntegrationModalOpen(false)} title="Adicionar Nova Integração">
         <div className="space-y-4">

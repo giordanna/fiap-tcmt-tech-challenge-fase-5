@@ -2,7 +2,7 @@ import { Search, Sparkles, Bell, Settings } from 'lucide-react';
 
 export function Header() {
   return (
-    <header className="h-16 bg-[#131827] border-b border-[#1E293B] flex items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-20 h-16 bg-[#131827] border-b border-[#1E293B] flex items-center justify-between px-4 sm:px-6">
       {/* Spacer for hamburger menu on mobile */}
       <div className="w-12 lg:hidden" />
       

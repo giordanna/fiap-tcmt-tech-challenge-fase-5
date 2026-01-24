@@ -131,6 +131,116 @@ O protótipo é totalmente responsivo:
 
 ---
 
+### 10. Delivery Pipeline: Deploy Seguro (Home)
+
+**Localização**: Widget "Pipeline de Deploy" → Botão "Deploy para Produção"
+
+| Etapa                 | Descrição                                                |
+| --------------------- | -------------------------------------------------------- |
+| 1. Clique em "Deploy" | Modal abre listando checks de segurança automáticos (IA) |
+| 2. Confirme           | Deploy iniciado via GitOps agent com feedback visual     |
+
+---
+
+### 11. Criação de Card no Backlog (Home)
+
+**Localização**: Widget "Backlog Priorizado" → Botão "+ Novo Card"
+
+| Etapa        | Descrição                                               |
+| ------------ | ------------------------------------------------------- |
+| 1. Novo Card | Modal permite criar item e ver prévia da análise de IA  |
+| 2. Criar     | Card adicionado e priorizado automaticamente (simulado) |
+
+---
+
+### 12. Exportação de Relatório Executivo (Home)
+
+**Localização**: Widget "Resumo Executivo" → Botão "Exportar relatório"
+
+| Etapa        | Descrição                                       |
+| ------------ | ----------------------------------------------- |
+| 1. Exportar  | Modal de confirmação com detalhes do PDF        |
+| 2. Confirmar | Feedback visual de envio para email corporativo |
+
+---
+
+### 13. Análise Detalhada de Estratégia (Estratégia)
+
+**Localização**: Estratégia & Priorização → Card "Recomendação Executiva" → Botão "Ver Análise Detalhada"
+
+| Etapa          | Descrição                                           |
+| -------------- | --------------------------------------------------- |
+| 1. Ver Análise | Modal exibe breakdown do Score Pugh por critério    |
+| 2. Insights IA | Exibição de insight de sinergia com outros projetos |
+
+---
+
+### 14. Detalhes de Anomalia FinOps (FinOps)
+
+**Localização**: FinOps & Observabilidade → Widget "Recomendação IA" → Botão "Ver Detalhes ->"
+
+| Etapa           | Descrição                                                              |
+| --------------- | ---------------------------------------------------------------------- |
+| 1. Ver Detalhes | Modal mostra recursos ociosos específicos                              |
+| 2. Ação Rápida  | Botões para "Downsize" ou "Terminar Instâncias" com feedback immediato |
+
+---
+
+### 15. Configuração de Integração (Ingestão)
+
+**Localização**: Hub de Ingestão → Card de Integração → Ícone "Engrenagem"
+
+| Etapa            | Descrição                                                 |
+| ---------------- | --------------------------------------------------------- |
+| 1. Configurar    | Modal exibe detalhes de conexão e frequência de sync      |
+| 2. Salvar/Testar | Botões para persistir alterações ou validar conectividade |
+
+---
+
+### 16. Planejamento de Capacidade (Planejamento)
+
+**Localização**: Planejamento & Capacidade → Card "Insight: Daniel Lima" → Botão "Ver Sugestões"
+
+| Etapa               | Descrição                                           |
+| ------------------- | --------------------------------------------------- |
+| 1. Ver Sugestões    | Modal exibe tarefas para redistribuição inteligente |
+| 2. Aplicar Mudanças | Confirmação move tarefas para colegas com idle time |
+
+---
+
+### 17. Nova Solicitação de Dependência (Planejamento)
+
+**Localização**: Planejamento & Capacidade → Botão "Nova Solicitação"
+
+| Etapa                | Descrição                                  |
+| -------------------- | ------------------------------------------ |
+| 1. Criar Solicitação | Modal para abrir ticket para Infra/DBA/Sec |
+| 2. Priorização       | Definição de SLA e impacto no projeto      |
+
+---
+
+### 18. Agendamento de GMUD (Governança)
+
+**Localização**: Governança & GMUD → Botão "+ Nova GMUD"
+
+| Etapa        | Descrição                                                  |
+| ------------ | ---------------------------------------------------------- |
+| 1. Agendar   | Modal com validação automática de janelas de freezing      |
+| 2. Confirmar | Integração simulada com ServiceNow para abertura de change |
+
+---
+
+### 19. Gamificação: Detalhes de Conquista (Gamificação)
+
+**Localização**: Gamificação → Card de Conquista
+
+| Etapa                      | Descrição                                      |
+| -------------------------- | ---------------------------------------------- |
+| 1. Clique em Conquista     | Modal exibe detalhes do progresso e recompensa |
+| 2. Resgatar (Se concluído) | Feedback de resgate de XP e badge              |
+
+---
+
 ## 📂 Estrutura de Páginas
 
 | Página                        | Descrição                                  |

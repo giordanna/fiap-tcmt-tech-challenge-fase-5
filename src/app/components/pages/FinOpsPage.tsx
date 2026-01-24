@@ -19,6 +19,7 @@ const anomalyData = [
 export function FinOpsPage() {
   const { showToast } = useToast();
   const [isCostSavingModalOpen, setIsCostSavingModalOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   const handleApplyCostSaving = () => {
     setIsCostSavingModalOpen(false);
@@ -134,7 +135,10 @@ export function FinOpsPage() {
                 <p className="text-sm text-[#F1F5F9] mb-2">
                   Ambiente Terrablade possui <span className="text-[#F59E0B]">recursos ociosos</span> consumindo R$ 890/mês
                 </p>
-                <button className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors">
+                <button 
+                  onClick={() => setIsDetailsModalOpen(true)}
+                  className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors"
+                >
                   Ver Detalhes →
                 </button>
               </div>
@@ -194,6 +198,48 @@ export function FinOpsPage() {
             >
               Cancelar
             </button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal isOpen={isDetailsModalOpen} onClose={() => setIsDetailsModalOpen(false)} title="Detalhes da Anomalia - Terrablade">
+        <div className="space-y-4">
+          <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <AlertTriangle className="w-5 h-5 text-[#F59E0B]" />
+              <h4 className="text-sm text-[#F1F5F9] font-bold">Recursos Ociosos Detectados</h4>
+            </div>
+            <p className="text-sm text-[#94A3B8] mb-3">
+              A IA detectou 3 instâncias `t3.large` no ambiente de staging com utilização de CPU &lt; 5% nos últimos 7 dias.
+            </p>
+            <div className="flex items-center justify-between text-xs bg-[#1E293B] p-2 rounded">
+              <span className="text-[#94A3B8]">Custo Desperdiçado:</span>
+              <span className="text-[#EF4444] font-mono">R$ 890,00 / mês</span>
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <h5 className="text-xs text-[#94A3B8] font-semibold uppercase">Ação Recomendada</h5>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => {
+                  setIsDetailsModalOpen(false);
+                  showToast('Instâncias redimensionadas para t3.micro', 'success');
+                }}
+                className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white text-sm py-2 rounded-lg transition-colors"
+              >
+                Downsize (t3.micro)
+              </button>
+              <button 
+                onClick={() => {
+                  setIsDetailsModalOpen(false);
+                  showToast('Instâncias terminadas com sucesso', 'success');
+                }}
+                className="flex-1 border border-[#EF4444] text-[#EF4444] hover:bg-[#EF4444]/10 text-sm py-2 rounded-lg transition-colors"
+              >
+                Terminar Instâncias
+              </button>
+            </div>
           </div>
         </div>
       </Modal>

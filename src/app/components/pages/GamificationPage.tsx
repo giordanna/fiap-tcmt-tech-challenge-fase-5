@@ -1,6 +1,17 @@
 import { Trophy, Award, Star, Zap, TrendingUp, Users } from 'lucide-react';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
 
 export function GamificationPage() {
+  const { showToast } = useToast();
+  const [isAchievementModalOpen, setIsAchievementModalOpen] = useState(false);
+  const [selectedAchievement, setSelectedAchievement] = useState<any>(null);
+
+  const handleAchievementClick = (achievement: any) => {
+    setSelectedAchievement(achievement);
+    setIsAchievementModalOpen(true);
+  };
   const leaderboard = [
     { rank: 1, name: 'Ana Silva', team: 'Platform Eng', points: 3240, badges: 12, avatar: 'AS' },
     { rank: 2, name: 'Bruno Costa', team: 'DevOps', points: 3180, badges: 11, avatar: 'BC' },
@@ -118,7 +129,11 @@ export function GamificationPage() {
           <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Conquistas</h2>
           <div className="space-y-4">
             {achievements.map((achievement, i) => (
-              <div key={i} className="p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg">
+              <div 
+                key={i} 
+                onClick={() => handleAchievementClick(achievement)}
+                className="p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg cursor-pointer hover:border-[#94A3B8]/30 hover:bg-[#0A0E1A]/80 transition-all"
+              >
                 <div className="flex items-start gap-3 mb-3">
                   <div 
                     className="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -157,6 +172,67 @@ export function GamificationPage() {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isAchievementModalOpen} onClose={() => setIsAchievementModalOpen(false)} title="Detalhes da Conquista">
+        {selectedAchievement && (
+          <div className="space-y-4">
+            <div className="p-4 bg-[#0A0E1A] border border-[#1E293B] rounded-xl flex items-start gap-4">
+              <div 
+                className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: `${selectedAchievement.color}20` }}
+              >
+                <selectedAchievement.icon className="w-8 h-8" style={{ color: selectedAchievement.color }} />
+              </div>
+              <div>
+                <h3 className="text-lg text-[#F1F5F9] font-semibold mb-1">{selectedAchievement.name}</h3>
+                <p className="text-sm text-[#94A3B8]">{selectedAchievement.description}</p>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-[#94A3B8]">Progresso Atual</span>
+                <span className="text-[#F1F5F9] font-bold">{selectedAchievement.progress}%</span>
+              </div>
+              <div className="h-3 bg-[#1E293B] rounded-full overflow-hidden">
+                <div 
+                  className="h-full rounded-full transition-all"
+                  style={{ 
+                    width: `${selectedAchievement.progress}%`,
+                    backgroundColor: selectedAchievement.color 
+                  }}
+                ></div>
+              </div>
+            </div>
+
+            <div className="p-3 bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-lg">
+              <h4 className="text-xs text-[#A855F7] font-semibold mb-1 uppercase">Recompensa</h4>
+              <p className="text-sm text-[#F1F5F9]">+250 XP e Badge exclusiva no perfil</p>
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              {selectedAchievement.completed ? (
+                <button
+                  onClick={() => {
+                    setIsAchievementModalOpen(false);
+                    showToast('Recompensa resgatada com sucesso!', 'success');
+                  }}
+                  className="w-full bg-[#10B981] hover:bg-[#059669] text-white py-2 rounded-lg transition-colors font-semibold"
+                >
+                  Resgatar Recompensa
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsAchievementModalOpen(false)}
+                  className="w-full border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] py-2 rounded-lg transition-colors"
+                >
+                  Fechar
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

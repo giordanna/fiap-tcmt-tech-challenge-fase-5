@@ -1,4 +1,4 @@
-import { Target, TrendingUp, DollarSign, Users, Zap, Plus } from 'lucide-react';
+import { Target, TrendingUp, DollarSign, Users, Zap, Plus, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -6,6 +6,7 @@ import { useToast } from '@/app/components/Toast';
 export function StrategyPage() {
   const { showToast } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnalysisModalOpen, setIsAnalysisModalOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
 
   const criteria = [
@@ -220,7 +221,10 @@ export function StrategyPage() {
               >
                 Aprovar para Roadmap
               </button>
-              <button className="px-4 py-2 border border-[#1E293B] hover:border-[#94A3B8] text-[#F1F5F9] rounded-lg transition-colors">
+              <button 
+                onClick={() => setIsAnalysisModalOpen(true)}
+                className="px-4 py-2 border border-[#1E293B] hover:border-[#94A3B8] text-[#F1F5F9] rounded-lg transition-colors"
+              >
                 Ver Análise Detalhada
               </button>
             </div>
@@ -279,6 +283,45 @@ export function StrategyPage() {
               Cancelar
             </button>
           </div>
+        </div>
+      </Modal>
+
+      <Modal isOpen={isAnalysisModalOpen} onClose={() => setIsAnalysisModalOpen(false)} title="Análise Detalhada - API Gateway Modernization">
+        <div className="space-y-4">
+          <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
+            <h4 className="text-sm text-[#F1F5F9] font-bold mb-3">Breakdown do Score Pugh</h4>
+            <div className="space-y-3">
+              {[
+                { label: 'Retorno Financeiro', score: 9, weight: 40, contribution: 'Alto Impacto' },
+                { label: 'Alinhamento OKR', score: 8, weight: 30, contribution: 'Estratégico' },
+                { label: 'Complexidade', score: 6, weight: 15, contribution: 'Moderada' },
+                { label: 'Time to Market', score: 7, weight: 15, contribution: 'Rápido' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center justify-between text-sm border-b border-[#1E293B] pb-2 last:border-0">
+                  <span className="text-[#94A3B8]">{item.label}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[#A855F7] font-mono">{item.weight}%</span>
+                    <span className="text-[#F1F5F9] font-bold">{item.score}/10</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="p-3 bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-lg">
+            <div className="flex items-center gap-2 mb-1">
+              <Sparkles className="w-4 h-4 text-[#A855F7]" />
+              <span className="text-sm font-semibold text-[#A855F7]">IA Insight</span>
+            </div>
+            <p className="text-xs text-[#94A3B8]">
+              Este projeto tem alta sinergia com a iniciativa "Security Uplift" prevista para Q3. Considere unificar os backlogs para otimizar recursos de QA.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsAnalysisModalOpen(false)}
+            className="w-full py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+          >
+            Fechar
+          </button>
         </div>
       </Modal>
     </div>

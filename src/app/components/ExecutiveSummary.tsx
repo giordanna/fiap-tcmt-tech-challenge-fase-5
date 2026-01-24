@@ -1,6 +1,16 @@
-import { TrendingUp, Users, DollarSign, Target } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, Target, FileBarChart } from 'lucide-react';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
 
 export function ExecutiveSummary() {
+  const { showToast } = useToast();
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+
+  const handleExportReport = () => {
+    setIsExportModalOpen(true);
+  };
+
   const metrics = [
     {
       label: 'ROI Total',
@@ -50,10 +60,43 @@ export function ExecutiveSummary() {
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Resumo Executivo</h2>
           <p className="text-sm text-[#94A3B8]">KPIs para apresentação ao board</p>
         </div>
-        <button className="px-4 py-2 bg-[#00D9FF]/10 hover:bg-[#00D9FF]/20 border border-[#00D9FF]/30 text-[#00D9FF] rounded-lg transition-colors text-sm">
+        <button 
+          onClick={handleExportReport}
+          className="px-4 py-2 bg-[#00D9FF]/10 hover:bg-[#00D9FF]/20 border border-[#00D9FF]/30 text-[#00D9FF] rounded-lg transition-colors text-sm flex items-center gap-2"
+        >
+          <FileBarChart className="w-4 h-4" />
           Exportar relatório
         </button>
       </div>
+
+      <Modal isOpen={isExportModalOpen} onClose={() => setIsExportModalOpen(false)} title="Exportar Relatório Executivo">
+        <div className="space-y-4">
+          <div className="p-4 bg-[#0A0E1A] border border-[#1E293B] rounded-xl text-center">
+            <div className="w-12 h-12 rounded-full bg-[#00D9FF]/20 flex items-center justify-center mx-auto mb-3">
+              <FileBarChart className="w-6 h-6 text-[#00D9FF]" />
+            </div>
+            <h3 className="text-[#F1F5F9] font-medium mb-1">Q1 2026 Executive Summary.pdf</h3>
+            <p className="text-sm text-[#94A3B8]">Inclui análise de ROI, DORA metrics e projeções de FinOps</p>
+          </div>
+          <div className="flex gap-3 pt-2">
+            <button
+              onClick={() => {
+                setIsExportModalOpen(false);
+                showToast('Relatório enviado para seu email corporativo', 'success');
+              }}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
+            >
+              Confirmar Exportação
+            </button>
+            <button
+              onClick={() => setIsExportModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {metrics.map((metric, i) => (

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Clock, AlertCircle, Sparkles, ArrowUp, ArrowDown } from 'lucide-react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
 
 interface BacklogCard {
   id: string;
@@ -208,6 +209,15 @@ export function PrioritizedBacklog() {
     showToast(`Card "${selectedCard?.title}" mantido na posição atual`, 'info');
   };
 
+  const [isNewCardModalOpen, setIsNewCardModalOpen] = useState(false);
+  const [newCardTitle, setNewCardTitle] = useState('');
+
+  const handleCreateCard = () => {
+    setIsNewCardModalOpen(false);
+    showToast('Card criado e adicionado ao backlog', 'success');
+    setNewCardTitle('');
+  };
+
   return (
     <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
       {/* Header */}
@@ -220,7 +230,10 @@ export function PrioritizedBacklog() {
           <button className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#1E293B] text-[#F1F5F9] rounded-lg text-sm transition-colors">
             Filtrar
           </button>
-          <button className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors">
+          <button 
+            onClick={() => setIsNewCardModalOpen(true)}
+            className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors"
+          >
             + Novo Card
           </button>
         </div>
@@ -313,6 +326,73 @@ export function PrioritizedBacklog() {
             </div>
           </div>
         )}
+      </Modal>
+
+      {/* New Card Modal */}
+      <Modal isOpen={isNewCardModalOpen} onClose={() => setIsNewCardModalOpen(false)} title="Adicionar Novo Item ao Backlog">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Título do Card</label>
+            <input 
+              type="text"
+              value={newCardTitle}
+              onChange={(e) => setNewCardTitle(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+              placeholder="Ex: Implementar cache no endpoint de usuários"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Responsável</label>
+              <Select defaultValue="@anderson.silva">
+                <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                  <SelectValue placeholder="Selecione o responsável" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="@anderson.silva">@anderson.silva</SelectItem>
+                  <SelectItem value="@bruno.costa">@bruno.costa</SelectItem>
+                  <SelectItem value="@silva.lima">@silva.lima</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Prioridade Inicial</label>
+              <Select defaultValue="medium">
+                <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                  <SelectValue placeholder="Selecione a prioridade" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="medium">Média</SelectItem>
+                  <SelectItem value="high">Alta</SelectItem>
+                  <SelectItem value="low">Baixa</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="p-3 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-lg">
+            <div className="flex items-center gap-2 mb-1">
+              <Sparkles className="w-4 h-4 text-[#00D9FF]" />
+              <span className="text-sm font-semibold text-[#00D9FF]">AI Analysis Preview</span>
+            </div>
+            <p className="text-xs text-[#94A3B8]">
+              Ao criar, a IA analisará automaticamente a complexidade e sugerirá a melhor posição no backlog baseada na velocidade do time.
+            </p>
+          </div>
+          <div className="flex gap-3 pt-2">
+            <button
+              onClick={handleCreateCard}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
+            >
+              Criar Card
+            </button>
+            <button
+              onClick={() => setIsNewCardModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
