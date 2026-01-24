@@ -9,7 +9,7 @@ export function AICopilotWidget() {
 
   const handleSendNotification = () => {
     setNotificationSent(true);
-    showToast('Notificação enviada para @rafael.costa sobre o card AB#402', 'success');
+    showToast('Notificação enviada para @rafael.costa sobre a tarefa AB#402', 'success');
   };
 
   const handleDismiss = () => {
@@ -31,7 +31,7 @@ export function AICopilotWidget() {
             <CheckCircle2 className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-[#F1F5F9] font-semibold">Copiloto Ágil</h3>
+            <h3 className="text-[#F1F5F9] font-semibold">Assistente Ágil</h3>
             <span className="text-sm text-[#10B981]">Sem alertas pendentes</span>
           </div>
         </div>
@@ -58,7 +58,7 @@ export function AICopilotWidget() {
             <Brain className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-[#F1F5F9] font-semibold">Copiloto Ágil</h3>
+            <h3 className="text-[#F1F5F9] font-semibold">Assistente Ágil</h3>
             <div className="flex items-center gap-1.5 mt-0.5">
               <div className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></div>
               <span className="text-xs text-[#94A3B8]">Monitoramento Ativo</span>
@@ -74,10 +74,10 @@ export function AICopilotWidget() {
             </div>
             <div className="flex-1">
               <div className="text-sm text-[#F1F5F9] mb-1">
-                <span className="text-[#F59E0B]">Impedimento Silencioso Detectado</span>
+                <span className="text-[#F59E0B]">Possível Bloqueio Identificado</span>
               </div>
               <p className="text-sm text-[#94A3B8] leading-relaxed">
-                Card <span className="text-[#00D9FF] font-mono">AB#402</span> está parado há <span className="text-[#F59E0B]">48h</span> sem atualizações
+                Tarefa <span className="text-[#00D9FF] font-mono">AB#402</span> está parada há <span className="text-[#F59E0B]">48h</span> sem atualizações
               </p>
             </div>
           </div>
@@ -88,11 +88,11 @@ export function AICopilotWidget() {
           <div className="flex items-start gap-2 mb-2">
             <div className="w-1.5 h-1.5 rounded-full bg-[#A855F7] mt-1.5"></div>
             <div>
-              <span className="text-xs text-[#A855F7] font-semibold">SUGESTÃO IA</span>
+              <span className="text-xs text-[#A855F7] font-semibold">SUGESTÃO INTELIGENTE</span>
             </div>
           </div>
           <p className="text-sm text-[#F1F5F9] pl-3.5">
-            Notificar Tech Lead <span className="text-[#00D9FF]">@rafael.costa</span> sobre possível bloqueio. Problemas similares levaram em média 3.2 dias para resolver.
+            Notificar Líder Técnico <span className="text-[#00D9FF]">@rafael.costa</span> sobre possível bloqueio. Problemas similares levaram em média 3.2 dias para resolver.
           </p>
         </div>
 

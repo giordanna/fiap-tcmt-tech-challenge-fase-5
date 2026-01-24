@@ -94,9 +94,9 @@ function Column({ title, cards, color, onCardClick }: ColumnProps) {
           <span className="text-xs text-[#94A3B8]">({cards.length})</span>
         </div>
         <div className="text-xs text-[#94A3B8]">
-          {title === 'Backlog Priorizado (IA)' && 'Prioridade otimizada por IA'}
-          {title === 'Em Progresso (Sprint 26)' && 'Sprint atual'}
-          {title === 'Deploy em UAT' && 'Pronto para testes'}
+          {title === 'Lista de Tarefas Priorizada (IA)' && 'Prioridade sugerida pela IA'}
+          {title === 'Em Progresso (Ciclo 26)' && 'Ciclo atual de trabalho'}
+          {title === 'Pronto para Testes' && 'Aguardando testes'}
         </div>
       </div>
 
@@ -201,12 +201,12 @@ export function PrioritizedBacklog() {
 
   const handleAcceptSuggestion = () => {
     setIsModalOpen(false);
-    showToast(`Card "${selectedCard?.title}" movido para prioridade sugerida pela IA`, 'success');
+    showToast(`Tarefa "${selectedCard?.title}" movida para prioridade sugerida pela IA`, 'success');
   };
 
   const handleKeepPosition = () => {
     setIsModalOpen(false);
-    showToast(`Card "${selectedCard?.title}" mantido na posição atual`, 'info');
+    showToast(`Tarefa "${selectedCard?.title}" mantida na posição atual`, 'info');
   };
 
   const [isNewCardModalOpen, setIsNewCardModalOpen] = useState(false);
@@ -214,7 +214,7 @@ export function PrioritizedBacklog() {
 
   const handleCreateCard = () => {
     setIsNewCardModalOpen(false);
-    showToast('Card criado e adicionado ao backlog', 'success');
+    showToast('Tarefa criada e adicionada à lista', 'success');
     setNewCardTitle('');
   };
 
@@ -223,8 +223,8 @@ export function PrioritizedBacklog() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Backlog Priorizado</h2>
-          <p className="text-sm text-[#94A3B8]">Orquestração de itens com IA</p>
+          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Lista de Tarefas Priorizada</h2>
+          <p className="text-sm text-[#94A3B8]">Organização inteligente de tarefas</p>
         </div>
         <div className="flex items-center gap-2">
           <button className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#1E293B] text-[#F1F5F9] rounded-lg text-sm transition-colors">
@@ -235,7 +235,7 @@ export function PrioritizedBacklog() {
             onClick={() => setIsNewCardModalOpen(true)}
             className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors"
           >
-            + Novo Card
+            + Nova Tarefa
           </button>
         </div>
       </div>
@@ -243,19 +243,19 @@ export function PrioritizedBacklog() {
       {/* Columns */}
       <div className="flex gap-6 overflow-x-auto pb-4">
         <Column 
-          title="Backlog Priorizado (IA)" 
+          title="Lista de Tarefas Priorizada (IA)" 
           cards={prioritizedBacklog} 
           color="#A855F7"
           onCardClick={handleCardClick}
         />
         <Column 
-          title="Em Progresso (Sprint 26)" 
+          title="Em Progresso (Ciclo 26)" 
           cards={inProgress} 
           color="#00D9FF"
           onCardClick={handleCardClick}
         />
         <Column 
-          title="Deploy em UAT" 
+          title="Pronto para Testes" 
           cards={deployed} 
           color="#10B981"
           onCardClick={handleCardClick}
@@ -263,7 +263,7 @@ export function PrioritizedBacklog() {
       </div>
 
       {/* Reprioritization Modal */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Análise de Priorização IA">
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Análise de Priorização Inteligente">
         {selectedCard && (
           <div className="space-y-6">
             {/* Card Info */}
@@ -283,10 +283,10 @@ export function PrioritizedBacklog() {
             <div className="bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles className="w-4 h-4 text-[#A855F7]" />
-                <span className="text-sm font-semibold text-[#A855F7]">Sugestão de IA</span>
+                <span className="text-sm font-semibold text-[#A855F7]">Sugestão Inteligente</span>
               </div>
               <p className="text-sm text-[#F1F5F9] mb-3">
-                Com base na análise de dependências e valor de negócio, recomendo mover este card <span className="text-[#10B981]">2 posições acima</span> no backlog.
+                Com base na análise de dependências e valor para o negócio, recomendo mover esta tarefa <span className="text-[#10B981]">2 posições acima</span> na lista.
               </p>
               <div className="flex items-center gap-4 text-xs text-[#94A3B8]">
                 <div className="flex items-center gap-1">
@@ -304,8 +304,8 @@ export function PrioritizedBacklog() {
               <div className="text-xs text-[#94A3B8] font-semibold">JUSTIFICATIVA</div>
               <ul className="space-y-1 text-sm text-[#94A3B8]">
                 <li>• Remove bloqueios para 3 outros itens</li>
-                <li>• Alinhado com OKR Q1 - Eficiência operacional</li>
-                <li>• Equipe disponível no sprint atual</li>
+                <li>• Alinhado com as metas do trimestre - Eficiência operacional</li>
+                <li>• Equipe disponível no ciclo atual</li>
               </ul>
             </div>
 
@@ -330,10 +330,10 @@ export function PrioritizedBacklog() {
       </Modal>
 
       {/* New Card Modal */}
-      <Modal isOpen={isNewCardModalOpen} onClose={() => setIsNewCardModalOpen(false)} title="Adicionar Novo Item ao Backlog">
+      <Modal isOpen={isNewCardModalOpen} onClose={() => setIsNewCardModalOpen(false)} title="Adicionar Nova Tarefa">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-[#94A3B8] mb-1">Título do Card</label>
+            <label className="block text-sm text-[#94A3B8] mb-1">Título da Tarefa</label>
             <input 
               type="text"
               value={newCardTitle}
@@ -373,10 +373,10 @@ export function PrioritizedBacklog() {
           <div className="p-3 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-lg">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="w-4 h-4 text-[#00D9FF]" />
-              <span className="text-sm font-semibold text-[#00D9FF]">AI Analysis Preview</span>
+              <span className="text-sm font-semibold text-[#00D9FF]">Prévia da Análise Inteligente</span>
             </div>
             <p className="text-xs text-[#94A3B8]">
-              Ao criar, a IA analisará automaticamente a complexidade e sugerirá a melhor posição no backlog baseada na velocidade do time.
+              Ao criar, a IA analisará automaticamente a complexidade e sugerirá a melhor posição na lista baseada no ritmo do time.
             </p>
           </div>
           <div className="flex gap-3 pt-2">
@@ -384,7 +384,7 @@ export function PrioritizedBacklog() {
               onClick={handleCreateCard}
               className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
             >
-              Criar Card
+              Criar Tarefa
             </button>
             <button
               onClick={() => setIsNewCardModalOpen(false)}

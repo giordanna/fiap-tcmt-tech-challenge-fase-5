@@ -29,15 +29,15 @@ export function GoldenPathsPage() {
   const paths: Path[] = [
     {
       name: 'Kubernetes Cluster',
-      description: 'Cluster K8s self-service com Istio e monitoramento',
+      description: 'Sistema de containers pronto para usar, com rede de serviços e monitoramento',
       icon: Database,
       color: '#00D9FF',
       uses: 47,
       avgTime: '12 min',
     },
     {
-      name: 'API Gateway',
-      description: 'API Gateway baseado em Kong com OAuth2 e rate limiting',
+      name: 'Controle de Acesso a Serviços',
+      description: 'Interface de serviços com autenticação e limite de requisições',
       icon: Code,
       color: '#A855F7',
       uses: 34,
@@ -45,15 +45,15 @@ export function GoldenPathsPage() {
     },
     {
       name: 'Microservice Template',
-      description: 'Microserviço Node.js com CI/CD e observabilidade',
+      description: 'Serviço pequeno com integração contínua e monitoramento',
       icon: Zap,
       color: '#10B981',
       uses: 89,
       avgTime: '15 min',
     },
     {
-      name: 'Secure Database',
-      description: 'PostgreSQL com criptografia e backups automatizados',
+      name: 'Banco de Dados Seguro',
+      description: 'Banco de dados PostgreSQL com segurança e cópias automáticas',
       icon: Shield,
       color: '#F59E0B',
       uses: 56,
@@ -65,10 +65,10 @@ export function GoldenPathsPage() {
     'Validando configurações...',
     'Provisionando recursos...',
     'Aplicando configurações de segurança...',
-    'Iniciando containers...',
-    'Configurando networking...',
-    'Executando health checks...',
-    'Finalizando deploy...',
+    'Iniciando serviços...',
+    'Configurando rede...',
+    'Executando verificações de funcionamento...',
+    'Finalizando publicação...',
   ];
 
   const handleDeploy = (path: Path) => {
@@ -104,7 +104,7 @@ export function GoldenPathsPage() {
           setTimeout(() => {
             setIsModalOpen(false);
             setIsDeploying(false);
-            showToast(`${selectedPath?.name} implantado com sucesso no ambiente ${selectedEnv}!`, 'success');
+            showToast(`${selectedPath?.name} implantado com sucesso no ambiente ${selectedEnv === 'development' ? 'de desenvolvimento' : selectedEnv === 'staging' ? 'de homologação' : 'de produção'}!`, 'success');
           }, 500);
         }
         return Math.min(next, 100);
@@ -125,7 +125,7 @@ export function GoldenPathsPage() {
             </div>
             <div>
               <h1 className="text-2xl text-[#F1F5F9] font-semibold">Caminhos Padrão</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Catálogo de infraestrutura self-service</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Catálogo de soluções prontas para uso</p>
             </div>
           </div>
           <button 
@@ -143,8 +143,8 @@ export function GoldenPathsPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Total de Caminhos', value: '24', color: '#A855F7' },
-          { label: 'Deploys Ativos', value: '142', color: '#00D9FF' },
-          { label: 'Tempo Médio de Deploy', value: '11m', color: '#10B981' },
+          { label: 'Publicações Ativas', value: '142', color: '#00D9FF' },
+          { label: 'Tempo Médio de Publicação', value: '11m', color: '#10B981' },
           { label: 'Taxa de Sucesso', value: '99.2%', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
@@ -310,7 +310,7 @@ export function GoldenPathsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm text-[#94A3B8] mb-1">Descrição Técnica / Stack</label>
+            <label className="block text-sm text-[#94A3B8] mb-1">Descrição da Solução</label>
             <textarea 
               value={newPathDesc}
               onChange={(e) => setNewPathDesc(e.target.value)}

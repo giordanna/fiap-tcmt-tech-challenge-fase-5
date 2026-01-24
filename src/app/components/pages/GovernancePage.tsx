@@ -95,7 +95,7 @@ export function GovernancePage() {
       id: 'GMUD-2026-005',
       title: 'Migração Database PostgreSQL 15',
       date: '14 Jan, 20:00',
-      system: 'Database',
+      system: 'Banco de Dados',
       impact: 'Alto',
       status: 'in_progress',
     },
@@ -103,7 +103,7 @@ export function GovernancePage() {
       id: 'GMUD-2026-007',
       title: 'Atualização Kubernetes 1.28',
       date: '20 Jan, 18:00',
-      system: 'Infrastructure',
+      system: 'Infraestrutura',
       impact: 'Alto',
       status: 'pending',
     },
@@ -164,7 +164,7 @@ export function GovernancePage() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-[#EF4444] rounded"></div>
-                <span className="text-sm text-[#94A3B8]">Freezing</span>
+                <span className="text-sm text-[#94A3B8]">Congelamento</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-[#1E293B] rounded"></div>

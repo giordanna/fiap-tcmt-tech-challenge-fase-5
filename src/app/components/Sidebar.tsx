@@ -44,7 +44,7 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
           </div>
           <div>
             <div className="text-lg font-semibold text-[#F1F5F9]">ValueFlow</div>
-            <div className="text-xs text-[#94A3B8]">Platform</div>
+            <div className="text-xs text-[#94A3B8]">Plataforma</div>
           </div>
         </div>
         {onClose && (

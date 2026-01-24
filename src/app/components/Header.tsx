@@ -12,12 +12,12 @@ export function Header() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
           <input
             type="text"
-            placeholder="Buscar em todos os fluxos de valor..."
+            placeholder="Buscar projetos, tarefas e métricas..."
             className="w-full bg-[#1E293B] border border-[#1E293B] rounded-lg pl-12 pr-28 py-2.5 text-[#F1F5F9] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#00D9FF]/50 focus:border-[#00D9FF]"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-md px-2.5 py-1">
             <Sparkles className="w-3.5 h-3.5 text-[#A855F7]" />
-            <span className="text-xs text-[#A855F7]">Busca IA</span>
+            <span className="text-xs text-[#A855F7]">Busca Inteligente</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export function Header() {
         <button 
           onClick={() => window.dispatchEvent(new Event('restart-onboarding'))}
           className="w-10 h-10 rounded-lg bg-[#1E293B] flex items-center justify-center text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#1E293B]/80 transition-colors"
-          title="Reiniciar Tour de Onboarding"
+          title="Iniciar tour de apresentação"
         >
           <Settings className="w-5 h-5" />
         </button>

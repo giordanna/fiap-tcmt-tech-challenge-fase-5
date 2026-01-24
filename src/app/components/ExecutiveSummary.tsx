@@ -34,7 +34,7 @@ export function ExecutiveSummary() {
       highlight: true,
     },
     {
-      label: 'Desempenho de Entrega',
+      label: 'Taxa de Entregas no Prazo',
       value: '98.2%',
       change: '+5.3%',
       trend: 'up',
@@ -49,7 +49,7 @@ export function ExecutiveSummary() {
       trend: 'up',
       icon: TrendingUp,
       color: '#F59E0B',
-      subtitle: 'Lead time médio',
+      subtitle: 'Tempo médio de entrega',
     },
   ];
 
@@ -58,7 +58,7 @@ export function ExecutiveSummary() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Resumo Executivo</h2>
-          <p className="text-sm text-[#94A3B8]">KPIs para apresentação ao board</p>
+          <p className="text-sm text-[#94A3B8]">Indicadores para apresentação à diretoria</p>
         </div>
         <button 
           onClick={handleExportReport}
@@ -76,7 +76,7 @@ export function ExecutiveSummary() {
               <FileBarChart className="w-6 h-6 text-[#00D9FF]" />
             </div>
             <h3 className="text-[#F1F5F9] font-medium mb-1">Q1 2026 Executive Summary.pdf</h3>
-            <p className="text-sm text-[#94A3B8]">Inclui análise de ROI, DORA metrics e projeções de FinOps</p>
+            <p className="text-sm text-[#94A3B8]">Inclui análise de retorno, métricas de desempenho e projeções de custos</p>
           </div>
           <div className="flex gap-3 pt-2">
             <button
@@ -162,7 +162,7 @@ export function ExecutiveSummary() {
         </div>
         <div className="flex-1">
           <div className="text-sm text-[#F1F5F9] mb-1">
-            <span className="text-[#A855F7] font-semibold">Destaque para o Board:</span> A implementação da ValueFlow Platform 
+            <span className="text-[#A855F7] font-semibold">Destaque para a Diretoria:</span> A implantação da Plataforma ValueFlow 
             resultou em <span className="text-[#10B981]">R$ 385k em economia operacional</span> e 
             aumento de <span className="text-[#00D9FF]">47% na velocidade de entrega</span>.
           </div>

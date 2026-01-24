@@ -9,13 +9,13 @@ export function DeliveryPipeline() {
 
   const handleDeploy = () => {
     setIsDeployModalOpen(false);
-    showToast('Processo de deploy iniciado via GitOps agent', 'success');
+    showToast('Processo de publicação iniciado via sistema automatizado', 'success');
   };
   const steps = [
     { label: 'Revisão de Código', status: 'completed', icon: CheckCircle2 },
-    { label: 'Build & Testes', status: 'completed', icon: CheckCircle2 },
-    { label: 'Scan de Segurança', status: 'completed', icon: CheckCircle2 },
-    { label: 'Deploy em Staging', status: 'active', icon: Circle },
+    { label: 'Compilação e Testes', status: 'completed', icon: CheckCircle2 },
+    { label: 'Verificação de Segurança', status: 'completed', icon: CheckCircle2 },
+    { label: 'Publicação em Homologação', status: 'active', icon: Circle },
     { label: 'Produção', status: 'pending', icon: Circle },
   ];
 
@@ -28,8 +28,8 @@ export function DeliveryPipeline() {
             <Rocket className="w-5 h-5 text-[#00D9FF]" />
           </div>
           <div>
-            <h3 className="text-[#F1F5F9] font-semibold">Pipeline de Deploy</h3>
-            <p className="text-xs text-[#94A3B8] mt-0.5">Golden Path: API Gateway v2.4.1</p>
+            <h3 className="text-[#F1F5F9] font-semibold">Fluxo de Publicação</h3>
+            <p className="text-xs text-[#94A3B8] mt-0.5">Caminho Padrão: API Gateway v2.4.1</p>
           </div>
         </div>
       </div>
@@ -77,13 +77,13 @@ export function DeliveryPipeline() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-[#F1F5F9] font-semibold">Score de Risco do Deploy</span>
+                <span className="text-sm text-[#F1F5F9] font-semibold">Risco da Publicação</span>
                 <div className="flex items-center gap-1 bg-[#A855F7]/20 px-2 py-0.5 rounded-full">
                   <Sparkles className="w-3 h-3 text-[#A855F7]" />
                   <span className="text-xs text-[#A855F7]">Aprovado por IA</span>
                 </div>
               </div>
-              <p className="text-xs text-[#94A3B8] mt-0.5">Todos os checks passaram • 0 problemas críticos</p>
+              <p className="text-xs text-[#94A3B8] mt-0.5">Todas as verificações passaram • 0 problemas críticos</p>
             </div>
           </div>
           <div className="text-right">
@@ -100,25 +100,25 @@ export function DeliveryPipeline() {
         className="w-full bg-gradient-to-r from-[#00D9FF] to-[#00B8D4] hover:from-[#00C4E6] hover:to-[#00A3BF] text-[#0A0E1A] py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 font-semibold shadow-lg shadow-[#00D9FF]/20"
       >
         <Rocket className="w-5 h-5" />
-        <span>Deploy para Produção</span>
+        <span>Publicar em Produção</span>
       </button>
 
-      <Modal isOpen={isDeployModalOpen} onClose={() => setIsDeployModalOpen(false)} title="Confirmar Deploy em Produção">
+      <Modal isOpen={isDeployModalOpen} onClose={() => setIsDeployModalOpen(false)} title="Confirmar Publicação em Produção">
         <div className="space-y-4">
           <div className="p-4 bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-xl flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0" />
             <div className="text-sm text-[#F1F5F9]">
-              <span className="font-semibold text-[#F59E0B]">Atenção:</span> Você está prestes a realizar um deploy no ambiente de <span className="font-bold">Produção</span>. Esta ação afetará todos os usuários ativos.
+              <span className="font-semibold text-[#F59E0B]">Atenção:</span> Você está prestes a publicar no ambiente de <span className="font-bold">Produção</span>. Esta ação afetará todos os usuários ativos.
             </div>
           </div>
 
           <div className="space-y-2">
-            <div className="text-sm text-[#94A3B8] font-semibold">Checks de Segurança (Autenticados por IA)</div>
+            <div className="text-sm text-[#94A3B8] font-semibold">Verificações de Segurança (Validadas por IA)</div>
             {[
-              { label: 'Sem vulnerabilidades críticas (Snyk)', status: 'pass' },
+              { label: 'Sem falhas críticas de segurança', status: 'pass' },
               { label: 'Cobertura de testes > 85%', status: 'pass' },
-              { label: 'Aprovação do Tech Lead', status: 'pass' },
-              { label: 'Janela de GMUD aprovada', status: 'pass' },
+              { label: 'Aprovação do Líder Técnico', status: 'pass' },
+              { label: 'Janela de mudança aprovada', status: 'pass' },
             ].map((check, i) => (
               <div key={i} className="flex items-center justify-between p-2 bg-[#0A0E1A] border border-[#1E293B] rounded-lg">
                 <span className="text-sm text-[#F1F5F9]">{check.label}</span>
@@ -133,7 +133,7 @@ export function DeliveryPipeline() {
               className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white py-2 rounded-lg transition-colors font-semibold flex items-center justify-center gap-2"
             >
               <Rocket className="w-4 h-4" />
-              Confirmar Deploy
+              Confirmar Publicação
             </button>
             <button
               onClick={() => setIsDeployModalOpen(false)}

@@ -45,7 +45,7 @@ export function FinOpsPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Gasto Mensal', value: 'R$ 32.5k', change: '-8%', color: '#10B981' },
-          { label: 'Otimizações Encontradas', value: '7', change: 'novo', color: '#00D9FF' },
+          { label: 'Oportunidades de Economia', value: '7', change: 'novo', color: '#00D9FF' },
           { label: 'Economia Potencial', value: 'R$ 2.1k', change: '+12%', color: '#A855F7' },
           { label: 'Anomalias de Custo', value: '2', change: 'ativo', color: '#F59E0B' },
         ].map((stat, i) => (
@@ -108,7 +108,7 @@ export function FinOpsPage() {
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorDev)" 
-                name="Ambiente Dev"
+                name="Ambiente de Desenvolvimento"
               />
               <Area 
                 type="monotone" 
@@ -117,7 +117,7 @@ export function FinOpsPage() {
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorTerrablade)"
-                name="Recursos Ociosos"
+                name="Recursos sem Uso"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -133,7 +133,7 @@ export function FinOpsPage() {
               <div className="flex-1">
                 <div className="text-xs text-[#A855F7] font-semibold mb-1">RECOMENDAÇÃO IA</div>
                 <p className="text-sm text-[#F1F5F9] mb-2">
-                  Ambiente Terrablade possui <span className="text-[#F59E0B]">recursos ociosos</span> consumindo R$ 890/mês
+                  Ambiente de homologação possui <span className="text-[#F59E0B]">recursos sem uso</span> consumindo R$ 890/mês
                 </p>
                 <button 
                   onClick={() => setIsDetailsModalOpen(true)}
@@ -154,7 +154,7 @@ export function FinOpsPage() {
               <div className="flex-1">
                 <div className="text-xs text-[#10B981] font-semibold mb-1">ECONOMIA DE CUSTO</div>
                 <p className="text-sm text-[#F1F5F9] mb-2">
-                  Agendar ambientes de não-produção para economizar <span className="text-[#10B981] font-semibold">R$ 1.2k/mês</span>
+                  Agendar desligamento de ambientes de desenvolvimento e homologação para economizar <span className="text-[#10B981] font-semibold">R$ 1.2k/mês</span>
                 </p>
                 <button 
                   onClick={() => setIsCostSavingModalOpen(true)}
@@ -172,9 +172,9 @@ export function FinOpsPage() {
       <Modal isOpen={isCostSavingModalOpen} onClose={() => setIsCostSavingModalOpen(false)} title="Aplicar Política de Economia">
         <div className="space-y-4">
           <div className="p-4 bg-[#10B981]/10 border border-[#10B981]/30 rounded-xl">
-            <h4 className="text-[#10B981] font-semibold mb-2">Shutdown Automático</h4>
+            <h4 className="text-[#10B981] font-semibold mb-2">Desligamento Automático</h4>
             <p className="text-sm text-[#F1F5F9]">
-              Deseja configurar o desligamento automático dos ambientes de desenvolvimento e staging fora do horário comercial (20h - 08h e finais de semana)?
+              Deseja configurar o desligamento automático dos ambientes de desenvolvimento e homologação fora do horário comercial (20h - 08h e finais de semana)?
             </p>
           </div>
           <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-3">
@@ -184,7 +184,7 @@ export function FinOpsPage() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-[#94A3B8]">Impacto:</span>
-              <span className="text-[#F59E0B]">Baixo (Dev/Staging)</span>
+              <span className="text-[#F59E0B]">Baixo (Dev/Homologação)</span>
             </div>
           </div>
           <div className="flex gap-3 pt-2">
@@ -204,15 +204,15 @@ export function FinOpsPage() {
         </div>
       </Modal>
 
-      <Modal isOpen={isDetailsModalOpen} onClose={() => setIsDetailsModalOpen(false)} title="Detalhes da Anomalia - Terrablade">
+      <Modal isOpen={isDetailsModalOpen} onClose={() => setIsDetailsModalOpen(false)} title="Detalhes - Recursos sem Uso">
         <div className="space-y-4">
           <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
             <div className="flex items-center gap-3 mb-3">
               <AlertTriangle className="w-5 h-5 text-[#F59E0B]" />
-              <h4 className="text-sm text-[#F1F5F9] font-bold">Recursos Ociosos Detectados</h4>
+              <h4 className="text-sm text-[#F1F5F9] font-bold">Recursos sem Uso Detectados</h4>
             </div>
             <p className="text-sm text-[#94A3B8] mb-3">
-              A IA detectou 3 instâncias `t3.large` no ambiente de staging com utilização de CPU &lt; 5% nos últimos 7 dias.
+              A IA detectou 3 servidores no ambiente de homologação com uso de processador menor que 5% nos últimos 7 dias.
             </p>
             <div className="flex items-center justify-between text-xs bg-[#1E293B] p-2 rounded">
               <span className="text-[#94A3B8]">Custo Desperdiçado:</span>
@@ -226,20 +226,20 @@ export function FinOpsPage() {
               <button 
                 onClick={() => {
                   setIsDetailsModalOpen(false);
-                  showToast('Instâncias redimensionadas para t3.micro', 'success');
+                  showToast('Servidores redimensionados para capacidade menor', 'success');
                 }}
                 className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white text-sm py-2 rounded-lg transition-colors"
               >
-                Downsize (t3.micro)
+                Reduzir Capacidade
               </button>
               <button 
                 onClick={() => {
                   setIsDetailsModalOpen(false);
-                  showToast('Instâncias terminadas com sucesso', 'success');
+                  showToast('Servidores encerrados com sucesso', 'success');
                 }}
                 className="flex-1 border border-[#EF4444] text-[#EF4444] hover:bg-[#EF4444]/10 text-sm py-2 rounded-lg transition-colors"
               >
-                Terminar Instâncias
+                Encerrar Servidores
               </button>
             </div>
           </div>

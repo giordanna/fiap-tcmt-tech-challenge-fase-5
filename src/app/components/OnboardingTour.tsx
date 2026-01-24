@@ -28,45 +28,80 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     return () => window.removeEventListener('restart-onboarding', handleRestart);
   }, [onNavigate]);
 
+  // Highlight target element
+  useEffect(() => {
+    if (!isOpen || showWelcome) return;
+    
+    const currentStepData = steps[step];
+    if (!currentStepData) return;
+    
+    const targetElement = document.querySelector(currentStepData.target) as HTMLElement;
+    
+    if (targetElement) {
+      // Store original styles
+      const originalZIndex = targetElement.style.zIndex;
+      const originalPosition = targetElement.style.position;
+      const originalBoxShadow = targetElement.style.boxShadow;
+      const originalBorderRadius = targetElement.style.borderRadius;
+      
+      // Apply highlight styles
+      targetElement.style.position = 'relative';
+      targetElement.style.zIndex = '95';
+      targetElement.style.boxShadow = '0 0 0 3px #00D9FF, 0 0 15px rgba(0, 217, 255, 0.6)';
+      targetElement.style.borderRadius = '8px';
+      
+      // Scroll into view
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Cleanup function
+      return () => {
+        targetElement.style.zIndex = originalZIndex;
+        targetElement.style.position = originalPosition;
+        targetElement.style.boxShadow = originalBoxShadow;
+        targetElement.style.borderRadius = originalBorderRadius;
+      };
+    }
+  }, [isOpen, step, showWelcome]);
+
   const steps = [
     // --- HOME ---
     {
       target: '#sidebar-nav',
       page: 'home',
       title: 'Navegação Unificada',
-      description: 'Acesse aqui todas as dimensões do Value Stream Management: Estratégia, Planejamento, Ingestão, FinOps e mais.',
+      description: 'Acesse aqui todas as áreas da plataforma: Estratégia, Planejamento, Integrações, Custos e mais. Cada seção ajuda a gerenciar uma parte do trabalho da sua equipe.',
       icon: Zap,
       position: 'right'
     },
     {
       target: '#executive-summary',
       page: 'home',
-      title: 'Jornada 12: Relatórios Executivos',
-      description: 'Single Pane of Glass com KPIs críticos. Clique em "Exportar Relatório" para simular o envio de PDF para stakeholders.',
+      title: 'Relatórios para a Diretoria',
+      description: 'Painel unificado com os principais indicadores de desempenho. Clique em "Exportar Relatório" para gerar um PDF pronto para apresentar aos gestores.',
       icon: Target,
       position: 'bottom'
     },
     {
       target: '#btn-copilot-action',
       page: 'home',
-      title: 'Jornada 1: Copiloto Ágil',
-      description: 'A IA monitora gargalos. Clique em "Enviar Notificação" para ver o agente desbloqueando um card parado.',
+      title: 'Assistente Ágil',
+      description: 'A Inteligência Artificial monitora bloqueios no trabalho da equipe. Clique em "Enviar Notificação" para alertar o responsável sobre uma tarefa parada.',
       icon: Zap,
       position: 'top'
     },
     {
       target: '#btn-new-card',
       page: 'home',
-      title: 'Jornada 3 & 11: Backlog Inteligente',
-      description: 'Crie um card e veja a IA sugerir automaticamente a prioridade baseada em valor e esforço.',
+      title: 'Lista de Tarefas Inteligente',
+      description: 'Crie uma nova tarefa e veja a IA sugerir automaticamente a prioridade baseada no valor para o negócio e no esforço necessário.',
       icon: Play,
       position: 'top'
     },
     {
       target: '#btn-deploy-prod',
       page: 'home',
-      title: 'Jornada 2 & 10: Deploy Seguro',
-      description: 'Inicie um deploy para Produção com validação de segurança automática via IA e Golden Path.',
+      title: 'Publicação Segura',
+      description: 'Publique seu sistema em produção com verificação automática de segurança pela IA, seguindo os padrões da empresa.',
       icon: Rocket,
       position: 'top'
     },
@@ -75,8 +110,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-project',
       page: 'strategy',
-      title: 'Jornada 4: Gestão de Portfolio',
-      description: 'Defina novos projetos e veja a Matriz de Pugh calcular prioridades automaticamente.',
+      title: 'Gestão de Projetos',
+      description: 'Cadastre novos projetos e veja o sistema calcular automaticamente as prioridades usando análise comparativa.',
       icon: Target,
       position: 'bottom-left'
     },
@@ -85,8 +120,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-request',
       page: 'planning',
-      title: 'Jornada 17: Solicitação de Dependências',
-      description: 'Gerencie tickets de Infra/DBA/Sec com SLA claro e impacto visível no projeto.',
+      title: 'Solicitações para Outras Equipes',
+      description: 'Abra chamados para as equipes de Infraestrutura, Banco de Dados ou Segurança, com prazo e impacto claros no seu projeto.',
       icon: Workflow,
       position: 'bottom-left'
     },
@@ -95,8 +130,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-gmud',
       page: 'governance',
-      title: 'Jornada 6: Agendamento GMUD',
-      description: 'Valide janelas de mudança automaticamente contra períodos de freezing e conflitos.',
+      title: 'Agendamento de Mudanças',
+      description: 'Agende alterações em sistemas verificando automaticamente conflitos com períodos de congelamento e outras mudanças.',
       icon: Shield,
       position: 'bottom-left'
     },
@@ -105,8 +140,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-add-integration',
       page: 'ingestion',
-      title: 'Jornada 8: Hub de Integração',
-      description: 'Conecte novas ferramentas (Jira, Datadog, Sonar) em segundos com configuração assistida.',
+      title: 'Central de Integrações',
+      description: 'Conecte novas ferramentas (Jira, Datadog, Sonar) em poucos cliques com configuração assistida.',
       icon: Database,
       position: 'bottom-left'
     },
@@ -115,8 +150,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-path',
       page: 'golden-paths',
-      title: 'Jornada 9: Catálogo de Serviços',
-      description: 'Crie novos templates de infraestrutura self-service padronizados para os times de desenvolvimento.',
+      title: 'Catálogo de Soluções',
+      description: 'Crie modelos de infraestrutura prontos para uso que os times de desenvolvimento podem utilizar sem precisar de ajuda.',
       icon: Rocket,
       position: 'bottom-left'
     },
@@ -125,16 +160,16 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-apply-savings',
       page: 'finops',
-      title: 'Jornada 7: Economia Automática',
-      description: 'Aplique recomendações de redução de custo (ex: shutdown de ambientes dev) com um clique.',
+      title: 'Economia Automática',
+      description: 'Aplique sugestões de redução de custos (ex: desligar ambientes de desenvolvimento fora do horário) com um clique.',
       icon: DollarSign,
       position: 'top'
     },
     {
       target: '#btn-view-anomaly',
       page: 'finops',
-      title: 'Jornada 14: Análise de Anomalias',
-      description: 'Investigue picos de custo detectados pela IA e tome ações corretivas imediatas.',
+      title: 'Análise de Gastos Anormais',
+      description: 'Investigue aumentos inesperados de custo detectados pela IA e tome ações corretivas imediatas.',
       icon: DollarSign,
       position: 'top'
     },
@@ -143,8 +178,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: 'card-achievement-0', // ID dynamic logic handled separately or just assume first element
       page: 'gamification',
-      title: 'Jornada 19: Engajamento',
-      description: 'Desenvolvedores ganham badges e XP por boas práticas (Code Review, Deploy sem erro).',
+      title: 'Engajamento da Equipe',
+      description: 'Desenvolvedores ganham medalhas e pontos por boas práticas, como revisar código de colegas ou publicar sistemas sem erros.',
       icon: Trophy,
       position: 'top'
     }
@@ -192,7 +227,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
           
           <h2 className="text-3xl font-bold text-[#F1F5F9] mb-3">Bem-vindo ao ValueFlow</h2>
           <p className="text-[#94A3B8] mb-6 text-lg">
-            Sua plataforma centralizada para gestão de fluxo de valor.
+            Sua plataforma centralizada para acompanhar e otimizar o trabalho da sua equipe de tecnologia.
           </p>
 
           <div className="grid grid-cols-2 gap-4 text-left mb-8">
@@ -200,13 +235,13 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
               <h3 className="text-[#00D9FF] font-semibold mb-2 flex items-center gap-2">
                 <Zap className="w-4 h-4" /> Automação Inteligente
               </h3>
-              <p className="text-sm text-[#94A3B8]">IA para priorização de backlog, riscos de deploy e análise de custos.</p>
+              <p className="text-sm text-[#94A3B8]">Inteligência Artificial para decidir prioridades, identificar riscos e analisar custos.</p>
             </div>
             <div className="bg-[#0A0E1A] p-4 rounded-xl border border-[#1E293B]">
               <h3 className="text-[#A855F7] font-semibold mb-2 flex items-center gap-2">
                 <Target className="w-4 h-4" /> Visão Estratégica
               </h3>
-              <p className="text-sm text-[#94A3B8]">Conecte OKRs ao código, gerenciando dependências e capacidade.</p>
+              <p className="text-sm text-[#94A3B8]">Conecte os objetivos da empresa ao trabalho do dia a dia, acompanhando prazos e disponibilidade.</p>
             </div>
           </div>
           
@@ -262,10 +297,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       <div className="fixed inset-0 z-[90] bg-black/40 pointer-events-none" /> 
       
       <div className={`fixed z-[100] ${getSmartPosition(step)} transition-all duration-500`}>
-        <div className="bg-[#131827] border border-[#00D9FF] rounded-2xl p-6 shadow-2xl relative animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="absolute -top-3 -left-3 w-12 h-12 bg-[#00D9FF] rounded-xl flex items-center justify-center text-[#0A0E1A] font-bold shadow-lg ring-4 ring-[#0A0E1A]">
-            {step + 1}
-          </div>
+        <div className="bg-[#131827] border border-[#00D9FF] rounded-2xl p-5 shadow-2xl relative animate-in fade-in slide-in-from-bottom-4 duration-300 max-w-sm">
           
           <button 
             onClick={handleSkip}

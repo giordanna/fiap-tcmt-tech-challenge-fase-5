@@ -127,7 +127,7 @@ export function PlanningPage() {
         {[
           { label: 'Capacidade Total', value: '192h', sublabel: '6 devs × 32h', color: '#00D9FF' },
           { label: 'Alocação Atual', value: '173h', sublabel: '90% utilizado', color: '#10B981' },
-          { label: 'Buffer Disponível', value: '19h', sublabel: 'Reserva estratégica', color: '#A855F7' },
+          { label: 'Reserva Disponível', value: '19h', sublabel: 'Para imprevistos', color: '#A855F7' },
           { label: 'Dependências Ativas', value: '5', sublabel: '1 bloqueada', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
@@ -143,7 +143,7 @@ export function PlanningPage() {
         <div className="mb-6">
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Capacidade do Time</h2>
           <p className="text-sm text-[#94A3B8]">
-            Regra <span className="text-[#00D9FF] font-semibold">32h/40h</span>: 8h reservadas para "afiar o instrumento" (estudos, refactoring, tech debt)
+            Regra <span className="text-[#00D9FF] font-semibold">32h/40h</span>: 8h reservadas para estudos e melhorias (aprendizado, melhorias de código, dívidas técnicas)
           </p>
         </div>
 
@@ -178,8 +178,8 @@ export function PlanningPage() {
             <Users className="w-5 h-5 text-[#A855F7] flex-shrink-0 mt-0.5" />
             <div>
               <div className="text-sm text-[#F1F5F9] mb-1">
-                <span className="text-[#A855F7] font-semibold">Insight:</span> Daniel Lima está no limite (32h). 
-                Considere redistribuir workload ou adiar tarefas não-críticas.
+                <span className="text-[#A855F7] font-semibold">Sugestão:</span> Daniel Lima está no limite (32h). 
+                Considere redistribuir a carga de trabalho ou adiar tarefas não-críticas.
               </div>
               <button 
                 onClick={() => setIsRedistributeModalOpen(true)}

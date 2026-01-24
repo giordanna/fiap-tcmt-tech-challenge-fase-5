@@ -34,7 +34,7 @@ export function UniversalIngestionPage() {
     { 
       name: 'Jira', 
       status: 'syncing', 
-      lastSync: 'sincronizando...',
+      lastSync: 'atualizando...',
       records: '2,341',
       logo: '🎯'
     },
@@ -78,7 +78,7 @@ export function UniversalIngestionPage() {
             </div>
             <div>
               <h1 className="text-2xl text-[#F1F5F9] font-semibold">Hub de Ingestão Universal</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Pipeline de dados centralizado de todas as ferramentas</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Central de dados integrada com todas as ferramentas</p>
             </div>
           </div>
           <button 
@@ -96,8 +96,8 @@ export function UniversalIngestionPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Total de Integrações', value: '12', color: '#00D9FF' },
-          { label: 'Fontes Ativas', value: '9', color: '#10B981' },
-          { label: 'Registros Sincronizados', value: '10.3k', color: '#A855F7' },
+          { label: 'Conexões Ativas', value: '9', color: '#10B981' },
+          { label: 'Dados Sincronizados', value: '10.3k', color: '#A855F7' },
           { label: 'Taxa de Sucesso', value: '98.7%', color: '#F59E0B' },
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
@@ -169,15 +169,15 @@ export function UniversalIngestionPage() {
             
             <div className="space-y-3">
               <div>
-                <label className="block text-xs text-[#94A3B8] mb-1">Frequência de Sync</label>
+                <label className="block text-xs text-[#94A3B8] mb-1">Frequência de Atualização</label>
                 <select className="w-full bg-[#1E293B] border border-[#1E293B] rounded px-2 py-1 text-sm text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]">
-                  <option>Tempo Real (Webhook)</option>
+                  <option>Tempo Real (Automático)</option>
                   <option>A cada 15 min</option>
                   <option>A cada 1 hora</option>
                 </select>
               </div>
               <div className="flex items-center justify-between pt-2">
-                <span className="text-sm text-[#F1F5F9]">Mapeamento de Campos Automático (IA)</span>
+                <span className="text-sm text-[#F1F5F9]">Organização Automática de Dados (IA)</span>
                 <div className="w-10 h-5 bg-[#00D9FF] rounded-full relative cursor-pointer">
                   <div className="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
                 </div>
@@ -229,7 +229,7 @@ export function UniversalIngestionPage() {
           <div className="p-4 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-xl flex items-start gap-3">
              <div className="w-8 h-8 rounded-lg bg-[#00D9FF] flex items-center justify-center flex-shrink-0 text-white">i</div>
              <p className="text-sm text-[#F1F5F9]">
-               A conexão segura será estabelecida via OAuth2 ou Token. Você será redirecionado para autorizar o acesso após clicar em "Conectar".
+               A conexão segura será estabelecida via autenticação segura. Você será redirecionado para autorizar o acesso após clicar em "Conectar".
              </p>
           </div>
 

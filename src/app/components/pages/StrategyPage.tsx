@@ -13,30 +13,30 @@ export function StrategyPage() {
     { name: 'Retorno Financeiro', weight: 40, baseline: 8 },
     { name: 'Alinhamento OKR Receita (+15%)', weight: 30, baseline: 7 },
     { name: 'Complexidade Técnica', weight: 15, baseline: 5, inverse: true },
-    { name: 'Time to Market', weight: 15, baseline: 6 },
+    { name: 'Tempo até o Lançamento', weight: 15, baseline: 6 },
   ];
 
   const projects = [
     {
       id: 'A',
-      name: 'API Gateway Modernization',
+      name: 'Modernização da Interface de Serviços',
       color: '#00D9FF',
       scores: [9, 8, 6, 7], // Scores for each criterion
       description: 'Migração para Kong + Service Mesh',
     },
     {
       id: 'B',
-      name: 'Predictive Analytics Engine',
+      name: 'Motor de Análise Preditiva',
       color: '#A855F7',
       scores: [7, 9, 3, 5],
-      description: 'ML para forecast de demanda',
+      description: 'Aprendizado de máquina para previsão de demanda',
     },
     {
       id: 'C',
-      name: 'Self-Service Portal',
+      name: 'Portal de Autoatendimento',
       color: '#10B981',
       scores: [6, 6, 8, 9],
-      description: 'Golden Paths automation',
+      description: 'Automação de caminhos padrão',
     },
   ];
 
@@ -72,7 +72,7 @@ export function StrategyPage() {
             </div>
             <div>
               <h1 className="text-2xl text-[#F1F5F9] font-semibold">Estratégia & Priorização</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Portfolio management com Matriz de Pugh</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Gestão de projetos com análise comparativa</p>
             </div>
           </div>
           <button 
@@ -118,7 +118,7 @@ export function StrategyPage() {
               <tr className="border-b border-[#1E293B]">
                 <th className="text-left py-4 px-4 text-sm text-[#94A3B8]">Critério</th>
                 <th className="text-center py-4 px-4 text-sm text-[#94A3B8]">Peso</th>
-                <th className="text-center py-4 px-4 text-sm text-[#94A3B8]">Baseline</th>
+                <th className="text-center py-4 px-4 text-sm text-[#94A3B8]">Referência</th>
                 {projects.map(project => (
                   <th key={project.id} className="text-center py-4 px-4">
                     <div className="flex flex-col items-center gap-1">
@@ -181,7 +181,7 @@ export function StrategyPage() {
               {/* Total Score Row */}
               <tr className="bg-[#0A0E1A]/80">
                 <td className="py-4 px-4">
-                  <span className="text-sm text-[#F1F5F9] font-bold">Score Ponderado</span>
+                  <span className="text-sm text-[#F1F5F9] font-bold">Pontuação Final</span>
                 </td>
                 <td className="py-4 px-4 text-center" colSpan={2}>
                   <span className="text-xs text-[#94A3B8]">Total</span>
@@ -220,7 +220,7 @@ export function StrategyPage() {
                 onClick={() => showToast('Projeto aprovado! Movido para o roadmap.', 'success')}
                 className="px-4 py-2 bg-[#10B981] hover:bg-[#059669] text-white rounded-lg transition-colors"
               >
-                Aprovar para Roadmap
+                Aprovar para o Planejamento
               </button>
               <button 
                 onClick={() => setIsAnalysisModalOpen(true)}
@@ -314,7 +314,7 @@ export function StrategyPage() {
               <span className="text-sm font-semibold text-[#A855F7]">IA Insight</span>
             </div>
             <p className="text-xs text-[#94A3B8]">
-              Este projeto tem alta sinergia com a iniciativa "Security Uplift" prevista para Q3. Considere unificar os backlogs para otimizar recursos de QA.
+              Este projeto tem alta sinergia com a iniciativa "Reforço de Segurança" prevista para o 3º trimestre. Considere unificar as listas de tarefas para otimizar recursos de testes.
             </p>
           </div>
           <button
