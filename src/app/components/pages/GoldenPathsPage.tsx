@@ -118,9 +118,9 @@ export function GoldenPathsPage() {
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A855F7] to-[#9333EA] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A855F7] to-[#9333EA] flex items-center justify-center flex-shrink-0">
               <Workflow className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -131,10 +131,11 @@ export function GoldenPathsPage() {
           <button 
             id="btn-new-path"
             onClick={() => setIsNewPathModalOpen(true)}
-            className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-[#A855F7] justify-center hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
           >
-            <Plus className="w-4 h-4" />
+           
             <span>Criar Novo Caminho</span>
+             <Plus className="w-4 h-4" />
           </button>
         </div>
       </div>

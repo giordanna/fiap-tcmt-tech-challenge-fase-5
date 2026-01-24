@@ -221,21 +221,21 @@ export function PrioritizedBacklog() {
   return (
     <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Lista de Tarefas Priorizada</h2>
           <p className="text-sm text-[#94A3B8]">Organização inteligente de tarefas</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <button className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#1E293B] text-[#F1F5F9] rounded-lg text-sm transition-colors">
             Filtrar
           </button>
           <button 
             id="btn-new-card"
             onClick={() => setIsNewCardModalOpen(true)}
-            className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors"
+            className="px-3 py-1.5 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg text-sm transition-colors whitespace-nowrap"
           >
-            + Nova Tarefa
+            Nova Tarefa +
           </button>
         </div>
       </div>

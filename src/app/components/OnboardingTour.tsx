@@ -251,7 +251,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
               className="w-full bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 text-lg shadow-lg hover:shadow-[#00D9FF]/30 hover:scale-[1.02]"
             >
               <Play className="w-5 h-5 fill-current" />
-              Iniciar Tour pelas Jornadas (13 passos)
+              Iniciar Tour
             </button>
             <button
               onClick={handleSkip}

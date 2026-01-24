@@ -15,9 +15,9 @@ export function FinOpsChart() {
   return (
     <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#10B981]/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[#10B981]/10 flex items-center justify-center flex-shrink-0">
             <DollarSign className="w-5 h-5 text-[#10B981]" />
           </div>
           <div>
@@ -25,7 +25,7 @@ export function FinOpsChart() {
             <p className="text-xs text-[#94A3B8] mt-0.5">AWS • Azure • GCP</p>
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-left sm:text-right flex items-center sm:block gap-2">
           <div className="text-2xl text-[#F1F5F9]">R$ 32,500</div>
           <div className="text-xs text-[#94A3B8]">Mês Atual</div>
         </div>

@@ -73,7 +73,7 @@ export function GamificationPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'XP Total', value: '15.2k', icon: TrendingUp, color: '#00D9FF' },
           { label: 'Medalhas Conquistadas', value: '47', icon: Award, color: '#A855F7' },
@@ -82,7 +82,7 @@ export function GamificationPage() {
         ].map((stat, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
             <div className="flex items-center gap-2 mb-3">
-              <stat.icon className="w-4 h-4" style={{ color: stat.color }} />
+              <stat.icon className="w-4 h-4 flex-none" style={{ color: stat.color }} />
               <div className="text-sm text-[#94A3B8]">{stat.label}</div>
             </div>
             <div className="text-3xl font-bold" style={{ color: stat.color }}>{stat.value}</div>

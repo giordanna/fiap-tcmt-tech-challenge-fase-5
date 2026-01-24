@@ -112,7 +112,7 @@ export function PlanningPage() {
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center">
+          <div className="w-12 h-12 flex-none rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center">
             <Calendar className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -149,7 +149,7 @@ export function PlanningPage() {
 
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={capacityData} layout="horizontal">
+            <BarChart data={capacityData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
               <XAxis type="number" stroke="#94A3B8" style={{ fontSize: '12px' }} domain={[0, 40]} />
               <YAxis type="category" dataKey="name" stroke="#94A3B8" style={{ fontSize: '12px' }} width={100} />
@@ -167,8 +167,7 @@ export function PlanningPage() {
               />
               <Legend wrapperStyle={{ fontSize: '12px' }} />
               <ReferenceLine x={32} stroke="#00D9FF" strokeDasharray="3 3" label={{ value: 'Limite 32h', fill: '#00D9FF', fontSize: 12 }} />
-              <Bar dataKey="allocated" fill="#00D9FF" name="Alocado" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="available" fill="#1E293B" name="Disponível (até 32h)" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="allocated" fill="#00D9FF" name="Alocado" radius={[0, 4, 4, 0]} barSize={20} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -194,7 +193,7 @@ export function PlanningPage() {
 
       {/* Dependencies Management */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Gestão de Dependências</h2>
             <p className="text-sm text-[#94A3B8]">Rastreamento de solicitações para DBAs e Infraestrutura</p>
@@ -202,10 +201,11 @@ export function PlanningPage() {
           <button 
             id="btn-new-request"
             onClick={() => setIsRequestModalOpen(true)}
-            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
+            className="px-4 justify-center py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
           >
-            <Plus className="w-4 h-4" />
+            
             <span>Nova Solicitação</span>
+            <Plus className="w-4 h-4" />
           </button>
         </div>
 
@@ -228,9 +228,9 @@ export function PlanningPage() {
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
                           <span className="text-xs font-mono text-[#94A3B8]">{dep.id}</span>
                           <span 
                             className="text-xs px-2 py-0.5 rounded font-semibold"
@@ -250,7 +250,7 @@ export function PlanningPage() {
 
                       {/* Status Badge */}
                       <div 
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg flex-shrink-0"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg flex-shrink-0 self-start"
                         style={{ backgroundColor: `${statusConfig.bg}20` }}
                       >
                         <StatusIcon className="w-4 h-4" style={{ color: statusConfig.bg }} />

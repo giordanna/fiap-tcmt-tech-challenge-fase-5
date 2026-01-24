@@ -65,9 +65,9 @@ export function StrategyPage() {
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A855F7] to-[#9333EA] flex items-center justify-center">
+            <div className="w-12 h-12 flex-none rounded-xl bg-gradient-to-br from-[#A855F7] to-[#9333EA] flex items-center justify-center flex-shrink-0">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -78,10 +78,11 @@ export function StrategyPage() {
           <button 
             id="btn-new-project"
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2"
+            className="px-4 justify-center py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
           >
-            <Plus className="w-4 h-4" />
+          
             <span>Novo Projeto</span>
+              <Plus className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -204,18 +205,18 @@ export function StrategyPage() {
 
       {/* Recommendation */}
       <div className="bg-gradient-to-r from-[#10B981]/10 to-[#00D9FF]/10 border border-[#10B981]/30 rounded-2xl p-6">
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#10B981] flex items-center justify-center flex-shrink-0">
+        <div className="flex flex-col sm:flex-row items-start gap-4">
+          <div className="w-12 h-12 flex-none rounded-xl bg-[#10B981] flex items-center justify-center flex-shrink-0">
             <Target className="w-6 h-6 text-white" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <h3 className="text-lg text-[#F1F5F9] font-semibold mb-2">Recomendação Executiva</h3>
             <p className="text-[#F1F5F9] mb-4">
               Com base na análise Pugh, o projeto <span className="text-[#00D9FF] font-semibold">{projectsWithScores[0].name}</span> apresenta 
               o melhor score ponderado (<span className="text-[#10B981] font-bold">{projectsWithScores[0].totalScore > 0 ? '+' : ''}{projectsWithScores[0].totalScore.toFixed(2)}</span>), 
               equilibrando retorno financeiro, alinhamento estratégico e viabilidade técnica.
             </p>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button 
                 onClick={() => showToast('Projeto aprovado! Movido para o roadmap.', 'success')}
                 className="px-4 py-2 bg-[#10B981] hover:bg-[#059669] text-white rounded-lg transition-colors"

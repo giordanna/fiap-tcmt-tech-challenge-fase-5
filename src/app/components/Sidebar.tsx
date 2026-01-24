@@ -20,10 +20,10 @@ interface SidebarProps {
 
 export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
   const navItems = [
-    { id: 'home', icon: GitBranch, label: 'Agile Engine', badge: 'Azure Boards' },
-    { id: 'strategy', icon: Target, label: 'Estratégia & Priorização', badge: 'Pugh' },
-    { id: 'planning', icon: Calendar, label: 'Planejamento & Capacidade', badge: '32h/40h' },
-    { id: 'governance', icon: Shield, label: 'Governança & GMUD', badge: 'ServiceNow' },
+    { id: 'home', icon: GitBranch, label: 'Agile Engine' },
+    { id: 'strategy', icon: Target, label: 'Estratégia & Priorização' },
+    { id: 'planning', icon: Calendar, label: 'Planejamento & Capacidade' },
+    { id: 'governance', icon: Shield, label: 'Governança & GMUD' },
     { id: 'ingestion', icon: Database, label: 'Hub de Ingestão' },
     { id: 'golden-paths', icon: Workflow, label: 'Caminhos Padrão' },
     { id: 'finops', icon: DollarSign, label: 'FinOps & Observabilidade' },

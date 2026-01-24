@@ -109,8 +109,9 @@ export function AICopilotWidget() {
               onClick={handleSendNotification}
               className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-              <Send className="w-4 h-4" />
+            
               <span className="text-sm">Enviar Notificação</span>
+                <Send className="w-4 h-4" />
             </button>
           )}
           <button 

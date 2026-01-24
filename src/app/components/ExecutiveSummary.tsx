@@ -55,17 +55,17 @@ export function ExecutiveSummary() {
 
   return (
     <div className="bg-gradient-to-r from-[#131827] to-[#0F1624] border border-[#1E293B] rounded-2xl p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Resumo Executivo</h2>
           <p className="text-sm text-[#94A3B8]">Indicadores para apresentação à diretoria</p>
         </div>
         <button 
           onClick={handleExportReport}
-          className="px-4 py-2 bg-[#00D9FF]/10 hover:bg-[#00D9FF]/20 border border-[#00D9FF]/30 text-[#00D9FF] rounded-lg transition-colors text-sm flex items-center gap-2"
+          className="px-4 justify-center py-2 bg-[#00D9FF]/10 hover:bg-[#00D9FF]/20 border border-[#00D9FF]/30 text-[#00D9FF] rounded-lg transition-colors text-sm flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
         >
+          <span>Exportar relatório</span>
           <FileBarChart className="w-4 h-4" />
-          Exportar relatório
         </button>
       </div>
 

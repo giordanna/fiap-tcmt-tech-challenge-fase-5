@@ -27,7 +27,7 @@ export function ExecutiveROIPage() {
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
+          <div className="w-12 h-12 flex-none rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
             <BarChart3 className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -38,7 +38,7 @@ export function ExecutiveROIPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'ROI Total', value: '+247%', icon: TrendingUp, color: '#10B981' },
           { label: 'Economia de Custos', value: 'R$ 385k', icon: DollarSign, color: '#00D9FF' },
@@ -48,7 +48,7 @@ export function ExecutiveROIPage() {
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="text-sm text-[#94A3B8]">{kpi.label}</div>
-              {kpi.icon && <kpi.icon className="w-5 h-5" style={{ color: kpi.color }} />}
+              {kpi.icon && <kpi.icon className="w-5 h-5 flex-none" style={{ color: kpi.color }} />}
             </div>
             <div className="text-3xl font-bold text-[#F1F5F9] mb-1">{kpi.value}</div>
             <div className="text-sm" style={{ color: kpi.color }}>{kpi.sublabel}</div>

@@ -64,14 +64,15 @@ export function FinOpsPage() {
 
       {/* Cost Anomaly Detection */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
             <h3 className="text-lg text-[#F1F5F9] font-semibold mb-1">Detecção de Anomalias de Custo</h3>
             <p className="text-sm text-[#94A3B8]">Análise de padrões de gasto com IA</p>
           </div>
-          <div className="flex items-center gap-2 bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-3 py-1.5 rounded-lg">
-            <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />
-            <span className="text-sm text-[#F59E0B] font-semibold">2 Anomalias</span>
+          <div className="flex items-center justify-center gap-2 bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-3 py-1.5 rounded-lg flex-shrink-0">
+            <span className="text-sm text-[#F59E0B] font-semibold whitespace-nowrap">2 Anomalias</span>
+            <AlertTriangle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+
           </div>
         </div>
 
@@ -124,7 +125,7 @@ export function FinOpsPage() {
         </div>
 
         {/* AI Recommendations */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-xl p-4">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-lg bg-[#A855F7] flex items-center justify-center flex-shrink-0">

@@ -71,9 +71,9 @@ export function UniversalIngestionPage() {
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center flex-shrink-0">
               <Database className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -84,10 +84,10 @@ export function UniversalIngestionPage() {
           <button 
             id="btn-add-integration"
             onClick={() => setIsIntegrationModalOpen(true)}
-            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
+            className="px-4 py-2 justify-center bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
           >
-            <Link className="w-4 h-4" />
             <span>Adicionar Integração</span>
+            <Link className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -214,7 +214,7 @@ export function UniversalIngestionPage() {
             <label className="block text-sm text-[#94A3B8] mb-1">Selecione o Provedor</label>
             <Select value={selectedProvider} onValueChange={setSelectedProvider}>
               <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
-                <SelectValue placeholder="Selecione o provedor" />
+                <SelectValue placeholder="Selecione" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="New Relic">New Relic</SelectItem>
@@ -222,16 +222,109 @@ export function UniversalIngestionPage() {
                 <SelectItem value="AWS">AWS CloudWatch</SelectItem>
                 <SelectItem value="Jenkins">Jenkins</SelectItem>
                 <SelectItem value="SonarQube">SonarQube</SelectItem>
+                <SelectItem value="Webhook Customizado">Webhook Customizado</SelectItem>
               </SelectContent>
             </Select>
           </div>
+
+          {/* Campos adicionais para Webhook Customizado */}
+          {selectedProvider === 'Webhook Customizado' && (
+            <div className="space-y-3 p-4 bg-[#0A0E1A] border border-[#1E293B] rounded-xl">
+              <h4 className="text-sm text-[#F1F5F9] font-semibold flex items-center gap-2">
+                <span className="text-lg">🔗</span> Configuração do Webhook
+              </h4>
+              
+              <div>
+                <label className="block text-xs text-[#94A3B8] mb-1">Nome da Integração</label>
+                <input
+                  type="text"
+                  placeholder="Ex: Meu Sistema Interno"
+                  className="w-full bg-[#1E293B] border border-[#1E293B] rounded px-3 py-2 text-sm text-[#F1F5F9] placeholder-[#64748B] focus:outline-none focus:border-[#00D9FF]"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-xs text-[#94A3B8] mb-1">URL do Webhook</label>
+                <input
+                  type="url"
+                  placeholder="https://api.meuservico.com/webhook"
+                  className="w-full bg-[#1E293B] border border-[#1E293B] rounded px-3 py-2 text-sm text-[#F1F5F9] placeholder-[#64748B] focus:outline-none focus:border-[#00D9FF]"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs text-[#94A3B8] mb-1">Método HTTP</label>
+                  <Select defaultValue="POST">
+                    <SelectTrigger className="w-full bg-[#1E293B] border border-[#1E293B] text-[#F1F5F9]">
+                      <SelectValue placeholder="Selecione" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="POST">POST</SelectItem>
+                      <SelectItem value="GET">GET</SelectItem>
+                      <SelectItem value="PUT">PUT</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="block text-xs text-[#94A3B8] mb-1">Formato</label>
+                  <Select defaultValue="JSON">
+                    <SelectTrigger className="w-full bg-[#1E293B] border border-[#1E293B] text-[#F1F5F9]">
+                      <SelectValue placeholder="Selecione" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="JSON">JSON</SelectItem>
+                      <SelectItem value="XML">XML</SelectItem>
+                      <SelectItem value="Form Data">Form Data</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-xs text-[#94A3B8] mb-1">Autenticação (opcional)</label>
+                <Select defaultValue="Nenhuma">
+                  <SelectTrigger className="w-full bg-[#1E293B] border border-[#1E293B] text-[#F1F5F9]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Nenhuma">Nenhuma</SelectItem>
+                    <SelectItem value="API Key">API Key (Header)</SelectItem>
+                    <SelectItem value="Bearer Token">Bearer Token</SelectItem>
+                    <SelectItem value="Basic Auth">Basic Auth</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="pt-2 border-t border-[#1E293B]">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-[#F1F5F9]">Mapeamento automático de campos (IA)</span>
+                  <div className="w-10 h-5 bg-[#00D9FF] rounded-full relative cursor-pointer">
+                    <div className="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+                  </div>
+                </div>
+                <p className="text-xs text-[#64748B] mt-1">A IA identifica e mapeia automaticamente os campos recebidos</p>
+              </div>
+            </div>
+          )}
           
-          <div className="p-4 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-xl flex items-start gap-3">
-             <div className="w-8 h-8 rounded-lg bg-[#00D9FF] flex items-center justify-center flex-shrink-0 text-white">i</div>
-             <p className="text-sm text-[#F1F5F9]">
-               A conexão segura será estabelecida via autenticação segura. Você será redirecionado para autorizar o acesso após clicar em "Conectar".
-             </p>
-          </div>
+          {selectedProvider !== 'Webhook Customizado' && (
+            <div className="p-4 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-xl flex items-start gap-3">
+               <div className="w-8 h-8 rounded-lg bg-[#00D9FF] flex items-center justify-center flex-shrink-0 text-white">i</div>
+               <p className="text-sm text-[#F1F5F9]">
+                 A conexão segura será estabelecida via autenticação segura. Você será redirecionado para autorizar o acesso após clicar em "Conectar".
+               </p>
+            </div>
+          )}
+
+          {selectedProvider === 'Webhook Customizado' && (
+            <div className="p-4 bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-xl flex items-start gap-3">
+               <div className="w-8 h-8 rounded-lg bg-[#A855F7] flex items-center justify-center flex-shrink-0 text-white">🔗</div>
+               <p className="text-sm text-[#F1F5F9]">
+                 Após configurar, você receberá um endpoint único para enviar dados. Nosso sistema processará automaticamente os payloads recebidos.
+               </p>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-4">
             <button
@@ -243,7 +336,7 @@ export function UniversalIngestionPage() {
                   : 'bg-[#1E293B] text-[#94A3B8] cursor-not-allowed'
               }`}
             >
-              Conectar {selectedProvider}
+              {selectedProvider === 'Webhook Customizado' ? 'Criar Webhook' : `Conectar ${selectedProvider}`}
             </button>
             <button
               onClick={() => setIsIntegrationModalOpen(false)}

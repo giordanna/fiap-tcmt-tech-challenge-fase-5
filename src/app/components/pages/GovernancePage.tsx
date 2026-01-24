@@ -119,9 +119,9 @@ export function GovernancePage() {
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EF4444] to-[#DC2626] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl flex-none bg-gradient-to-br from-[#EF4444] to-[#DC2626] flex items-center justify-center flex-shrink-0">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -134,9 +134,9 @@ export function GovernancePage() {
           <button 
             id="btn-new-gmud"
             onClick={() => setIsGMUDModalOpen(true)}
-            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors"
+            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex-shrink-0 whitespace-nowrap"
           >
-            + Nova GMUD
+            Nova GMUD +
           </button>
         </div>
       </div>
@@ -159,15 +159,15 @@ export function GovernancePage() {
             <h2 className="text-xl text-[#F1F5F9] font-semibold mb-4">Calendário de Mudanças</h2>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#10B981] rounded"></div>
+                <div className="w-4 h-4 bg-[#10B981] flex-none rounded"></div>
                 <span className="text-sm text-[#94A3B8]">Janela de Mudança</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#EF4444] rounded"></div>
+                <div className="w-4 h-4 bg-[#EF4444] flex-none rounded"></div>
                 <span className="text-sm text-[#94A3B8]">Congelamento</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#1E293B] rounded"></div>
+                <div className="w-4 h-4 bg-[#1E293B] flex-none rounded"></div>
                 <span className="text-sm text-[#94A3B8]">Fim de Semana</span>
               </div>
             </div>
