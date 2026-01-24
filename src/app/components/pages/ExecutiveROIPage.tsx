@@ -38,7 +38,7 @@ export function ExecutiveROIPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'ROI Total', value: '+247%', icon: TrendingUp, color: '#10B981' },
           { label: 'Economia de Custos', value: 'R$ 385k', icon: DollarSign, color: '#00D9FF' },
@@ -57,7 +57,7 @@ export function ExecutiveROIPage() {
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ROI Chart */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
           <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">ROI Analysis</h3>

@@ -218,7 +218,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
   if (showWelcome) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
-        <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-8 max-w-2xl w-full text-center relative overflow-hidden">
+        <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6 md:p-8 w-[90%] md:max-w-2xl md:w-full text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00D9FF] to-[#A855F7]" />
           
           <div className="w-20 h-20 bg-gradient-to-br from-[#00D9FF] to-[#A855F7] rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-xl shadow-[#00D9FF]/20">
@@ -230,7 +230,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
             Sua plataforma centralizada para acompanhar e otimizar o trabalho da sua equipe de tecnologia.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 text-left mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-8">
             <div className="bg-[#0A0E1A] p-4 rounded-xl border border-[#1E293B]">
               <h3 className="text-[#00D9FF] font-semibold mb-2 flex items-center gap-2">
                 <Zap className="w-4 h-4" /> Automação Inteligente
@@ -269,24 +269,48 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
 
   // Simple positioning logic based on quadrant roughly
   const getPositionClasses = (position: string) => {
+    const base = "md:w-96";
     switch (position) {
-      case 'right': return 'top-20 left-72';
-      case 'top': return 'top-32 right-10 max-w-sm'; // Default for buttons usually on right
-      case 'bottom-left': return 'bottom-20 right-20 max-w-sm';
-      case 'center': return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
-      default: return 'bottom-10 left-1/2 -translate-x-1/2';
+      case 'right': 
+        return `${base} md:bottom-auto md:right-auto md:top-20 md:left-72`;
+      case 'top': 
+        return `${base} md:bottom-auto md:left-auto md:top-32 md:right-10`;
+      case 'bottom-left': 
+        return `${base} md:left-auto md:top-auto md:bottom-20 md:right-20`;
+      case 'center': 
+        return `${base} md:bottom-auto md:right-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2`;
+      case 'bottom': 
+        return `${base} md:right-auto md:top-auto md:bottom-10 md:left-1/2 md:-translate-x-1/2`;
+      default: 
+        return `${base} md:right-auto md:top-auto md:bottom-10 md:left-1/2 md:-translate-x-1/2`;
     }
   };
 
   // Override specific positions based on known layout
   const getSmartPosition = (stepIndex: number) => {
-    // Strategy/Planning/Gov/Ingestion/GP buttons are top right
-    if ([5, 6, 7, 8, 9].includes(stepIndex)) return 'top-32 right-10 max-w-sm';
-    // FinOps buttons
-    if ([10].includes(stepIndex)) return 'bottom-32 right-1/4 max-w-sm'; // Savings
-    if ([11].includes(stepIndex)) return 'bottom-32 left-1/4 max-w-sm'; // Anomaly
+    // Base classes for mobile (bottom sheet style) - applied to ALL
+    const mobileClasses = "bottom-4 left-4 right-4 w-auto fixed z-[100] transition-all duration-500";
     
-    return getPositionClasses(currentStep.position || 'center');
+    let desktopClasses = "";
+    
+    // Strategy/Planning/Gov/Ingestion/GP buttons are top right
+    if ([5, 6, 7, 8, 9].includes(stepIndex)) {
+      desktopClasses = getPositionClasses('top');
+    }
+    // FinOps buttons
+    else if ([10].includes(stepIndex)) {
+      // Custom for FinOps Savings - bottom rightish
+      desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-32 md:right-1/4";
+    }
+    else if ([11].includes(stepIndex)) {
+       // Custom for FinOps Anomaly - bottom leftish
+      desktopClasses = "md:w-96 md:top-auto md:right-auto md:bottom-32 md:left-1/4";
+    }
+    else {
+      desktopClasses = getPositionClasses(currentStep.position || 'center');
+    }
+    
+    return `${mobileClasses} ${desktopClasses}`;
   };
 
   return (
@@ -297,7 +321,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       <div className="fixed inset-0 z-[90] bg-black/40 pointer-events-none" /> 
       
       <div className={`fixed z-[100] ${getSmartPosition(step)} transition-all duration-500`}>
-        <div className="bg-[#131827] border border-[#00D9FF] rounded-2xl p-5 shadow-2xl relative animate-in fade-in slide-in-from-bottom-4 duration-300 max-w-sm">
+        <div className="bg-[#131827] border border-[#00D9FF] rounded-2xl p-5 shadow-2xl relative animate-in fade-in slide-in-from-bottom-4 duration-300 md:max-w-sm w-full mx-auto">
           
           <button 
             onClick={handleSkip}
@@ -307,7 +331,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
           </button>
 
           <div className="mt-2 mb-3 flex items-center gap-3">
-            <currentStep.icon className="w-6 h-6 text-[#00D9FF]" />
+            <currentStep.icon className="w-6 h-6 text-[#00D9FF] flex-shrink-0" />
             <h3 className="text-lg font-bold text-[#F1F5F9]">{currentStep.title}</h3>
           </div>
           

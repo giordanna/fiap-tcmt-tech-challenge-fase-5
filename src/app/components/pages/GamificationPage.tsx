@@ -73,7 +73,7 @@ export function GamificationPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'XP Total', value: '15.2k', icon: TrendingUp, color: '#00D9FF' },
           { label: 'Medalhas Conquistadas', value: '47', icon: Award, color: '#A855F7' },
@@ -90,7 +90,7 @@ export function GamificationPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Leaderboard */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
           <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Ranking</h2>
