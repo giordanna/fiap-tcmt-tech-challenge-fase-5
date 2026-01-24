@@ -1,4 +1,7 @@
-import { Clock, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Clock, AlertCircle, Sparkles, ArrowUp, ArrowDown } from 'lucide-react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
 
 interface BacklogCard {
   id: string;
@@ -14,9 +17,10 @@ interface ColumnProps {
   title: string;
   cards: BacklogCard[];
   color: string;
+  onCardClick: (card: BacklogCard) => void;
 }
 
-function BacklogCard({ card }: { card: BacklogCard }) {
+function BacklogCardComponent({ card, onClick }: { card: BacklogCard; onClick: () => void }) {
   const priorityColors = {
     high: '#EF4444',
     medium: '#F59E0B',
@@ -24,7 +28,10 @@ function BacklogCard({ card }: { card: BacklogCard }) {
   };
 
   return (
-    <div className="bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg p-3 hover:border-[#94A3B8]/50 transition-all cursor-pointer group">
+    <div 
+      onClick={onClick}
+      className="bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg p-3 hover:border-[#94A3B8]/50 transition-all cursor-pointer group"
+    >
       <div className="flex items-start gap-3">
         {/* Avatar */}
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00D9FF] to-[#A855F7] flex items-center justify-center text-white text-sm font-semibold flex-shrink-0">
@@ -73,7 +80,7 @@ function BacklogCard({ card }: { card: BacklogCard }) {
   );
 }
 
-function Column({ title, cards, color }: ColumnProps) {
+function Column({ title, cards, color, onCardClick }: ColumnProps) {
   return (
     <div className="flex-1 min-w-[300px]">
       <div className="mb-4">
@@ -94,12 +101,13 @@ function Column({ title, cards, color }: ColumnProps) {
 
       <div className="space-y-3">
         {cards.map((card) => (
-          <BacklogCard key={card.id} card={card} />
+          <BacklogCardComponent key={card.id} card={card} onClick={() => onCardClick(card)} />
         ))}
       </div>
     </div>
   );
 }
+
 
 export function PrioritizedBacklog() {
   const prioritizedBacklog: BacklogCard[] = [
@@ -181,6 +189,25 @@ export function PrioritizedBacklog() {
     },
   ];
 
+  const { showToast } = useToast();
+  const [selectedCard, setSelectedCard] = useState<BacklogCard | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCardClick = (card: BacklogCard) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleAcceptSuggestion = () => {
+    setIsModalOpen(false);
+    showToast(`Card "${selectedCard?.title}" movido para prioridade sugerida pela IA`, 'success');
+  };
+
+  const handleKeepPosition = () => {
+    setIsModalOpen(false);
+    showToast(`Card "${selectedCard?.title}" mantido na posição atual`, 'info');
+  };
+
   return (
     <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
       {/* Header */}
@@ -205,18 +232,88 @@ export function PrioritizedBacklog() {
           title="Backlog Priorizado (IA)" 
           cards={prioritizedBacklog} 
           color="#A855F7"
+          onCardClick={handleCardClick}
         />
         <Column 
           title="Em Progresso (Sprint 26)" 
           cards={inProgress} 
           color="#00D9FF"
+          onCardClick={handleCardClick}
         />
         <Column 
           title="Deploy em UAT" 
           cards={deployed} 
           color="#10B981"
+          onCardClick={handleCardClick}
         />
       </div>
+
+      {/* Reprioritization Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Análise de Priorização IA">
+        {selectedCard && (
+          <div className="space-y-6">
+            {/* Card Info */}
+            <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00D9FF] to-[#A855F7] flex items-center justify-center text-white text-sm font-semibold">
+                  {selectedCard.avatar}
+                </div>
+                <div>
+                  <h4 className="text-sm text-[#F1F5F9] font-medium">{selectedCard.title}</h4>
+                  <p className="text-xs text-[#94A3B8]">{selectedCard.assignee}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* AI Suggestion */}
+            <div className="bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-4 h-4 text-[#A855F7]" />
+                <span className="text-sm font-semibold text-[#A855F7]">Sugestão de IA</span>
+              </div>
+              <p className="text-sm text-[#F1F5F9] mb-3">
+                Com base na análise de dependências e valor de negócio, recomendo mover este card <span className="text-[#10B981]">2 posições acima</span> no backlog.
+              </p>
+              <div className="flex items-center gap-4 text-xs text-[#94A3B8]">
+                <div className="flex items-center gap-1">
+                  <ArrowUp className="w-3 h-3 text-[#10B981]" />
+                  <span>Impacto: Alto</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span>Confiança: 87%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Reasoning */}
+            <div className="space-y-2">
+              <div className="text-xs text-[#94A3B8] font-semibold">JUSTIFICATIVA</div>
+              <ul className="space-y-1 text-sm text-[#94A3B8]">
+                <li>• Remove bloqueios para 3 outros itens</li>
+                <li>• Alinhado com OKR Q1 - Eficiência operacional</li>
+                <li>• Equipe disponível no sprint atual</li>
+              </ul>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-3">
+              <button
+                onClick={handleAcceptSuggestion}
+                className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <ArrowUp className="w-4 h-4" />
+                Aceitar Sugestão
+              </button>
+              <button
+                onClick={handleKeepPosition}
+                className="px-4 py-3 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+              >
+                Manter Posição
+              </button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

@@ -1,6 +1,44 @@
-import { Brain, AlertTriangle, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Brain, AlertTriangle, Send, CheckCircle2 } from 'lucide-react';
+import { useToast } from '@/app/components/Toast';
 
 export function AICopilotWidget() {
+  const { showToast } = useToast();
+  const [notificationSent, setNotificationSent] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  const handleSendNotification = () => {
+    setNotificationSent(true);
+    showToast('Notificação enviada para @rafael.costa sobre o card AB#402', 'success');
+  };
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    showToast('Alerta ignorado. Você pode revisar alertas anteriores nas configurações.', 'info');
+  };
+
+  if (dismissed) {
+    return (
+      <div 
+        className="rounded-2xl p-6 border border-[#10B981]/20 relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%)',
+          backdropFilter: 'blur(20px)',
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
+            <CheckCircle2 className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="text-[#F1F5F9] font-semibold">Copiloto Ágil</h3>
+            <span className="text-sm text-[#10B981]">Sem alertas pendentes</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div 
       className="rounded-2xl p-6 border border-[#A855F7]/20 relative overflow-hidden"
@@ -60,11 +98,24 @@ export function AICopilotWidget() {
 
         {/* Actions */}
         <div className="flex gap-2">
-          <button className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
-            <Send className="w-4 h-4" />
-            <span className="text-sm">Enviar Notificação</span>
-          </button>
-          <button className="px-4 py-2.5 border border-[#1E293B] hover:border-[#94A3B8] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors text-sm">
+          {notificationSent ? (
+            <div className="flex-1 bg-[#10B981]/20 border border-[#10B981]/30 text-[#10B981] py-2.5 px-4 rounded-lg flex items-center justify-center gap-2">
+              <CheckCircle2 className="w-4 h-4" />
+              <span className="text-sm">Notificação Enviada</span>
+            </div>
+          ) : (
+            <button 
+              onClick={handleSendNotification}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              <span className="text-sm">Enviar Notificação</span>
+            </button>
+          )}
+          <button 
+            onClick={handleDismiss}
+            className="px-4 py-2.5 border border-[#1E293B] hover:border-[#94A3B8] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors text-sm"
+          >
             Ignorar
           </button>
         </div>
@@ -72,3 +123,4 @@ export function AICopilotWidget() {
     </div>
   );
 }
+

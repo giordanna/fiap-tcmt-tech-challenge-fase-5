@@ -1,10 +1,30 @@
-import { Workflow, Rocket, Database, Code, Shield, Zap } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Workflow, Rocket, Database, Code, Shield, Zap, CheckCircle2, Loader2 } from 'lucide-react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
+
+interface Path {
+  name: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  color: string;
+  uses: number;
+  avgTime: string;
+}
 
 export function GoldenPathsPage() {
-  const paths = [
+  const { showToast } = useToast();
+  const [selectedPath, setSelectedPath] = useState<Path | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeploying, setIsDeploying] = useState(false);
+  const [deployProgress, setDeployProgress] = useState(0);
+  const [deployStage, setDeployStage] = useState('');
+  const [selectedEnv, setSelectedEnv] = useState('staging');
+
+  const paths: Path[] = [
     {
       name: 'Kubernetes Cluster',
-      description: 'Self-service K8s cluster with Istio and monitoring',
+      description: 'Cluster K8s self-service com Istio e monitoramento',
       icon: Database,
       color: '#00D9FF',
       uses: 47,
@@ -12,7 +32,7 @@ export function GoldenPathsPage() {
     },
     {
       name: 'API Gateway',
-      description: 'Kong-based API gateway with OAuth2 and rate limiting',
+      description: 'API Gateway baseado em Kong com OAuth2 e rate limiting',
       icon: Code,
       color: '#A855F7',
       uses: 34,
@@ -20,7 +40,7 @@ export function GoldenPathsPage() {
     },
     {
       name: 'Microservice Template',
-      description: 'Node.js microservice with CI/CD and observability',
+      description: 'Microserviço Node.js com CI/CD e observabilidade',
       icon: Zap,
       color: '#10B981',
       uses: 89,
@@ -28,13 +48,59 @@ export function GoldenPathsPage() {
     },
     {
       name: 'Secure Database',
-      description: 'PostgreSQL with encryption and automated backups',
+      description: 'PostgreSQL com criptografia e backups automatizados',
       icon: Shield,
       color: '#F59E0B',
       uses: 56,
       avgTime: '10 min',
     },
   ];
+
+  const deployStages = [
+    'Validando configurações...',
+    'Provisionando recursos...',
+    'Aplicando configurações de segurança...',
+    'Iniciando containers...',
+    'Configurando networking...',
+    'Executando health checks...',
+    'Finalizando deploy...',
+  ];
+
+  const handleDeploy = (path: Path) => {
+    setSelectedPath(path);
+    setIsModalOpen(true);
+    setDeployProgress(0);
+    setIsDeploying(false);
+  };
+
+  const startDeploy = () => {
+    setIsDeploying(true);
+    setDeployProgress(0);
+  };
+
+  useEffect(() => {
+    if (!isDeploying) return;
+
+    const interval = setInterval(() => {
+      setDeployProgress(prev => {
+        const next = prev + 2;
+        const stageIndex = Math.min(Math.floor((next / 100) * deployStages.length), deployStages.length - 1);
+        setDeployStage(deployStages[stageIndex]);
+        
+        if (next >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setIsModalOpen(false);
+            setIsDeploying(false);
+            showToast(`${selectedPath?.name} implantado com sucesso no ambiente ${selectedEnv}!`, 'success');
+          }, 500);
+        }
+        return Math.min(next, 100);
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isDeploying, selectedEnv, selectedPath, showToast]);
 
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
@@ -106,7 +172,8 @@ export function GoldenPathsPage() {
                 <div className="text-lg text-[#F1F5F9] font-semibold">{path.avgTime}</div>
               </div>
               <button 
-                className="ml-auto px-4 py-2 rounded-lg transition-colors"
+                onClick={() => handleDeploy(path)}
+                className="ml-auto px-4 py-2 rounded-lg transition-colors hover:opacity-80"
                 style={{ 
                   backgroundColor: `${path.color}20`,
                   color: path.color
@@ -118,6 +185,94 @@ export function GoldenPathsPage() {
           </div>
         ))}
       </div>
+
+      {/* Deploy Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => !isDeploying && setIsModalOpen(false)} title={`Implantar ${selectedPath?.name || ''}`}>
+        {!isDeploying ? (
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-2">Ambiente de Destino</label>
+              <div className="grid grid-cols-3 gap-2">
+                {['development', 'staging', 'production'].map(env => (
+                  <button
+                    key={env}
+                    onClick={() => setSelectedEnv(env)}
+                    className={`py-2 px-3 rounded-lg border text-sm transition-colors ${
+                      selectedEnv === env 
+                        ? 'bg-[#00D9FF]/10 border-[#00D9FF] text-[#00D9FF]' 
+                        : 'border-[#1E293B] text-[#94A3B8] hover:border-[#94A3B8]'
+                    }`}
+                  >
+                    {env.charAt(0).toUpperCase() + env.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-4">
+              <div className="text-xs text-[#94A3B8] mb-2">Configuração</div>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-[#94A3B8]">Template:</span>
+                  <span className="text-[#F1F5F9]">{selectedPath?.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#94A3B8]">Tempo estimado:</span>
+                  <span className="text-[#F1F5F9]">{selectedPath?.avgTime}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#94A3B8]">Ambiente:</span>
+                  <span className="text-[#00D9FF]">{selectedEnv}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={startDeploy}
+                className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <Rocket className="w-4 h-4" />
+                Iniciar Deploy
+              </button>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-3 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <Loader2 className="w-5 h-5 text-[#00D9FF] animate-spin" />
+              <span className="text-sm text-[#F1F5F9]">{deployStage}</span>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-[#94A3B8]">Progresso</span>
+                <span className="text-[#00D9FF]">{deployProgress}%</span>
+              </div>
+              <div className="h-3 bg-[#1E293B] rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#00D9FF] to-[#A855F7] rounded-full transition-all duration-200"
+                  style={{ width: `${deployProgress}%` }}
+                />
+              </div>
+            </div>
+
+            {deployProgress >= 100 && (
+              <div className="flex items-center gap-2 text-[#10B981]">
+                <CheckCircle2 className="w-5 h-5" />
+                <span>Deploy concluído com sucesso!</span>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
+

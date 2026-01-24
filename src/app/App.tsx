@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
+import { ToastProvider } from '@/app/components/Toast';
 import { Sidebar } from '@/app/components/Sidebar';
 import { Header } from '@/app/components/Header';
 import { HomePage } from '@/app/components/pages/HomePage';
@@ -47,44 +48,46 @@ export default function App() {
   };
 
   return (
-    <div className="dark min-h-screen bg-[#0A0E1A] flex">
-      {/* Mobile Menu Button - only show when menu is closed */}
-      {!mobileMenuOpen && (
-        <button 
-          className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-lg bg-[#131827] border border-[#1E293B] flex items-center justify-center text-[#F1F5F9]"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <Menu className="w-5 h-5" />
-        </button>
-      )}
+    <ToastProvider>
+      <div className="dark min-h-screen bg-[#0A0E1A] flex">
+        {/* Mobile Menu Button - only show when menu is closed */}
+        {!mobileMenuOpen && (
+          <button 
+            className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-lg bg-[#131827] border border-[#1E293B] flex items-center justify-center text-[#F1F5F9]"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
 
-      {/* Mobile Overlay */}
-      {mobileMenuOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-30"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
+        {/* Mobile Overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className="lg:hidden fixed inset-0 bg-black/50 z-30"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
 
-      {/* Sidebar - hidden on mobile, shown on lg+ or when menu is open */}
-      <div className={`
-        fixed lg:sticky lg:top-0 lg:h-screen z-40
-        ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        transition-transform duration-300
-      `}>
-        <Sidebar currentPage={currentPage} onNavigate={handleNavigate} onClose={() => setMobileMenuOpen(false)} />
+        {/* Sidebar - hidden on mobile, shown on lg+ or when menu is open */}
+        <div className={`
+          fixed lg:sticky lg:top-0 lg:h-screen z-40
+          ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          transition-transform duration-300
+        `}>
+          <Sidebar currentPage={currentPage} onNavigate={handleNavigate} onClose={() => setMobileMenuOpen(false)} />
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0 min-h-screen">
+          {/* Header */}
+          <Header />
+
+          {/* Dashboard Content */}
+          <main className="flex-1 p-3 sm:p-6 overflow-x-hidden">
+            {renderPage()}
+          </main>
+        </div>
       </div>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-        {/* Header */}
-        <Header />
-
-        {/* Dashboard Content */}
-        <main className="flex-1 p-3 sm:p-6 overflow-x-hidden">
-          {renderPage()}
-        </main>
-      </div>
-    </div>
+    </ToastProvider>
   );
 }
