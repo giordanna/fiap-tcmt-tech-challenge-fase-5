@@ -115,7 +115,7 @@ export function GamificationPage() {
 
         {/* Achievements */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Achievements</h2>
+          <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Conquistas</h2>
           <div className="space-y-4">
             {achievements.map((achievement, i) => (
               <div key={i} className="p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg">

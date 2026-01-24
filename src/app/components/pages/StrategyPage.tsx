@@ -1,6 +1,13 @@
-import { Target, TrendingUp, DollarSign, Users, Zap } from 'lucide-react';
+import { Target, TrendingUp, DollarSign, Users, Zap, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
 
 export function StrategyPage() {
+  const { showToast } = useToast();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newProjectName, setNewProjectName] = useState('');
+
   const criteria = [
     { name: 'Retorno Financeiro', weight: 40, baseline: 8 },
     { name: 'Alinhamento OKR Receita (+15%)', weight: 30, baseline: 7 },
@@ -47,6 +54,12 @@ export function StrategyPage() {
     totalScore: calculateScore(project),
   })).sort((a, b) => b.totalScore - a.totalScore);
 
+  const handleCreateProject = () => {
+    setIsModalOpen(false);
+    showToast('Projeto criado e enviado para análise de priorização', 'success');
+    setNewProjectName('');
+  };
+
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
@@ -61,8 +74,11 @@ export function StrategyPage() {
               <p className="text-sm text-[#94A3B8] mt-1">Portfolio management com Matriz de Pugh</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2">
-            <Zap className="w-4 h-4" />
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
             <span>Novo Projeto</span>
           </button>
         </div>
@@ -198,7 +214,10 @@ export function StrategyPage() {
               equilibrando retorno financeiro, alinhamento estratégico e viabilidade técnica.
             </p>
             <div className="flex gap-3">
-              <button className="px-4 py-2 bg-[#10B981] hover:bg-[#059669] text-white rounded-lg transition-colors">
+              <button 
+                onClick={() => showToast('Projeto aprovado! Movido para o roadmap.', 'success')}
+                className="px-4 py-2 bg-[#10B981] hover:bg-[#059669] text-white rounded-lg transition-colors"
+              >
                 Aprovar para Roadmap
               </button>
               <button className="px-4 py-2 border border-[#1E293B] hover:border-[#94A3B8] text-[#F1F5F9] rounded-lg transition-colors">
@@ -208,6 +227,60 @@ export function StrategyPage() {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Novo Projeto">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Nome do Projeto</label>
+            <input 
+              type="text"
+              value={newProjectName}
+              onChange={(e) => setNewProjectName(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+              placeholder="Ex: Migração Cloud"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Descrição</label>
+            <textarea 
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF] h-24 resize-none"
+              placeholder="Descreva o objetivo do projeto..."
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Custo Estimado</label>
+              <input 
+                type="text"
+                className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+                placeholder="R$ 0,00"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Prazo (meses)</label>
+              <input 
+                type="number"
+                className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+                placeholder="0"
+              />
+            </div>
+          </div>
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleCreateProject}
+              className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white py-2 rounded-lg transition-colors"
+            >
+              Criar Projeto
+            </button>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

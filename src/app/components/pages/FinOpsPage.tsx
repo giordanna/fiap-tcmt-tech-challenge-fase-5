@@ -1,6 +1,9 @@
 import { FinOpsChart } from '@/app/components/FinOpsChart';
 import { DollarSign, TrendingDown, AlertTriangle, Sparkles } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
 
 const anomalyData = [
   { date: '30.03', dev: 45, terrablade: 120 },
@@ -14,6 +17,14 @@ const anomalyData = [
 ];
 
 export function FinOpsPage() {
+  const { showToast } = useToast();
+  const [isCostSavingModalOpen, setIsCostSavingModalOpen] = useState(false);
+
+  const handleApplyCostSaving = () => {
+    setIsCostSavingModalOpen(false);
+    showToast('Política de agendamento aplicada. Economia estimada: R$ 1.2k/mês', 'success');
+  };
+
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
@@ -96,7 +107,7 @@ export function FinOpsPage() {
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorDev)" 
-                name="Dev Environment"
+                name="Ambiente Dev"
               />
               <Area 
                 type="monotone" 
@@ -105,7 +116,7 @@ export function FinOpsPage() {
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorTerrablade)"
-                name="Terrablade Idle Resources"
+                name="Recursos Ociosos"
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -119,12 +130,12 @@ export function FinOpsPage() {
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1">
-                <div className="text-xs text-[#A855F7] font-semibold mb-1">AI RECOMMENDATION</div>
+                <div className="text-xs text-[#A855F7] font-semibold mb-1">RECOMENDAÇÃO IA</div>
                 <p className="text-sm text-[#F1F5F9] mb-2">
-                  Terrablade environment has <span className="text-[#F59E0B]">idle resources</span> consuming R$ 890/month
+                  Ambiente Terrablade possui <span className="text-[#F59E0B]">recursos ociosos</span> consumindo R$ 890/mês
                 </p>
                 <button className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors">
-                  View Details →
+                  Ver Detalhes →
                 </button>
               </div>
             </div>
@@ -136,18 +147,56 @@ export function FinOpsPage() {
                 <TrendingDown className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1">
-                <div className="text-xs text-[#10B981] font-semibold mb-1">COST SAVING</div>
+                <div className="text-xs text-[#10B981] font-semibold mb-1">ECONOMIA DE CUSTO</div>
                 <p className="text-sm text-[#F1F5F9] mb-2">
-                  Schedule non-production environments to save <span className="text-[#10B981] font-semibold">R$ 1.2k/month</span>
+                  Agendar ambientes de não-produção para economizar <span className="text-[#10B981] font-semibold">R$ 1.2k/mês</span>
                 </p>
-                <button className="text-xs text-[#10B981] hover:text-[#34D399] transition-colors">
-                  Apply Now →
+                <button 
+                  onClick={() => setIsCostSavingModalOpen(true)}
+                  className="text-xs text-[#10B981] hover:text-[#34D399] transition-colors"
+                >
+                  Aplicar Agora →
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isCostSavingModalOpen} onClose={() => setIsCostSavingModalOpen(false)} title="Aplicar Política de Economia">
+        <div className="space-y-4">
+          <div className="p-4 bg-[#10B981]/10 border border-[#10B981]/30 rounded-xl">
+            <h4 className="text-[#10B981] font-semibold mb-2">Shutdown Automático</h4>
+            <p className="text-sm text-[#F1F5F9]">
+              Deseja configurar o desligamento automático dos ambientes de desenvolvimento e staging fora do horário comercial (20h - 08h e finais de semana)?
+            </p>
+          </div>
+          <div className="bg-[#0A0E1A] border border-[#1E293B] rounded-lg p-3">
+            <div className="flex justify-between text-sm mb-1">
+              <span className="text-[#94A3B8]">Economia Estimada:</span>
+              <span className="text-[#10B981] font-bold">R$ 1.250,00 / mês</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-[#94A3B8]">Impacto:</span>
+              <span className="text-[#F59E0B]">Baixo (Dev/Staging)</span>
+            </div>
+          </div>
+          <div className="flex gap-3 pt-2">
+            <button
+              onClick={handleApplyCostSaving}
+              className="flex-1 bg-[#10B981] hover:bg-[#059669] text-white py-2 rounded-lg transition-colors"
+            >
+              Confirmar e Aplicar
+            </button>
+            <button
+              onClick={() => setIsCostSavingModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

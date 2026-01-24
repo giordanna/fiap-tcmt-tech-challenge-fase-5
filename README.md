@@ -64,6 +64,73 @@ O protótipo é totalmente responsivo:
 
 ---
 
+### 4. Criação de Novo Projeto (Estratégia)
+
+**Localização**: Estratégia & Priorização → Botão "Novo Projeto"
+
+| Etapa                       | Descrição                                         |
+| --------------------------- | ------------------------------------------------- |
+| 1. Clique em "Novo Projeto" | Modal de cadastro abre                            |
+| 2. Preencha os dados        | Nome, descrição, custo e prazo                    |
+| 3. Confirme                 | Projeto criado e enviado para priorização (Toast) |
+
+---
+
+### 5. Gestão de Dependências e Capacidade (Planejamento)
+
+**Localização**: Planejamento & Capacidade
+
+| Ação                  | Descrição                                                                                       |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| **Nova Solicitação**  | Clique em "+ Nova Solicitação" -> Modal para abrir ticket para DBA/Infra/Sec                    |
+| **Redistribuição IA** | Clique em "Ver Sugestões..." no card de Insight -> Modal para aceitar redistribuição de tarefas |
+
+---
+
+### 6. Agendamento de GMUD (Governança)
+
+**Localização**: Governança & GMUD → Botão "+ Nova GMUD"
+
+| Etapa                  | Descrição                                          |
+| ---------------------- | -------------------------------------------------- |
+| 1. Iniciar agendamento | Modal para definir título, sistema, impacto e data |
+| 2. Confirmar           | GMUD agendada e pendente de aprovação (Toast)      |
+
+---
+
+### 7. FinOps: Economia Automática
+
+**Localização**: FinOps & Observabilidade → Widget "Economia de Custo" → Botão "Aplicar Agora"
+
+| Ação                   | Resultado                                                |
+| ---------------------- | -------------------------------------------------------- |
+| Clique "Aplicar Agora" | Modal confirma shutdown de ambientes dev fora do horário |
+| Confirmação            | Aplicação da política e estimativa de economia (Toast)   |
+
+---
+
+### 8. Adicionar Integração (Ingestão)
+
+**Localização**: Hub de Ingestão → Botão "Adicionar Integração"
+
+| Etapa                  | Descrição                                       |
+| ---------------------- | ----------------------------------------------- |
+| 1. Selecionar Provider | Escolha entre New Relic, Datadog, AWS, etc.     |
+| 2. Conectar            | Simulação de fluxo OAuth2 e feedback de sucesso |
+
+---
+
+### 9. Criação de Golden Path (Platform Eng)
+
+**Localização**: Caminhos Padrão → Botão "Criar Novo Caminho"
+
+| Etapa               | Descrição                                         |
+| ------------------- | ------------------------------------------------- |
+| 1. Definir Template | Nome do novo caminho e stack tecnológica          |
+| 2. Salvar           | Template disponível no catálogo para outros times |
+
+---
+
 ## 📂 Estrutura de Páginas
 
 | Página                        | Descrição                                  |

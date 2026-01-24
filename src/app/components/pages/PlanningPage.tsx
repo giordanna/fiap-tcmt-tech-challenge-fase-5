@@ -1,5 +1,9 @@
-import { Calendar, Users, AlertCircle, Clock, CheckCircle2, XCircle } from 'lucide-react';
+import { Calendar, Users, AlertCircle, Clock, CheckCircle2, XCircle, Plus, ArrowRight } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
 
 const capacityData = [
   { name: 'Ana Silva', allocated: 28, available: 32, total: 40 },
@@ -11,6 +15,15 @@ const capacityData = [
 ];
 
 export function PlanningPage() {
+  const { showToast } = useToast();
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  const [isRedistributeModalOpen, setIsRedistributeModalOpen] = useState(false);
+  
+  // New Request State
+  const [requestType, setRequestType] = useState('Infra');
+  const [requestTitle, setRequestTitle] = useState('');
+  const [requestPriority, setRequestPriority] = useState('medium');
+
   const dependencies = [
     {
       id: 'DEP-001',
@@ -81,6 +94,17 @@ export function PlanningPage() {
       case 'medium': return '#00D9FF';
       default: return '#94A3B8';
     }
+  };
+
+  const handleCreateRequest = () => {
+    setIsRequestModalOpen(false);
+    showToast(`Solicitação DEP-${Math.floor(Math.random() * 1000)} criada com sucesso`, 'success');
+    setRequestTitle('');
+  };
+
+  const handleRedistribute = () => {
+    setIsRedistributeModalOpen(false);
+    showToast('Carga de trabalho redistribuída automaticamente', 'success');
   };
 
   return (
@@ -157,7 +181,10 @@ export function PlanningPage() {
                 <span className="text-[#A855F7] font-semibold">Insight:</span> Daniel Lima está no limite (32h). 
                 Considere redistribuir workload ou adiar tarefas não-críticas.
               </div>
-              <button className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors mt-2">
+              <button 
+                onClick={() => setIsRedistributeModalOpen(true)}
+                className="text-xs text-[#A855F7] hover:text-[#C084FC] transition-colors mt-2 underline"
+              >
                 Ver Sugestões de Redistribuição →
               </button>
             </div>
@@ -172,8 +199,12 @@ export function PlanningPage() {
             <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Gestão de Dependências</h2>
             <p className="text-sm text-[#94A3B8]">Rastreamento de solicitações para DBAs e Infraestrutura</p>
           </div>
-          <button className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors">
-            + Nova Solicitação
+          <button 
+            onClick={() => setIsRequestModalOpen(true)}
+            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Nova Solicitação</span>
           </button>
         </div>
 
@@ -244,6 +275,116 @@ export function PlanningPage() {
           })}
         </div>
       </div>
+
+      {/* New Request Modal */}
+      <Modal isOpen={isRequestModalOpen} onClose={() => setIsRequestModalOpen(false)} title="Nova Solicitação de Dependência">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Tipo de Dependência</label>
+            <div className="grid grid-cols-3 gap-2">
+              {['Infra', 'DBA', 'Security'].map(type => (
+                <button
+                  key={type}
+                  onClick={() => setRequestType(type)}
+                  className={`py-2 px-3 rounded-lg border text-sm transition-colors ${
+                    requestType === type 
+                      ? 'bg-[#00D9FF]/10 border-[#00D9FF] text-[#00D9FF]' 
+                      : 'border-[#1E293B] text-[#94A3B8] hover:border-[#94A3B8]'
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Título da Solicitação</label>
+            <input 
+              type="text"
+              value={requestTitle}
+              onChange={(e) => setRequestTitle(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+              placeholder="Ex: Provisionar novo bucket S3"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Prioridade</label>
+            <Select value={requestPriority} onValueChange={setRequestPriority}>
+              <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                <SelectValue placeholder="Selecione a prioridade" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="medium">Média</SelectItem>
+                <SelectItem value="high">Alta</SelectItem>
+                <SelectItem value="critical">Crítica</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleCreateRequest}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
+            >
+              Criar Solicitação
+            </button>
+            <button
+              onClick={() => setIsRequestModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Redistribute Modal */}
+      <Modal isOpen={isRedistributeModalOpen} onClose={() => setIsRedistributeModalOpen(false)} title="Sugestão de Redistribuição (IA)">
+        <div className="space-y-6">
+          <div className="p-4 bg-[#A855F7]/10 border border-[#A855F7]/30 rounded-xl">
+            <p className="text-sm text-[#F1F5F9]">
+              Identificamos que <span className="text-[#A855F7] font-semibold">Daniel Lima</span> está sobrecarregado. 
+              Sugerimos mover as seguintes tarefas para alinhar com a capacidade disponível:
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-between p-3 bg-[#0A0E1A] border border-[#1E293B] rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#1E293B] flex items-center justify-center text-xs text-[#94A3B8]">DL</div>
+                <ArrowRight className="w-4 h-4 text-[#94A3B8]" />
+                <div className="w-8 h-8 rounded-full bg-[#1E293B] flex items-center justify-center text-xs text-[#94A3B8]">CD</div>
+              </div>
+              <div className="text-sm text-[#F1F5F9]">Review de PRs Backend</div>
+              <div className="text-xs text-[#00D9FF] font-mono">4h</div>
+            </div>
+            
+            <div className="flex items-center justify-between p-3 bg-[#0A0E1A] border border-[#1E293B] rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#1E293B] flex items-center justify-center text-xs text-[#94A3B8]">DL</div>
+                <ArrowRight className="w-4 h-4 text-[#94A3B8]" />
+                <div className="w-8 h-8 rounded-full bg-[#1E293B] flex items-center justify-center text-xs text-[#94A3B8]">AS</div>
+              </div>
+              <div className="text-sm text-[#F1F5F9]">Documentação API</div>
+              <div className="text-xs text-[#00D9FF] font-mono">2h</div>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={handleRedistribute}
+              className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white py-2 rounded-lg transition-colors"
+            >
+              Aplicar Mudanças
+            </button>
+            <button
+              onClick={() => setIsRedistributeModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Workflow, Rocket, Database, Code, Shield, Zap, CheckCircle2, Loader2 } from 'lucide-react';
+import { Workflow, Rocket, Database, Code, Shield, Zap, CheckCircle2, Loader2, Plus } from 'lucide-react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 
@@ -16,10 +16,15 @@ export function GoldenPathsPage() {
   const { showToast } = useToast();
   const [selectedPath, setSelectedPath] = useState<Path | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewPathModalOpen, setIsNewPathModalOpen] = useState(false);
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployProgress, setDeployProgress] = useState(0);
   const [deployStage, setDeployStage] = useState('');
   const [selectedEnv, setSelectedEnv] = useState('staging');
+  
+  // New Path State
+  const [newPathName, setNewPathName] = useState('');
+  const [newPathDesc, setNewPathDesc] = useState('');
 
   const paths: Path[] = [
     {
@@ -73,6 +78,13 @@ export function GoldenPathsPage() {
     setIsDeploying(false);
   };
 
+  const handleCreatePath = () => {
+    setIsNewPathModalOpen(false);
+    showToast('Template salvo no catálogo e pronto para uso', 'success');
+    setNewPathName('');
+    setNewPathDesc('');
+  };
+
   const startDeploy = () => {
     setIsDeploying(true);
     setDeployProgress(0);
@@ -116,8 +128,11 @@ export function GoldenPathsPage() {
               <p className="text-sm text-[#94A3B8] mt-1">Catálogo de infraestrutura self-service</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2">
-            <Rocket className="w-4 h-4" />
+          <button 
+            onClick={() => setIsNewPathModalOpen(true)}
+            className="px-4 py-2 bg-[#A855F7] hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
             <span>Criar Novo Caminho</span>
           </button>
         </div>
@@ -193,17 +208,21 @@ export function GoldenPathsPage() {
             <div>
               <label className="block text-sm text-[#94A3B8] mb-2">Ambiente de Destino</label>
               <div className="grid grid-cols-3 gap-2">
-                {['development', 'staging', 'production'].map(env => (
+                {[
+                  { id: 'development', label: 'Desenvolvimento' },
+                  { id: 'staging', label: 'Homologação' },
+                  { id: 'production', label: 'Produção' }
+                ].map(env => (
                   <button
-                    key={env}
-                    onClick={() => setSelectedEnv(env)}
+                    key={env.id}
+                    onClick={() => setSelectedEnv(env.id)}
                     className={`py-2 px-3 rounded-lg border text-sm transition-colors ${
-                      selectedEnv === env 
+                      selectedEnv === env.id 
                         ? 'bg-[#00D9FF]/10 border-[#00D9FF] text-[#00D9FF]' 
                         : 'border-[#1E293B] text-[#94A3B8] hover:border-[#94A3B8]'
                     }`}
                   >
-                    {env.charAt(0).toUpperCase() + env.slice(1)}
+                    {env.label}
                   </button>
                 ))}
               </div>
@@ -222,7 +241,10 @@ export function GoldenPathsPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#94A3B8]">Ambiente:</span>
-                  <span className="text-[#00D9FF]">{selectedEnv}</span>
+                  <span className="text-[#00D9FF]">
+                    {selectedEnv === 'development' ? 'Desenvolvimento' : 
+                     selectedEnv === 'staging' ? 'Homologação' : 'Produção'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -271,6 +293,46 @@ export function GoldenPathsPage() {
             )}
           </div>
         )}
+      </Modal>
+
+      {/* New Path Modal */}
+      <Modal isOpen={isNewPathModalOpen} onClose={() => setIsNewPathModalOpen(false)} title="Adicionar Novo Caminho Padrão">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Nome do Template</label>
+            <input 
+              type="text"
+              value={newPathName}
+              onChange={(e) => setNewPathName(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+              placeholder="Ex: Redis Cache Cluster"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Descrição Técnica / Stack</label>
+            <textarea 
+              value={newPathDesc}
+              onChange={(e) => setNewPathDesc(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF] h-24 resize-none"
+              placeholder="Descreva a infraestrutura, dependências e configurações..."
+            />
+          </div>
+          
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleCreatePath}
+              className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white py-2 rounded-lg transition-colors font-semibold"
+            >
+              Criar Caminho
+            </button>
+            <button
+              onClick={() => setIsNewPathModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

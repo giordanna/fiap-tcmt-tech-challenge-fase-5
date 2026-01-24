@@ -1,6 +1,14 @@
 import { Database, Link, RefreshCw, CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
 
 export function UniversalIngestionPage() {
+  const { showToast } = useToast();
+  const [isIntegrationModalOpen, setIsIntegrationModalOpen] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState('');
+
   const integrations = [
     { 
       name: 'ServiceNow', 
@@ -12,7 +20,7 @@ export function UniversalIngestionPage() {
     { 
       name: 'Azure Boards', 
       status: 'active', 
-      lastSync: '5 min ago',
+      lastSync: 'há 5 min',
       records: '892',
       logo: '📋'
     },
@@ -40,11 +48,17 @@ export function UniversalIngestionPage() {
     { 
       name: 'PagerDuty', 
       status: 'active', 
-      lastSync: '10 min ago',
+      lastSync: 'há 10 min',
       records: '156',
       logo: '🚨'
     },
   ];
+
+  const handleAddIntegration = () => {
+    setIsIntegrationModalOpen(false);
+    showToast('Conector configurado e sincronizando dados', 'success');
+    setSelectedProvider('');
+  };
 
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
@@ -60,7 +74,10 @@ export function UniversalIngestionPage() {
               <p className="text-sm text-[#94A3B8] mt-1">Pipeline de dados centralizado de todas as ferramentas</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2">
+          <button 
+            onClick={() => setIsIntegrationModalOpen(true)}
+            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors flex items-center gap-2"
+          >
             <Link className="w-4 h-4" />
             <span>Adicionar Integração</span>
           </button>
@@ -114,6 +131,53 @@ export function UniversalIngestionPage() {
           </div>
         ))}
       </div>
+
+      <Modal isOpen={isIntegrationModalOpen} onClose={() => setIsIntegrationModalOpen(false)} title="Adicionar Nova Integração">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Selecione o Provedor</label>
+            <Select value={selectedProvider} onValueChange={setSelectedProvider}>
+              <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                <SelectValue placeholder="Selecione o provedor" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="New Relic">New Relic</SelectItem>
+                <SelectItem value="Datadog">Datadog</SelectItem>
+                <SelectItem value="AWS">AWS CloudWatch</SelectItem>
+                <SelectItem value="Jenkins">Jenkins</SelectItem>
+                <SelectItem value="SonarQube">SonarQube</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="p-4 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-xl flex items-start gap-3">
+             <div className="w-8 h-8 rounded-lg bg-[#00D9FF] flex items-center justify-center flex-shrink-0 text-white">i</div>
+             <p className="text-sm text-[#F1F5F9]">
+               A conexão segura será estabelecida via OAuth2 ou Token. Você será redirecionado para autorizar o acesso após clicar em "Conectar".
+             </p>
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleAddIntegration}
+              disabled={!selectedProvider}
+              className={`flex-1 py-2 rounded-lg transition-colors font-semibold ${
+                selectedProvider 
+                  ? 'bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A]' 
+                  : 'bg-[#1E293B] text-[#94A3B8] cursor-not-allowed'
+              }`}
+            >
+              Conectar {selectedProvider}
+            </button>
+            <button
+              onClick={() => setIsIntegrationModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

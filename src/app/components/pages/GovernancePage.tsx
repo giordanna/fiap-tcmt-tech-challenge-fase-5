@@ -1,8 +1,19 @@
 import { Shield, Calendar as CalendarIcon, AlertTriangle, CheckCircle2, Clock, Snowflake } from 'lucide-react';
 import { useState } from 'react';
+import { Modal } from '@/app/components/Modal';
+import { useToast } from '@/app/components/Toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
 
 export function GovernancePage() {
+  const { showToast } = useToast();
   const [selectedMonth] = useState(0); // 0 = January 2026
+  const [isGMUDModalOpen, setIsGMUDModalOpen] = useState(false);
+  
+  // GMUD Form State
+  const [gmudTitle, setGmudTitle] = useState('');
+  const [gmudSystem, setGmudSystem] = useState('API Gateway');
+  const [gmudImpact, setGmudImpact] = useState('Médio');
+  const [gmudDate, setGmudDate] = useState('');
 
   const months = ['Janeiro 2026', 'Fevereiro 2026', 'Março 2026'];
   
@@ -98,6 +109,12 @@ export function GovernancePage() {
     },
   ];
 
+  const handleCreateGMUD = () => {
+    setIsGMUDModalOpen(false);
+    showToast('GMUD agendada e aguardando aprovação', 'success');
+    setGmudTitle('');
+  };
+
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
@@ -114,7 +131,10 @@ export function GovernancePage() {
               </p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors">
+          <button 
+            onClick={() => setIsGMUDModalOpen(true)}
+            className="px-4 py-2 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] rounded-lg transition-colors"
+          >
             + Nova GMUD
           </button>
         </div>
@@ -284,6 +304,73 @@ export function GovernancePage() {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isGMUDModalOpen} onClose={() => setIsGMUDModalOpen(false)} title="Agendar Nova GMUD">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Título da Mudança</label>
+            <input 
+              type="text"
+              value={gmudTitle}
+              onChange={(e) => setGmudTitle(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF]"
+              placeholder="Ex: Atualização do cluster de produção"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Sistema</label>
+              <Select value={gmudSystem} onValueChange={setGmudSystem}>
+                <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                  <SelectValue placeholder="Selecione o sistema" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="API Gateway">API Gateway</SelectItem>
+                  <SelectItem value="Database">Database</SelectItem>
+                  <SelectItem value="Infrastructure">Infrastructure</SelectItem>
+                  <SelectItem value="Frontend">Frontend</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm text-[#94A3B8] mb-1">Impacto Esperado</label>
+              <Select value={gmudImpact} onValueChange={setGmudImpact}>
+                <SelectTrigger className="w-full bg-[#0A0E1A] border border-[#1E293B] text-[#F1F5F9]">
+                  <SelectValue placeholder="Selecione o impacto" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Baixo">Baixo</SelectItem>
+                  <SelectItem value="Médio">Médio</SelectItem>
+                  <SelectItem value="Alto">Alto</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm text-[#94A3B8] mb-1">Data e Hora</label>
+            <input 
+              type="datetime-local"
+              value={gmudDate}
+              onChange={(e) => setGmudDate(e.target.value)}
+              className="w-full bg-[#0A0E1A] border border-[#1E293B] rounded-lg px-4 py-2 text-[#F1F5F9] focus:outline-none focus:border-[#00D9FF] [color-scheme:dark]"
+            />
+          </div>
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleCreateGMUD}
+              className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] font-semibold py-2 rounded-lg transition-colors"
+            >
+              Agendar GMUD
+            </button>
+            <button
+              onClick={() => setIsGMUDModalOpen(false)}
+              className="px-4 py-2 border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
