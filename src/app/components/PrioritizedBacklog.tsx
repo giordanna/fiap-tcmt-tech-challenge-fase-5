@@ -9,6 +9,7 @@ interface BacklogCard {
   title: string;
   assignee: string;
   avatar: string;
+  squad: string;
   priority?: 'high' | 'medium' | 'low';
   effort?: string;
   badge?: { text: string; color: string };
@@ -46,6 +47,8 @@ function BacklogCardComponent({ card, onClick }: { card: BacklogCard; onClick: (
           </h4>
           <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
             <span>{card.assignee}</span>
+            <span>•</span>
+            <span>{card.squad}</span>
             {card.effort && (
               <>
                 <span>•</span>
@@ -117,6 +120,7 @@ export function PrioritizedBacklog() {
       title: 'Sanitização Golden Values',
       assignee: '@anderson.silva',
       avatar: 'AS',
+      squad: 'Squad Data Platform',
       priority: 'high',
       effort: '5.5d',
       badge: { text: 'Legado', color: '#00D9FF' },
@@ -126,6 +130,7 @@ export function PrioritizedBacklog() {
       title: 'Integrar RXSS via Neo Sentry',
       assignee: '@bruno.costa',
       avatar: 'BC',
+      squad: 'Squad Segurança',
       priority: 'high',
       effort: '3.1d',
     },
@@ -134,6 +139,7 @@ export function PrioritizedBacklog() {
       title: 'Saperi EnterpriseGateway Br Dois',
       assignee: '@silva.lima',
       avatar: 'SL',
+      squad: 'Squad Pagamentos',
       priority: 'medium',
       effort: '8.2d',
       badge: { text: 'Alta Prioridade', color: '#EF4444' },
@@ -146,6 +152,7 @@ export function PrioritizedBacklog() {
       title: 'Implementar Predictive Analytics Engine',
       assignee: '@carlos.dias',
       avatar: 'CD',
+      squad: 'Squad Data Platform',
       effort: '3.9d',
       badge: { text: 'API', color: '#00D9FF' },
     },
@@ -154,6 +161,7 @@ export function PrioritizedBacklog() {
       title: 'Integrar SAP ERP via API Gateway',
       assignee: '@maria.santos',
       avatar: 'MS',
+      squad: 'Squad Core Banking',
       effort: '5.6d',
     },
     {
@@ -161,6 +169,7 @@ export function PrioritizedBacklog() {
       title: 'Streamer Initiative AocRelations',
       assignee: '@pedro.silva',
       avatar: 'PS',
+      squad: 'Squad Mobile',
       badge: { text: 'LITE', color: '#10B981' },
     },
   ];
@@ -171,6 +180,7 @@ export function PrioritizedBacklog() {
       title: 'Implement SAP ERP API Gateway 3',
       assignee: '@ana.ferreira',
       avatar: 'AF',
+      squad: 'Squad Core Banking',
       effort: '2.8d',
     },
     {
@@ -178,6 +188,7 @@ export function PrioritizedBacklog() {
       title: 'Integrar SAP ERP via API Gateway',
       assignee: '@lucas.martins',
       avatar: 'LM',
+      squad: 'Squad Checkout',
       effort: '4.3d',
       badge: { text: 'LITE', color: '#10B981' },
     },
@@ -186,6 +197,7 @@ export function PrioritizedBacklog() {
       title: 'Streamer Initiative Grid Base',
       assignee: '@julia.rocha',
       avatar: 'JR',
+      squad: 'Squad Mobile',
       badge: { text: 'LITE', color: '#10B981' },
     },
   ];

@@ -9,18 +9,62 @@ import { PlanningPage } from '@/app/components/pages/PlanningPage';
 import { GovernancePage } from '@/app/components/pages/GovernancePage';
 import { UniversalIngestionPage } from '@/app/components/pages/UniversalIngestionPage';
 import { GoldenPathsPage } from '@/app/components/pages/GoldenPathsPage';
+import { ResourcesPage } from '@/app/components/pages/ResourcesPage';
 import { FinOpsPage } from '@/app/components/pages/FinOpsPage';
 import { GamificationPage } from '@/app/components/pages/GamificationPage';
 import { ExecutiveROIPage } from '@/app/components/pages/ExecutiveROIPage';
 import { OnboardingTour } from '@/app/components/OnboardingTour';
+import { DeployedResource } from '@/app/types';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Shared State for Resources
+  const [resources, setResources] = useState<DeployedResource[]>([
+    {
+      id: 'r1',
+      name: 'Checkout Service API',
+      type: 'Microsserviço .NET + RDS',
+      env: 'production',
+      status: 'running',
+      health: 'healthy',
+      url: 'api.checkout.internal',
+      createdAt: '2024-03-10',
+      category: 'service'
+    },
+    {
+      id: 'r2',
+      name: 'Auth Gateway',
+      type: 'API Gateway + Auth',
+      env: 'staging',
+      status: 'testing',
+      health: 'healthy',
+      url: 'auth-stg.internal',
+      createdAt: '2024-03-12',
+      category: 'service'
+    },
+     {
+      id: 'r3',
+      name: 'Payments DB Replica',
+      type: 'Banco de Dados Enterprise',
+      env: 'production',
+      status: 'running',
+      health: 'degraded',
+      url: 'db-pay-02.internal',
+      createdAt: '2024-02-15',
+      category: 'database'
+    }
+  ]);
+
+  const handleAddResource = (resource: DeployedResource) => {
+      setResources(prev => [resource, ...prev]);
+  };
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
     setMobileMenuOpen(false); // Close menu after navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const renderPage = () => {
@@ -36,7 +80,11 @@ export default function App() {
       case 'ingestion':
         return <UniversalIngestionPage />;
       case 'golden-paths':
-        return <GoldenPathsPage />;
+        return <GoldenPathsPage onDeploy={handleAddResource} resources={resources} />;
+      case 'resources':
+        return <ResourcesPage resources={resources} />;
+      case 'people-squads':
+        return <PeopleSquadsPage />;
       case 'finops':
         return <FinOpsPage />;
       case 'gamification':
@@ -82,7 +130,7 @@ export default function App() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col min-w-0 min-h-screen">
           {/* Header */}
-          <Header />
+          <Header onNavigate={handleNavigate} />
 
           {/* Dashboard Content */}
           <main className="flex-1 p-3 sm:p-6 overflow-x-hidden">

@@ -53,7 +53,7 @@ O protótipo é totalmente responsivo:
 
 ### 3. Deploy via Golden Path
 
-**Localização**: Sidebar → "Caminhos Padrão"
+**Localização**: Sidebar → "Golden Paths"
 
 | Etapa                    | Descrição                                          |
 | ------------------------ | -------------------------------------------------- |
@@ -134,7 +134,7 @@ O protótipo é totalmente responsivo:
 
 ### 10. Criação de Golden Path (Platform Eng)
 
-**Localização**: Caminhos Padrão → Botão "Criar Novo Caminho"
+**Localização**: Golden Paths → Botão "Criar Novo Caminho"
 
 | Etapa               | Descrição                                         |
 | ------------------- | ------------------------------------------------- |
@@ -251,7 +251,7 @@ O protótipo é totalmente responsivo:
 | **Planejamento & Capacidade** | Alocação de time e capacidade              |
 | **Governança & GMUD**         | Calendário de mudanças e aprovações        |
 | **Hub de Ingestão**           | Conectores e integrações de dados          |
-| **Caminhos Padrão**           | Templates de infraestrutura self-service   |
+| **Golden Paths**              | Templates de infraestrutura self-service   |
 | **FinOps & Observabilidade**  | Custos multi-cloud e monitoramento         |
 | **Gamificação**               | Ranking e conquistas do time               |
 | **Painel de ROI**             | Métricas executivas de retorno             |

@@ -1,5 +1,6 @@
 import { BarChart3, TrendingUp, DollarSign, Users, Clock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from 'recharts';
+import { StakeholderSentimentWidget } from '@/app/components/StakeholderSentimentWidget';
 
 const roiData = [
   { month: 'Jul', savings: 45000, investment: 20000 },
@@ -178,6 +179,9 @@ export function ExecutiveROIPage() {
           ))}
         </div>
       </div>
+
+      {/* Stakeholder Sentiment Widget */}
+      <StakeholderSentimentWidget />
     </div>
   );
 }

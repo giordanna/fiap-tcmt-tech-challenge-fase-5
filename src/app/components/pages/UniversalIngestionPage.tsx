@@ -1,4 +1,4 @@
-import { Database, Link, RefreshCw, CheckCircle2, XCircle, Clock, Settings } from 'lucide-react';
+import { Database, Link, RefreshCw, CheckCircle2, XCircle, Clock, Settings, Sparkles, Copy, Tag, AlertTriangle } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -22,42 +22,42 @@ export function UniversalIngestionPage() {
       status: 'active', 
       lastSync: 'há 2 min',
       records: '1,247',
-      logo: '🔄'
+      logo: 'https://logosandtypes.com/wp-content/uploads/2020/12/servicenow.svg'
     },
     { 
       name: 'Azure Boards', 
       status: 'active', 
       lastSync: 'há 5 min',
       records: '892',
-      logo: '📋'
+      logo: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/azure-boards-icon.svg'
     },
     { 
       name: 'Jira', 
       status: 'syncing', 
       lastSync: 'atualizando...',
       records: '2,341',
-      logo: '🎯'
+      logo: 'https://cdn.worldvectorlogo.com/logos/jira-1.svg'
     },
     { 
       name: 'GitHub', 
       status: 'active', 
       lastSync: 'há 1 min',
       records: '5,678',
-      logo: '💻'
+      logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-2.svg'
     },
     { 
       name: 'GitLab', 
       status: 'error', 
       lastSync: 'há 1 hora',
       records: '0',
-      logo: '🦊'
+      logo: 'https://cdn.worldvectorlogo.com/logos/gitlab.svg'
     },
     { 
       name: 'PagerDuty', 
       status: 'active', 
       lastSync: 'há 10 min',
       records: '156',
-      logo: '🚨'
+      logo: 'https://play-lh.googleusercontent.com/E-zhAf4KJ6JDDXmQfQxBprn2sATGYUMkOEqLQX5HAQQtiwDZJg4c8sQd7deb6nCZCwU=w240-h480-rw'
     },
   ];
 
@@ -113,8 +113,8 @@ export function UniversalIngestionPage() {
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-5 hover:border-[#94A3B8]/50 transition-colors">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-[#1E293B] rounded-lg flex items-center justify-center text-2xl">
-                  {integration.logo}
+                <div className="w-12 h-12 bg-[#1E293B] rounded-lg flex items-center justify-center p-2">
+                  <img src={integration.logo} alt={integration.name} className="w-8 h-8 object-contain" />
                 </div>
                 <div>
                   <h3 className="text-[#F1F5F9] font-semibold">{integration.name}</h3>
@@ -148,6 +148,180 @@ export function UniversalIngestionPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Triagem Inteligente com IA */}
+      <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#A855F7]/20 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-[#A855F7]" />
+            </div>
+            <div>
+              <h2 className="text-lg text-[#F1F5F9] font-semibold">Triagem Inteligente</h2>
+              <p className="text-xs text-[#94A3B8]">Classificação automática e detecção de duplicidades</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <span className="text-[#94A3B8]">Última análise:</span>
+            <span className="text-[#10B981]">há 30 segundos</span>
+          </div>
+        </div>
+
+        {/* Demandas recentes com triagem */}
+        <div className="space-y-3">
+          {[
+            {
+              id: 'SN-12847',
+              origem: 'ServiceNow',
+              titulo: 'Erro crítico no módulo de pagamentos',
+              status: 'triado',
+              tags: ['#crítico', '#pagamentos', '#produção'],
+              confianca: 94,
+              duplicidade: null,
+            },
+            {
+              id: 'SN-12848',
+              origem: 'ServiceNow',
+              titulo: 'Lentidão no sistema de relatórios',
+              status: 'duplicidade',
+              tags: ['#performance', '#relatórios'],
+              confianca: 87,
+              duplicidade: 'JIRA-4521',
+            },
+            {
+              id: 'JIRA-4589',
+              origem: 'Jira',
+              titulo: 'Implementar novo endpoint de autenticação OAuth2',
+              status: 'triado',
+              tags: ['#segurança', '#api', '#backlog'],
+              confianca: 91,
+              duplicidade: null,
+            },
+            {
+              id: 'SN-12849',
+              origem: 'ServiceNow',
+              titulo: 'Solicitação de acesso VPN para equipe externa',
+              status: 'pendente',
+              tags: ['#infraestrutura', '#acesso'],
+              confianca: 78,
+              duplicidade: null,
+            },
+            {
+              id: 'AZ-892',
+              origem: 'Azure Boards',
+              titulo: 'Migração de banco de dados para PostgreSQL 16',
+              status: 'triado',
+              tags: ['#dba', '#migração', '#alta-prioridade'],
+              confianca: 96,
+              duplicidade: null,
+            },
+          ].map((demanda) => (
+            <div 
+              key={demanda.id}
+              className={`bg-[#0A0E1A]/50 border rounded-xl p-4 hover:border-[#94A3B8]/30 transition-all ${
+                demanda.status === 'duplicidade' ? 'border-[#F59E0B]/50' : 'border-[#1E293B]'
+              }`}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  {/* Header com origem e ID */}
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#00D9FF]/10 text-[#00D9FF]">
+                      {demanda.origem}: {demanda.id}
+                    </span>
+                    {demanda.status === 'triado' && (
+                      <span className="text-xs px-2 py-0.5 rounded bg-[#10B981]/20 text-[#10B981] flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Triagem completa
+                      </span>
+                    )}
+                    {demanda.status === 'pendente' && (
+                      <span className="text-xs px-2 py-0.5 rounded bg-[#F59E0B]/20 text-[#F59E0B] flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> Pendente
+                      </span>
+                    )}
+                    {demanda.status === 'duplicidade' && (
+                      <span className="text-xs px-2 py-0.5 rounded bg-[#F59E0B]/20 text-[#F59E0B] flex items-center gap-1">
+                        <Copy className="w-3 h-3" /> Duplicado
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Título */}
+                  <h4 className="text-sm text-[#F1F5F9] font-medium mb-2">{demanda.titulo}</h4>
+
+                  {/* Tags sugeridas pela IA */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Tag className="w-3 h-3 text-[#A855F7]" />
+                    {demanda.tags.map((tag, i) => (
+                      <span 
+                        key={i}
+                        className="text-xs px-2 py-0.5 rounded-full bg-[#A855F7]/10 text-[#A855F7]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    <span className="text-xs text-[#94A3B8]">
+                      ({demanda.confianca}% confiança)
+                    </span>
+                  </div>
+
+                  {/* Alerta de duplicidade */}
+                  {demanda.duplicidade && (
+                    <div className="mt-3 p-2 bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-lg inline-flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+                      <span className="text-xs text-[#F59E0B]">
+                        Card duplicado de: <span className="font-semibold">{demanda.duplicidade}</span>
+                      </span>
+                      <button 
+                        onClick={() => showToast('Demandas vinculadas com sucesso', 'success')}
+                        className="ml-auto text-xs text-[#F59E0B] hover:text-[#FBBF24] underline"
+                      >
+                        Vincular
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Ações */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button 
+                    onClick={() => showToast('Triagem confirmada pela IA', 'success')}
+                    className="px-3 py-1.5 text-xs bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20 rounded-lg transition-colors"
+                  >
+                    Confirmar
+                  </button>
+                  <button 
+                    onClick={() => showToast('Demanda enviada para revisão manual', 'info')}
+                    className="px-3 py-1.5 text-xs border border-[#1E293B] text-[#94A3B8] hover:text-[#F1F5F9] rounded-lg transition-colors"
+                  >
+                    Revisar
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Estatísticas da triagem */}
+        <div className="mt-6 pt-4 border-t border-[#1E293B] grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#10B981]">847</div>
+            <div className="text-xs text-[#94A3B8]">Triadas Hoje</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#F59E0B]">23</div>
+            <div className="text-xs text-[#94A3B8]">Demandas Gêmeas</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#A855F7]">91%</div>
+            <div className="text-xs text-[#94A3B8]">Precisão IA</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#00D9FF]">2.3s</div>
+            <div className="text-xs text-[#94A3B8]">Tempo Médio</div>
+          </div>
+        </div>
       </div>
 
       <Modal isOpen={isConfigModalOpen} onClose={() => setIsConfigModalOpen(false)} title={`Configurar ${selectedConfigIntegration?.name || ''}`}>

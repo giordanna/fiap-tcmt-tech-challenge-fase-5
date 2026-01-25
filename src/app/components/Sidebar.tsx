@@ -9,7 +9,9 @@ import {
   Target,
   Calendar,
   Shield,
-  X
+  X,
+  Server,
+  Users
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -25,7 +27,8 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
     { id: 'planning', icon: Calendar, label: 'Planejamento & Capacidade' },
     { id: 'governance', icon: Shield, label: 'Governança & GMUD' },
     { id: 'ingestion', icon: Database, label: 'Hub de Ingestão' },
-    { id: 'golden-paths', icon: Workflow, label: 'Caminhos Padrão' },
+    { id: 'golden-paths', icon: Workflow, label: 'Golden Paths' },
+    { id: 'resources', icon: Server, label: 'Recursos' },
     { id: 'finops', icon: DollarSign, label: 'FinOps & Observabilidade' },
     { id: 'gamification', icon: Trophy, label: 'Gamificação' },
     { id: 'roi', icon: BarChart3, label: 'Painel de ROI' },

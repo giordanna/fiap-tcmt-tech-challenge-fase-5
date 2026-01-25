@@ -1,4 +1,4 @@
-import { Shield, Calendar as CalendarIcon, AlertTriangle, CheckCircle2, Clock, Snowflake } from 'lucide-react';
+import { Shield, Calendar as CalendarIcon, AlertTriangle, CheckCircle2, Clock, Snowflake, Activity, Target, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -89,6 +89,10 @@ export function GovernancePage() {
       date: '07 Jan, 19:00',
       system: 'API Gateway',
       impact: 'Médio',
+      urgency: 'Normal',
+      riskScore: 45,
+      riskLevel: 'baixo',
+      slaRestante: '12h',
       status: 'pending',
     },
     {
@@ -97,6 +101,10 @@ export function GovernancePage() {
       date: '14 Jan, 20:00',
       system: 'Banco de Dados',
       impact: 'Alto',
+      urgency: 'Alta',
+      riskScore: 85,
+      riskLevel: 'alto',
+      slaRestante: '4h',
       status: 'in_progress',
     },
     {
@@ -105,6 +113,10 @@ export function GovernancePage() {
       date: '20 Jan, 18:00',
       system: 'Infraestrutura',
       impact: 'Alto',
+      urgency: 'Normal',
+      riskScore: 65,
+      riskLevel: 'medio',
+      slaRestante: '48h',
       status: 'pending',
     },
   ];
@@ -254,10 +266,15 @@ export function GovernancePage() {
                                  gmud.status === 'in_progress' ? Clock : 
                                  AlertTriangle;
 
+              const riskColor = gmud.riskLevel === 'alto' ? '#EF4444' : 
+                               gmud.riskLevel === 'medio' ? '#F59E0B' : '#10B981';
+
               return (
                 <div
                   key={gmud.id}
-                  className="bg-[#0A0E1A]/50 border border-[#1E293B] rounded-xl p-4 hover:border-[#94A3B8]/30 transition-all"
+                  className={`bg-[#0A0E1A]/50 border rounded-xl p-4 hover:border-[#94A3B8]/30 transition-all ${
+                    gmud.riskLevel === 'alto' ? 'border-[#EF4444]/30' : 'border-[#1E293B]'
+                  }`}
                 >
                   <div className="flex items-start gap-3 mb-3">
                     <div 
@@ -267,26 +284,72 @@ export function GovernancePage() {
                       <StatusIcon className="w-4 h-4" style={{ color: statusColor }} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-xs font-mono text-[#94A3B8] mb-1">{gmud.id}</div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-mono text-[#94A3B8]">{gmud.id}</span>
+                        {/* Risk Score Badge */}
+                        <span 
+                          className="text-xs px-2 py-0.5 rounded font-bold"
+                          style={{ backgroundColor: `${riskColor}20`, color: riskColor }}
+                        >
+                          Risco: {gmud.riskScore}
+                        </span>
+                      </div>
                       <h4 className="text-sm text-[#F1F5F9] font-semibold mb-1">{gmud.title}</h4>
-                      <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
-                        <CalendarIcon className="w-3 h-3" />
-                        <span>{gmud.date}</span>
+                      <div className="flex items-center gap-4 text-xs text-[#94A3B8]">
+                        <div className="flex items-center gap-1">
+                          <CalendarIcon className="w-3 h-3" />
+                          <span>{gmud.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-[#F59E0B]" />
+                          <span className="text-[#F59E0B]">SLA: {gmud.slaRestante}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Impact Matrix */}
+                  <div className="grid grid-cols-3 gap-2 mb-3">
+                    <div className="bg-[#0A0E1A] rounded-lg p-2 text-center">
+                      <div className="text-[10px] text-[#94A3B8] mb-0.5">Impacto</div>
+                      <div className={`text-xs font-semibold ${
+                        gmud.impact === 'Alto' ? 'text-[#EF4444]' : 
+                        gmud.impact === 'Médio' ? 'text-[#F59E0B]' : 'text-[#10B981]'
+                      }`}>{gmud.impact}</div>
+                    </div>
+                    <div className="bg-[#0A0E1A] rounded-lg p-2 text-center">
+                      <div className="text-[10px] text-[#94A3B8] mb-0.5">Urgência</div>
+                      <div className={`text-xs font-semibold ${
+                        gmud.urgency === 'Alta' ? 'text-[#EF4444]' : 'text-[#10B981]'
+                      }`}>{gmud.urgency}</div>
+                    </div>
+                    <div className="bg-[#0A0E1A] rounded-lg p-2 text-center">
+                      <div className="text-[10px] text-[#94A3B8] mb-0.5">Nível</div>
+                      <div className="text-xs font-semibold" style={{ color: riskColor }}>
+                        {gmud.riskLevel === 'alto' ? 'ALTO' : 
+                         gmud.riskLevel === 'medio' ? 'MÉDIO' : 'BAIXO'}
                       </div>
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between pt-3 border-t border-[#1E293B]">
                     <span className="text-xs text-[#94A3B8]">{gmud.system}</span>
-                    <span 
-                      className="text-xs px-2 py-0.5 rounded font-semibold"
-                      style={{
-                        backgroundColor: gmud.impact === 'Alto' ? '#EF444420' : '#F59E0B20',
-                        color: gmud.impact === 'Alto' ? '#EF4444' : '#F59E0B',
-                      }}
-                    >
-                      {gmud.impact}
-                    </span>
+                    {gmud.riskLevel === 'baixo' && (
+                      <button 
+                        onClick={() => showToast(`GMUD ${gmud.id} aprovada automaticamente (baixo risco)`, 'success')}
+                        className="text-xs px-2 py-1 bg-[#10B981]/20 text-[#10B981] hover:bg-[#10B981]/30 rounded transition-colors"
+                      >
+                        Aprovação Expressa
+                      </button>
+                    )}
+                    {gmud.riskLevel !== 'baixo' && (
+                      <span 
+                        className="text-xs px-2 py-0.5 rounded font-semibold"
+                        style={{ backgroundColor: `${riskColor}20`, color: riskColor }}
+                      >
+                        Requer Análise
+                      </span>
+                    )}
                   </div>
                 </div>
               );

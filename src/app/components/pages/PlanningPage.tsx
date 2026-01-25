@@ -1,9 +1,10 @@
-import { Calendar, Users, AlertCircle, Clock, CheckCircle2, XCircle, Plus, ArrowRight } from 'lucide-react';
+import { Calendar, Users, AlertCircle, Clock, CheckCircle2, XCircle, Plus, ArrowRight, AlertTriangle, DollarSign, Activity } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
 
 const capacityData = [
   { name: 'Ana Silva', allocated: 28, available: 32, total: 40 },
@@ -138,7 +139,271 @@ export function PlanningPage() {
         ))}
       </div>
 
+      {/* Squads Ativas - Monitor de Saúde */}
+      <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
+        <Tabs defaultValue="squads" className="w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-[#00D9FF]/20 flex items-center justify-center">
+                <Activity className="w-5 h-5 text-[#00D9FF]" />
+              </div>
+              <div>
+                <h2 className="text-lg text-[#F1F5F9] font-semibold">Squads e Pessoas Ativas</h2>
+                <p className="text-xs text-[#94A3B8]">Importadas do Azure DevOps • Atualizado há 5 min</p>
+              </div>
+            </div>
+
+            <TabsList className="bg-[#0A0E1A] border border-[#1E293B]">
+              <TabsTrigger value="squads">Squads</TabsTrigger>
+              <TabsTrigger value="people">Pessoas</TabsTrigger>
+            </TabsList>
+          </div>
+
+          <TabsContent value="squads" className="mt-0">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4 text-xs justify-end">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#10B981]"></div>
+                  <span className="text-[#94A3B8]">Saudável</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#F59E0B]"></div>
+                  <span className="text-[#94A3B8]">Atenção</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#EF4444]"></div>
+                  <span className="text-[#94A3B8]">Crítico</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  {
+                    nome: 'Squad Pagamentos',
+                    membros: 6,
+                    health: 'saudavel',
+                    cardsParados: 0,
+                    dependenciasVioladas: 0,
+                    jiraStatus: 'On Track',
+                    centroCusto: 'CC-FIN-001',
+                    custoMensal: 'R$ 48.500',
+                  },
+                  {
+                    nome: 'Squad Checkout',
+                    membros: 5,
+                    health: 'atencao',
+                    cardsParados: 2,
+                    dependenciasVioladas: 1,
+                    jiraStatus: 'At Risk',
+                    centroCusto: 'CC-COM-002',
+                    custoMensal: 'R$ 42.300',
+                  },
+                  {
+                    nome: 'Squad Core Banking',
+                    membros: 8,
+                    health: 'critico',
+                    cardsParados: 4,
+                    dependenciasVioladas: 3,
+                    jiraStatus: 'Blocked',
+                    centroCusto: 'CC-FIN-003',
+                    custoMensal: 'R$ 72.100',
+                  },
+                  {
+                    nome: 'Squad Mobile',
+                    membros: 4,
+                    health: 'saudavel',
+                    cardsParados: 0,
+                    dependenciasVioladas: 0,
+                    jiraStatus: 'On Track',
+                    centroCusto: 'CC-DIG-001',
+                    custoMensal: 'R$ 35.800',
+                  },
+                  {
+                    nome: 'Squad Segurança',
+                    membros: 3,
+                    health: 'atencao',
+                    cardsParados: 1,
+                    dependenciasVioladas: 2,
+                    jiraStatus: 'At Risk',
+                    centroCusto: 'CC-SEC-001',
+                    custoMensal: 'R$ 28.900',
+                  },
+                  {
+                    nome: 'Squad Data Platform',
+                    membros: 7,
+                    health: 'saudavel',
+                    cardsParados: 0,
+                    dependenciasVioladas: 0,
+                    jiraStatus: 'On Track',
+                    centroCusto: 'CC-DAT-001',
+                    custoMensal: 'R$ 65.200',
+                  },
+                ].map((squad) => (
+                  <div 
+                    key={squad.nome}
+                    className={`bg-[#0A0E1A]/50 border flex flex-col rounded-xl p-4 transition-all hover:border-[#94A3B8]/30 ${
+                      squad.health === 'critico' ? 'border-[#EF4444]/50' : 
+                      squad.health === 'atencao' ? 'border-[#F59E0B]/50' : 'border-[#1E293B]'
+                    }`}
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h4 className="text-sm text-[#F1F5F9] font-semibold">{squad.nome}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Users className="w-3 h-3 text-[#94A3B8]" />
+                          <span className="text-xs text-[#94A3B8]">{squad.membros} membros</span>
+                        </div>
+                      </div>
+                      <div className={`w-3 h-3 rounded-full ${
+                        squad.health === 'critico' ? 'bg-[#EF4444]' : 
+                        squad.health === 'atencao' ? 'bg-[#F59E0B]' : 'bg-[#10B981]'
+                      }`}></div>
+                    </div>
+
+                    {/* Jira Status Badge */}
+                    <div className="mb-3 mt-auto">
+                      <span className={`text-xs px-2 py-1 rounded ${
+                        squad.jiraStatus === 'Blocked' ? 'bg-[#EF4444]/20 text-[#EF4444]' :
+                        squad.jiraStatus === 'At Risk' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
+                        'bg-[#10B981]/20 text-[#10B981]'
+                      }`}>
+                        Jira: {squad.jiraStatus}
+                      </span>
+                    </div>
+
+                    {/* Alertas */}
+                    {(squad.cardsParados > 0 || squad.dependenciasVioladas > 0) && (
+                      <div className="space-y-2 mb-3">
+                        {squad.cardsParados > 0 && (
+                          <div className="flex items-center gap-2 text-xs">
+                            <AlertTriangle className="w-3 h-3 text-[#F59E0B]" />
+                            <span className="text-[#F59E0B]">{squad.cardsParados} cards parados (+5 dias)</span>
+                          </div>
+                        )}
+                        {squad.dependenciasVioladas > 0 && (
+                          <div className="flex items-center gap-2 text-xs">
+                            <XCircle className="w-3 h-3 text-[#EF4444]" />
+                            <span className="text-[#EF4444]">{squad.dependenciasVioladas} dep. cross-team SLA violado</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* FinOps Info */}
+                    <div className="pt-3 border-t border-[#1E293B] flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        <DollarSign className="w-3 h-3 text-[#94A3B8]" />
+                        <span className="text-xs text-[#94A3B8]">{squad.centroCusto}</span>
+                      </div>
+                      <span className="text-xs text-[#10B981] font-semibold">{squad.custoMensal}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Resumo e ações */}
+              <div className="p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-sm text-[#F1F5F9]">
+                        <span className="text-[#F59E0B] font-semibold">3 squads</span> precisam de atenção: 
+                        <span className="text-[#EF4444]"> 7 cards parados</span> e 
+                        <span className="text-[#EF4444]"> 6 dependências violadas</span>
+                      </div>
+                      <p className="text-xs text-[#94A3B8] mt-1">Custo total: R$ 293.800/mês (6 squads)</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => showToast('Relatório de saúde das squads exportado', 'success')}
+                    className="px-4 py-2 text-sm bg-[#00D9FF]/10 text-[#00D9FF] hover:bg-[#00D9FF]/20 rounded-lg transition-colors whitespace-nowrap"
+                  >
+                    Exportar Relatório
+                  </button>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="people" className="mt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {capacityData.map((person) => {
+                 const utilization = (person.allocated / person.total) * 100;
+                 const isOverloaded = person.allocated >= person.available;
+                 
+                return (
+                  <div 
+                    key={person.name}
+                    className={`bg-[#0A0E1A]/50 border flex flex-col rounded-xl p-4 transition-all hover:border-[#94A3B8]/30 ${
+                      isOverloaded ? 'border-[#F59E0B]/50' : 'border-[#1E293B]'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#1E293B] flex items-center justify-center text-[#F1F5F9] font-medium">
+                          {person.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                          <h4 className="text-sm text-[#F1F5F9] font-semibold">{person.name}</h4>
+                          <span className="text-xs text-[#94A3B8]">Desenvolvedor Senior</span>
+                        </div>
+                      </div>
+                      <div className={`px-2 py-0.5 rounded text-xs font-medium ${
+                        isOverloaded ? 'bg-[#F59E0B]/20 text-[#F59E0B]' : 'bg-[#10B981]/20 text-[#10B981]'
+                      }`}>
+                        {Math.round(utilization)}%
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex justify-between text-xs text-[#94A3B8] mb-1">
+                          <span>Alocado</span>
+                          <span className={isOverloaded ? 'text-[#F59E0B]' : 'text-[#F1F5F9]'}>
+                            {person.allocated}h / {person.available}h
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-[#1E293B] rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full ${isOverloaded ? 'bg-[#F59E0B]' : 'bg-[#00D9FF]'}`}
+                            style={{ width: `${(person.allocated / person.available) * 100}%` }}
+                          ></div>
+                        </div>
+                      </div>
+
+                      <div className="pt-3 border-t border-[#1E293B] grid grid-cols-2 gap-4">
+                         <div>
+                           <span className="text-xs text-[#94A3B8] block">Disponível</span>
+                           <span className="text-sm text-[#F1F5F9] font-medium">{person.available - person.allocated}h</span>
+                         </div>
+                         <div>
+                           <span className="text-xs text-[#94A3B8] block">Total Contrato</span>
+                           <span className="text-sm text-[#F1F5F9] font-medium">{person.total}h</span>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+             <div className="mt-6 p-4 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-xl">
+              <div className="flex items-center justify-between">
+                 <div className="text-sm text-[#94A3B8]">
+                   Mostrando <span className="text-[#F1F5F9] font-medium">{capacityData.length}</span> pessoas ativas
+                 </div>
+                 <button className="text-xs text-[#00D9FF] hover:underline">
+                   Ver lista completa
+                 </button>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+
       {/* Capacity Chart */}
+
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
         <div className="mb-6">
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Capacidade do Time</h2>

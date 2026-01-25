@@ -1,4 +1,4 @@
-import { Trophy, Award, Star, Zap, TrendingUp, Users } from 'lucide-react';
+import { Trophy, Award, Star, Zap, TrendingUp, Users, Shield, GitPullRequest, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -12,12 +12,29 @@ export function GamificationPage() {
     setSelectedAchievement(achievement);
     setIsAchievementModalOpen(true);
   };
+
+  const [isSquadModalOpen, setIsSquadModalOpen] = useState(false);
+  const [selectedSquad, setSelectedSquad] = useState<any>(null);
+
+  const handleSquadClick = (squad: any) => {
+    setSelectedSquad(squad);
+    setIsSquadModalOpen(true);
+  };
+
   const leaderboard = [
     { rank: 1, name: 'Ana Silva', team: 'Platform Eng', points: 3240, badges: 12, avatar: 'AS' },
     { rank: 2, name: 'Bruno Costa', team: 'DevOps', points: 3180, badges: 11, avatar: 'BC' },
     { rank: 3, name: 'Camila Santos', team: 'SRE', points: 3120, badges: 14, avatar: 'CS' },
     { rank: 4, name: 'Daniel Lima', team: 'Backend', points: 2890, badges: 9, avatar: 'DL' },
     { rank: 5, name: 'Elena Rocha', team: 'Frontend', points: 2750, badges: 10, avatar: 'ER' },
+  ];
+
+  const squadLeaderboard = [
+    { rank: 1, name: 'Squad Pagamentos', members: 6, points: 15420, cards: 12, active: true },
+    { rank: 2, name: 'Squad Data Platform', members: 7, points: 14850, cards: 8, active: true },
+    { rank: 3, name: 'Squad Mobile', members: 4, points: 9200, cards: 5, active: true },
+    { rank: 4, name: 'Squad Checkout', members: 5, points: 8900, cards: 7, active: false },
+    { rank: 5, name: 'Squad Core Banking', members: 8, points: 8750, cards: 9, active: false },
   ];
 
   const achievements = [
@@ -28,6 +45,8 @@ export function GamificationPage() {
       color: '#00D9FF',
       completed: true,
       progress: 100,
+      xpReward: 250,
+      category: 'Qualidade',
     },
     {
       name: 'Mestre Ágil',
@@ -36,6 +55,8 @@ export function GamificationPage() {
       color: '#A855F7',
       completed: true,
       progress: 100,
+      xpReward: 300,
+      category: 'Agilidade',
     },
     {
       name: 'Herói DevOps',
@@ -44,6 +65,8 @@ export function GamificationPage() {
       color: '#F59E0B',
       completed: false,
       progress: 68,
+      xpReward: 500,
+      category: 'DevOps',
     },
     {
       name: 'Revisor de Código Pro',
@@ -52,6 +75,28 @@ export function GamificationPage() {
       color: '#10B981',
       completed: false,
       progress: 82,
+      xpReward: 350,
+      category: 'Qualidade',
+    },
+    {
+      name: 'Zero Downtime Master',
+      description: '10 deploys em produção sem incidentes',
+      icon: Shield,
+      color: '#EF4444',
+      completed: false,
+      progress: 40,
+      xpReward: 600,
+      category: 'SRE',
+    },
+    {
+      name: 'Golden Path Advocate',
+      description: '5 templates de Golden Path utilizados',
+      icon: CheckCircle2,
+      color: '#00D9FF',
+      completed: true,
+      progress: 100,
+      xpReward: 200,
+      category: 'Platform',
     },
   ];
 
@@ -124,10 +169,45 @@ export function GamificationPage() {
           </div>
         </div>
 
+        {/* Squads Leaderboard */}
+        <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
+          <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Ranking de Squads</h2>
+          <div className="space-y-3">
+            {squadLeaderboard.map((squad) => (
+              <div 
+                key={squad.rank}
+                onClick={() => handleSquadClick(squad)}
+                className="flex items-center gap-4 p-3 bg-[#0A0E1A]/50 border border-[#1E293B] rounded-lg hover:border-[#94A3B8]/30 transition-colors cursor-pointer group"
+              >
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
+                  squad.rank === 1 ? 'bg-[#F59E0B] text-white' :
+                  squad.rank === 2 ? 'bg-[#94A3B8] text-white' :
+                  squad.rank === 3 ? 'bg-[#D97706] text-white' :
+                  'bg-[#1E293B] text-[#94A3B8]'
+                }`}>
+                  {squad.rank}
+                </div>
+                <div className="w-10 h-10 rounded-full bg-[#1E293B] flex items-center justify-center text-[#94A3B8]">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm text-[#F1F5F9] font-semibold group-hover:text-[#00D9FF] transition-colors">{squad.name}</div>
+                  <div className="text-xs text-[#94A3B8]">{squad.members} membros • {squad.cards} cards ativos</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg text-[#00D9FF] font-bold">{((squad.points) / 1000).toFixed(1)}k</div>
+                  <div className="text-xs text-[#94A3B8]">pontos</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
         {/* Achievements */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
           <h2 className="text-lg text-[#F1F5F9] font-semibold mb-4">Conquistas</h2>
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
             {achievements.map((achievement, i) => (
               <div 
                 key={i} 
@@ -144,10 +224,19 @@ export function GamificationPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <h3 className="text-sm text-[#F1F5F9] font-semibold">{achievement.name}</h3>
-                      {achievement.completed && (
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm text-[#F1F5F9] font-semibold">{achievement.name}</h3>
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1E293B] text-[#94A3B8]">
+                          {achievement.category}
+                        </span>
+                      </div>
+                      {achievement.completed ? (
                         <span className="text-xs bg-[#10B981]/20 text-[#10B981] px-2 py-0.5 rounded-full">
                           Concluído
+                        </span>
+                      ) : (
+                        <span className="text-xs text-[#F59E0B] font-semibold">
+                          +{achievement.xpReward} XP
                         </span>
                       )}
                     </div>
@@ -231,6 +320,55 @@ export function GamificationPage() {
                 </button>
               )}
             </div>
+          </div>
+        )}
+      </Modal>
+      <Modal isOpen={isSquadModalOpen} onClose={() => setIsSquadModalOpen(false)} title="Detalhes da Squad">
+        {selectedSquad && (
+          <div className="space-y-4">
+             <div className="p-4 bg-[#0A0E1A] border border-[#1E293B] rounded-xl flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#00D9FF]/20 flex items-center justify-center">
+                   <Users className="w-6 h-6 text-[#00D9FF]" />
+                </div>
+                <div>
+                   <h3 className="text-lg text-[#F1F5F9] font-bold">{selectedSquad.name}</h3>
+                   <p className="text-sm text-[#94A3B8]">{selectedSquad.points} Pontos Totais</p>
+                </div>
+             </div>
+
+             <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 bg-[#131827] rounded-lg border border-[#1E293B] text-center">
+                   <div className="text-2xl font-bold text-[#F1F5F9]">{selectedSquad.members}</div>
+                   <div className="text-xs text-[#94A3B8]">Membros Ativos</div>
+                </div>
+                <div className="p-3 bg-[#131827] rounded-lg border border-[#1E293B] text-center">
+                   <div className="text-2xl font-bold text-[#10B981]">{selectedSquad.cards}</div>
+                   <div className="text-xs text-[#94A3B8]">Tasks em Andamento</div>
+                </div>
+             </div>
+
+             <div className="border-t border-[#1E293B] pt-4">
+                <h4 className="text-sm text-[#F1F5F9] font-semibold mb-3">Membros em Destaque</h4>
+                <div className="space-y-2">
+                   {[1, 2, 3].map((i) => (
+                      <div key={i} className="flex items-center gap-3 p-2 hover:bg-[#1E293B]/50 rounded-lg transition-colors">
+                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#A855F7]"></div>
+                         <div className="flex-1">
+                            <div className="text-sm text-[#F1F5F9]">Membro da Squad {i}</div>
+                            <div className="text-xs text-[#94A3B8]">Senior Engineer</div>
+                         </div>
+                         <div className="text-xs font-bold text-[#F59E0B]">Nível {10 - i}</div>
+                      </div>
+                   ))}
+                </div>
+             </div>
+
+             <button
+               onClick={() => setIsSquadModalOpen(false)}
+               className="w-full bg-[#1E293B] hover:bg-[#334155] text-white py-2 rounded-lg transition-colors"
+             >
+               Fechar
+             </button>
           </div>
         )}
       </Modal>
