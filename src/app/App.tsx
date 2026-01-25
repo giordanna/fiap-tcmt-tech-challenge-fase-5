@@ -9,7 +9,6 @@ import { PlanningPage } from '@/app/components/pages/PlanningPage';
 import { GovernancePage } from '@/app/components/pages/GovernancePage';
 import { UniversalIngestionPage } from '@/app/components/pages/UniversalIngestionPage';
 import { GoldenPathsPage } from '@/app/components/pages/GoldenPathsPage';
-import { ResourcesPage } from '@/app/components/pages/ResourcesPage';
 import { FinOpsPage } from '@/app/components/pages/FinOpsPage';
 import { GamificationPage } from '@/app/components/pages/GamificationPage';
 import { ExecutiveROIPage } from '@/app/components/pages/ExecutiveROIPage';
@@ -81,8 +80,6 @@ export default function App() {
         return <UniversalIngestionPage />;
       case 'golden-paths':
         return <GoldenPathsPage onDeploy={handleAddResource} resources={resources} />;
-      case 'resources':
-        return <ResourcesPage resources={resources} />;
       case 'people-squads':
         return <PeopleSquadsPage />;
       case 'finops':
