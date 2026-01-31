@@ -1,7 +1,8 @@
-import { Target, TrendingUp, DollarSign, Users, Zap, Plus, Sparkles } from 'lucide-react';
+import { Target, TrendingUp, DollarSign, Users, Zap, Plus, Sparkles, Clock, CheckCircle2, PlayCircle, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
+import { DeliveryPipeline } from '@/app/components/DeliveryPipeline';
 
 export function StrategyPage() {
   const { showToast } = useToast();
@@ -15,6 +16,63 @@ export function StrategyPage() {
     { name: 'Complexidade Técnica', weight: 15, baseline: 5, inverse: true },
     { name: 'Tempo até o Lançamento', weight: 15, baseline: 6 },
   ];
+
+  // Project portfolio with status and teams
+  const projectPortfolio = [
+    {
+      id: 'A',
+      name: 'Modernização da Interface de Serviços',
+      description: 'Migração para Kong + Service Mesh',
+      status: 'em-andamento' as const,
+      progress: 65,
+      team: 'Squad Pagamentos',
+      deadline: '15 Mar 2026',
+      color: '#00D9FF',
+    },
+    {
+      id: 'B',
+      name: 'Motor de Análise Preditiva',
+      description: 'Aprendizado de máquina para previsão de demanda',
+      status: 'em-deploy' as const,
+      progress: 90,
+      team: 'Squad Data Platform',
+      deadline: '28 Fev 2026',
+      color: '#A855F7',
+    },
+    {
+      id: 'C',
+      name: 'Portal de Autoatendimento',
+      description: 'Automação de caminhos padrão',
+      status: 'a-fazer' as const,
+      progress: 0,
+      team: 'Squad Mobile',
+      deadline: '30 Abr 2026',
+      color: '#10B981',
+    },
+    {
+      id: 'D',
+      name: 'Reforço de Segurança',
+      description: 'Implementação de WAF e SIEM',
+      status: 'concluido' as const,
+      progress: 100,
+      team: 'Squad Segurança',
+      deadline: '10 Jan 2026',
+      color: '#F59E0B',
+    },
+  ];
+
+  const getStatusConfig = (status: 'a-fazer' | 'em-andamento' | 'em-deploy' | 'concluido') => {
+    switch (status) {
+      case 'a-fazer':
+        return { label: 'A Fazer', color: '#94A3B8', icon: Clock, bg: '#94A3B8' };
+      case 'em-andamento':
+        return { label: 'Em Andamento', color: '#00D9FF', icon: PlayCircle, bg: '#00D9FF' };
+      case 'em-deploy':
+        return { label: 'Em Deploy', color: '#A855F7', icon: AlertCircle, bg: '#A855F7' };
+      case 'concluido':
+        return { label: 'Concluído', color: '#10B981', icon: CheckCircle2, bg: '#10B981' };
+    }
+  };
 
   const projects = [
     {
@@ -61,6 +119,14 @@ export function StrategyPage() {
     setNewProjectName('');
   };
 
+  // Stats for portfolio
+  const portfolioStats = {
+    total: projectPortfolio.length,
+    emAndamento: projectPortfolio.filter(p => p.status === 'em-andamento').length,
+    emDeploy: projectPortfolio.filter(p => p.status === 'em-deploy').length,
+    concluidos: projectPortfolio.filter(p => p.status === 'concluido').length,
+  };
+
   return (
     <div className="max-w-[1800px] mx-auto space-y-6">
       {/* Header */}
@@ -71,8 +137,8 @@ export function StrategyPage() {
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Estratégia & Priorização</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Gestão de projetos com análise comparativa</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Projetos</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Portfólio de projetos e priorização inteligente</p>
             </div>
           </div>
           <button 
@@ -90,10 +156,10 @@ export function StrategyPage() {
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'ROI Médio Projetado', value: '247%', icon: DollarSign, color: '#10B981' },
-          { label: 'Alinhamento OKRs', value: '94%', icon: Target, color: '#00D9FF' },
-          { label: 'Projetos Ativos', value: '8', icon: TrendingUp, color: '#A855F7' },
-          { label: 'NPS Interno', value: '8.5', icon: Users, color: '#F59E0B' },
+          { label: 'Total de Projetos', value: portfolioStats.total.toString(), icon: Target, color: '#00D9FF' },
+          { label: 'Em Andamento', value: portfolioStats.emAndamento.toString(), icon: PlayCircle, color: '#A855F7' },
+          { label: 'Em Deploy', value: portfolioStats.emDeploy.toString(), icon: AlertCircle, color: '#F59E0B' },
+          { label: 'Concluídos', value: portfolioStats.concluidos.toString(), icon: CheckCircle2, color: '#10B981' },
         ].map((kpi, i) => (
           <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-5">
             <div className="flex items-center gap-2 mb-3">
@@ -104,6 +170,79 @@ export function StrategyPage() {
           </div>
         ))}
       </div>
+
+      {/* Project Portfolio Cards */}
+      <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
+        <div className="mb-6">
+          <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Portfólio de Projetos</h2>
+          <p className="text-sm text-[#94A3B8]">Visão geral dos projetos ativos e seus status</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {projectPortfolio.map((project) => {
+            const statusConfig = getStatusConfig(project.status);
+            const StatusIcon = statusConfig.icon;
+            
+            return (
+              <div 
+                key={project.id}
+                className="bg-[#0A0E1A]/50 border border-[#1E293B] rounded-xl p-5 hover:border-[#94A3B8]/30 transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div 
+                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg"
+                      style={{ backgroundColor: project.color }}
+                    >
+                      {project.id}
+                    </div>
+                    <div>
+                      <h3 className="text-sm text-[#F1F5F9] font-semibold">{project.name}</h3>
+                      <p className="text-xs text-[#94A3B8]">{project.description}</p>
+                    </div>
+                  </div>
+                  <div 
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold"
+                    style={{ backgroundColor: `${statusConfig.bg}20`, color: statusConfig.color }}
+                  >
+                    <StatusIcon className="w-3.5 h-3.5" />
+                    {statusConfig.label}
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mb-3">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-[#94A3B8]">Progresso</span>
+                    <span className="text-[#F1F5F9] font-medium">{project.progress}%</span>
+                  </div>
+                  <div className="h-1.5 bg-[#1E293B] rounded-full overflow-hidden">
+                    <div 
+                      className="h-full rounded-full transition-all"
+                      style={{ width: `${project.progress}%`, backgroundColor: project.color }}
+                    />
+                  </div>
+                </div>
+
+                {/* Team & Deadline */}
+                <div className="flex items-center justify-between text-xs pt-3 border-t border-[#1E293B]">
+                  <div className="flex items-center gap-1.5 text-[#94A3B8]">
+                    <Users className="w-3.5 h-3.5" />
+                    <span>{project.team}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[#94A3B8]">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>{project.deadline}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Delivery Pipeline */}
+      <DeliveryPipeline />
 
       {/* Pugh Matrix */}
       <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">

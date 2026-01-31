@@ -32,8 +32,8 @@ export function ExecutiveROIPage() {
             <BarChart3 className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Painel de ROI Executivo</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Métricas de valor de negócio e otimização de custos</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Dashboard Executivo</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Visão consolidada de valor gerado pela transformação digital</p>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ export function ExecutiveROIPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ROI Chart */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">ROI Analysis</h3>
+          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Análise de ROI</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={roiData}>
@@ -81,8 +81,8 @@ export function ExecutiveROIPage() {
                   formatter={(value: number) => `R$ ${value.toLocaleString()}`}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px' }} />
-                <Bar dataKey="savings" fill="#10B981" name="Savings" radius={[8, 8, 0, 0]} />
-                <Bar dataKey="investment" fill="#EF4444" name="Investment" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="savings" fill="#10B981" name="Economia" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="investment" fill="#EF4444" name="Investimento" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -90,7 +90,7 @@ export function ExecutiveROIPage() {
 
         {/* Productivity Chart */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Productivity Metrics</h3>
+          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Métricas de Produtividade</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={productivityData}>
@@ -113,7 +113,7 @@ export function ExecutiveROIPage() {
                   dataKey="deployments" 
                   stroke="#00D9FF" 
                   strokeWidth={3}
-                  name="Deployments"
+                  name="Implantações"
                   dot={{ fill: '#00D9FF', r: 4 }}
                 />
                 <Line 
@@ -121,7 +121,7 @@ export function ExecutiveROIPage() {
                   dataKey="incidents" 
                   stroke="#EF4444" 
                   strokeWidth={3}
-                  name="Incidents"
+                  name="Incidentes"
                   dot={{ fill: '#EF4444', r: 4 }}
                 />
               </LineChart>

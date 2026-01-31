@@ -35,8 +35,8 @@ export function FinOpsPage() {
             <DollarSign className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">FinOps & Observabilidade</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Otimização de custos e monitoramento</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Custos Cloud</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Gestão financeira de recursos em nuvem</p>
           </div>
         </div>
       </div>

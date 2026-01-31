@@ -25,18 +25,11 @@ export function UniversalIngestionPage() {
       logo: 'https://logosandtypes.com/wp-content/uploads/2020/12/servicenow.svg'
     },
     { 
-      name: 'Azure Boards', 
+      name: 'Azure DevOps', 
       status: 'active', 
       lastSync: 'há 5 min',
       records: '892',
-      logo: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/azure-boards-icon.svg'
-    },
-    { 
-      name: 'Jira', 
-      status: 'syncing', 
-      lastSync: 'atualizando...',
-      records: '2,341',
-      logo: 'https://cdn.worldvectorlogo.com/logos/jira-1.svg'
+      logo: 'https://tbxtech.com.br/wp-content/uploads/2024/11/1_uE6eLcrESeBC1E9hwKvuxQ.webp'
     },
     { 
       name: 'GitHub', 
@@ -46,18 +39,18 @@ export function UniversalIngestionPage() {
       logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-2.svg'
     },
     { 
-      name: 'GitLab', 
-      status: 'error', 
-      lastSync: 'há 1 hora',
-      records: '0',
-      logo: 'https://cdn.worldvectorlogo.com/logos/gitlab.svg'
+      name: 'Dynatrace', 
+      status: 'active', 
+      lastSync: 'há 30 seg',
+      records: '24,892',
+      logo: 'https://companieslogo.com/img/orig/DT-89e31c0c.png?t=1720244491'
     },
     { 
-      name: 'PagerDuty', 
-      status: 'active', 
-      lastSync: 'há 10 min',
-      records: '156',
-      logo: 'https://play-lh.googleusercontent.com/E-zhAf4KJ6JDDXmQfQxBprn2sATGYUMkOEqLQX5HAQQtiwDZJg4c8sQd7deb6nCZCwU=w240-h480-rw'
+      name: 'Snowflake', 
+      status: 'syncing', 
+      lastSync: 'atualizando...',
+      records: '156,234',
+      logo: 'https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/snowflake-color.png'
     },
   ];
 
@@ -77,8 +70,8 @@ export function UniversalIngestionPage() {
               <Database className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Hub de Ingestão Universal</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Central de dados integrada com todas as ferramentas</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Hub de Dados</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Conexões com ferramentas que alimentam a plataforma</p>
             </div>
           </div>
           <button 
@@ -187,11 +180,11 @@ export function UniversalIngestionPage() {
               status: 'duplicidade',
               tags: ['#performance', '#relatórios'],
               confianca: 87,
-              duplicidade: 'JIRA-4521',
+              duplicidade: 'ADO-4521',
             },
             {
-              id: 'JIRA-4589',
-              origem: 'Jira',
+              id: 'ADO-4589',
+              origem: 'Azure DevOps',
               titulo: 'Implementar novo endpoint de autenticação OAuth2',
               status: 'triado',
               tags: ['#segurança', '#api', '#backlog'],
@@ -307,11 +300,11 @@ export function UniversalIngestionPage() {
         <div className="mt-6 pt-4 border-t border-[#1E293B] grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-[#10B981]">847</div>
-            <div className="text-xs text-[#94A3B8]">Triadas Hoje</div>
+            <div className="text-xs text-[#94A3B8]">Triagens Hoje</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-[#F59E0B]">23</div>
-            <div className="text-xs text-[#94A3B8]">Demandas Gêmeas</div>
+            <div className="text-xs text-[#94A3B8]">Demandas duplicadas</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-[#A855F7]">91%</div>
@@ -391,11 +384,11 @@ export function UniversalIngestionPage() {
                 <SelectValue placeholder="Selecione" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="New Relic">New Relic</SelectItem>
-                <SelectItem value="Datadog">Datadog</SelectItem>
-                <SelectItem value="AWS">AWS CloudWatch</SelectItem>
-                <SelectItem value="Jenkins">Jenkins</SelectItem>
-                <SelectItem value="SonarQube">SonarQube</SelectItem>
+                <SelectItem value="Terraform">Terraform</SelectItem>
+                <SelectItem value="Azure Functions">Azure Functions</SelectItem>
+                <SelectItem value="Azure Logic Apps">Azure Logic Apps</SelectItem>
+                <SelectItem value="Qlik Sense">Qlik Sense</SelectItem>
+                <SelectItem value="Backstage">Backstage</SelectItem>
                 <SelectItem value="Webhook Customizado">Webhook Customizado</SelectItem>
               </SelectContent>
             </Select>

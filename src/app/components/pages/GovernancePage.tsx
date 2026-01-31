@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { AutoRemediationWidget } from '@/app/components/AutoRemediationWidget';
 
 export function GovernancePage() {
   const { showToast } = useToast();
@@ -85,9 +86,9 @@ export function GovernancePage() {
   const upcomingGMUDs = [
     {
       id: 'GMUD-2026-002',
-      title: 'Deploy API Gateway v2.5.0',
+      title: 'Deploy Azure API Management v2.5.0',
       date: '07 Jan, 19:00',
-      system: 'API Gateway',
+      system: 'Azure API Management',
       impact: 'Médio',
       urgency: 'Normal',
       riskScore: 45,
@@ -97,9 +98,9 @@ export function GovernancePage() {
     },
     {
       id: 'GMUD-2026-005',
-      title: 'Migração Database PostgreSQL 15',
+      title: 'Migração Azure SQL Database',
       date: '14 Jan, 20:00',
-      system: 'Banco de Dados',
+      system: 'Azure SQL',
       impact: 'Alto',
       urgency: 'Alta',
       riskScore: 85,
@@ -109,9 +110,9 @@ export function GovernancePage() {
     },
     {
       id: 'GMUD-2026-007',
-      title: 'Atualização Kubernetes 1.28',
+      title: 'Atualização Azure AKS 1.28',
       date: '20 Jan, 18:00',
-      system: 'Infraestrutura',
+      system: 'Azure AKS',
       impact: 'Alto',
       urgency: 'Normal',
       riskScore: 65,
@@ -137,9 +138,9 @@ export function GovernancePage() {
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Governança & GMUD</h1>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Mudanças</h1>
               <p className="text-sm text-[#94A3B8] mt-1">
-                Integrado com <span className="text-[#00D9FF]">ServiceNow</span>
+                Agendamento e calendário de deploys
               </p>
             </div>
           </div>
@@ -435,6 +436,9 @@ export function GovernancePage() {
           </div>
         </div>
       </Modal>
+
+      {/* Auto-Remediation Section */}
+      <AutoRemediationWidget />
     </div>
   );
 }

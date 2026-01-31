@@ -110,8 +110,8 @@ export function GamificationPage() {
               <Trophy className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Gamificação</h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Conquistas e ranking do time</p>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Desempenho</h1>
+              <p className="text-sm text-[#94A3B8] mt-1">Acompanhamento de metas e conquistas dos times</p>
             </div>
           </div>
         </div>

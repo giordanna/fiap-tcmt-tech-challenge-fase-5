@@ -4,6 +4,7 @@ import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 import { DeployedResource } from '@/app/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
+import { QualityGateWidget } from '@/app/components/QualityGateWidget';
 
 interface Path {
   id: string;
@@ -54,66 +55,66 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
   // const dbs = resources.filter(r => r.category === 'database'); 
 
   const repos = [
-    { id: '1', name: 'fiap-tech-challenge', type: 'GitHub', logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-2.svg', stars: 12, lastUpdate: '2h ago' },
-    { id: '2', name: 'payment-gateway', type: 'GitLab', logo: 'https://cdn.worldvectorlogo.com/logos/gitlab.svg', stars: 5, lastUpdate: '1d ago' },
-    { id: '3', name: 'auth-service', type: 'GitHub', logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-2.svg', stars: 8, lastUpdate: '3d ago' },
+    { id: '1', name: 'valueflow-backend', type: 'Azure Repos', logo: 'https://www.freelogovectors.net/wp-content/uploads/2022/03/azure_repos_logo_freelogovectors.net_.png', stars: 12, lastUpdate: '2h atrás' },
+    { id: '2', name: 'payment-gateway', type: 'GitHub', logo: 'https://cdn.worldvectorlogo.com/logos/github-icon-2.svg', stars: 5, lastUpdate: '1d atrás' },
+    { id: '3', name: 'auth-service', type: 'Azure Repos', logo: 'https://www.freelogovectors.net/wp-content/uploads/2022/03/azure_repos_logo_freelogovectors.net_.png', stars: 8, lastUpdate: '3d atrás' },
   ];
 
   const dbMocks = [
-      { id: 'db1', name: 'CustomerDB PROD', type: 'PostgreSQL (RDS)', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg', env: 'production', status: 'running', health: 'healthy', createdAt: '2026-01-15' },
-      { id: 'db2', name: 'CustomerDB STG', type: 'PostgreSQL (RDS)',logo: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg',  env: 'staging', status: 'running', health: 'healthy', createdAt: '2025-02-20' },
+      { id: 'db1', name: 'CustomerDB PROD', type: 'Azure SQL', logo: 'https://symbols.getvecta.com/stencil_27/8_sql-database.80d349c4d9.svg', env: 'production', status: 'running', health: 'healthy', createdAt: '2026-01-15' },
+      { id: 'db2', name: 'CustomerDB STG', type: 'Azure SQL', logo: 'https://symbols.getvecta.com/stencil_27/8_sql-database.80d349c4d9.svg',  env: 'staging', status: 'running', health: 'healthy', createdAt: '2025-02-20' },
   ];
 
   const paths: Path[] = [
     {
       id: 'p1',
-      name: 'Kubernetes Cluster',
-      description: 'Cluster EKS com 3 nodes, Istio service mesh, Prometheus/Grafana e auto-scaling configurado',
+      name: 'Kubernetes Cluster (AKS)',
+      description: 'Cluster Azure AKS com 3 nodes, Istio service mesh, Prometheus e auto-scaling configurado via Terraform',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg',
       color: '#00D9FF',
       uses: 47,
       avgTime: '12 min',
       custoMensal: 850,
-      techStack: ['AWS EKS', 'Istio', 'Prometheus', 'Grafana'],
+      techStack: ['Azure AKS', 'Istio', 'Prometheus', 'Dynatrace'],
       requiresApproval: true,
       category: 'service'
     },
     {
       id: 'p2',
-      name: 'API Gateway + Auth',
-      description: 'Kong Gateway com OAuth2, rate limiting, WAF e integração com Azure AD',
-      logo: 'https://avatars.githubusercontent.com/u/962416',
+      name: 'Azure API Management',
+      description: 'API Gateway com OAuth2, rate limiting, WAF e integração com Azure AD',
+      logo: 'https://img.icons8.com/?size=256&id=QaejVa62EGjF&format=png&color=228BE6',
       color: '#A855F7',
       uses: 34,
       avgTime: '8 min',
       custoMensal: 280,
-      techStack: ['Kong', 'OAuth2', 'Azure AD', 'AWS WAF'],
+      techStack: ['Azure API Management', 'OAuth2', 'Azure AD'],
       requiresApproval: false,
       category: 'service'
     },
     {
         id: 'p3',
-      name: 'Microsserviço .NET + RDS',
-      description: '.NET 8 com PostgreSQL RDS, CI/CD completo, Health Checks e OpenTelemetry',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Microsoft_.NET_logo.png',
+      name: 'Microsserviço .NET + Azure SQL',
+      description: '.NET 8 com Azure SQL, CI/CD via Azure DevOps Pipelines, Health Checks e Dynatrace',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg',
       color: '#10B981',
       uses: 89,
       avgTime: '15 min',
       custoMensal: 420,
-      techStack: ['.NET 8', 'PostgreSQL', 'GitHub Actions', 'OpenTelemetry'],
+      techStack: ['.NET 8', 'Azure SQL', 'Azure DevOps Pipelines', 'Dynatrace'],
       requiresApproval: false,
       category: 'service'
     },
     {
       id: 'p4',
-      name: 'Banco de Dados Enterprise',
-      description: 'PostgreSQL Multi-AZ com backup automático, read replicas e criptografia em repouso',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg',
+      name: 'Azure SQL Database',
+      description: 'Azure SQL com Geo-Replication, backup automático, read replicas e criptografia via Azure Key Vault',
+      logo: 'https://symbols.getvecta.com/stencil_28/61_sql-database-generic.90b41636a8.svg',
       color: '#F59E0B',
       uses: 56,
       avgTime: '10 min',
       custoMensal: 1200,
-      techStack: ['PostgreSQL', 'Multi-AZ', 'AWS KMS', 'Point-in-time Recovery'],
+      techStack: ['Azure SQL', 'Geo-Replication', 'Azure Key Vault', 'Point-in-time Recovery'],
       requiresApproval: true,
       category: 'database'
     },
@@ -199,15 +200,15 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                 <Workflow className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl text-[#F1F5F9] font-semibold">Golden Paths & Recursos</h1>
-                <p className="text-sm text-[#94A3B8] mt-1">Catálogo de soluções padronizadas e gerenciamento de recursos</p>
+                <h1 className="text-2xl text-[#F1F5F9] font-semibold">Caminhos Padrão</h1>
+                <p className="text-sm text-[#94A3B8] mt-1">Modelos de infraestrutura aprovados para deploy autônomo</p>
               </div>
             </div>
             
             <div className="flex items-center gap-4">
                <TabsList className="bg-[#0A0E1A] border border-[#1E293B]">
                 <TabsTrigger value="catalog">Catálogo</TabsTrigger>
-                <TabsTrigger value="resources">Meus Recursos</TabsTrigger>
+                <TabsTrigger value="resources">Recursos Implantados</TabsTrigger>
               </TabsList>
 
               <button 
@@ -345,8 +346,8 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                                   </div>
                               </div>
                               <div className="flex items-center gap-4 text-xs text-[#94A3B8] pt-2 border-t border-[#1E293B]">
-                                  <span>Last update: {repo.lastUpdate}</span>
-                                  <span>Stars: {repo.stars}</span>
+                                  <span>Atualização: {repo.lastUpdate}</span>
+                                  <span>Favoritos: {repo.stars}</span>
                               </div>
                           </div>
                       ))}
@@ -361,7 +362,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                                     <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Recurso</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Ambiente</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Status</th>
-                                    <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Health</th>
+                                    <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Saúde</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase">Criado em</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-[#94A3B8] uppercase text-right">Ações</th>
                                 </tr>
@@ -676,6 +677,9 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
           </div>
         </div>
       </Modal>
+
+      {/* Quality Gate Section */}
+      <QualityGateWidget />
     </div>
   );
 }

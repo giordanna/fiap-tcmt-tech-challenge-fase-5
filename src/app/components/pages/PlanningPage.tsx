@@ -117,8 +117,8 @@ export function PlanningPage() {
             <Calendar className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Planejamento & Capacidade</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Gestão de recursos e dependências</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Times</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Saúde das squads e alocação de pessoas</p>
           </div>
         </div>
       </div>
@@ -184,7 +184,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-FIN-001',
                     custoMensal: 'R$ 48.500',
                   },
@@ -194,7 +194,7 @@ export function PlanningPage() {
                     health: 'atencao',
                     cardsParados: 2,
                     dependenciasVioladas: 1,
-                    jiraStatus: 'At Risk',
+                    adoStatus: 'At Risk',
                     centroCusto: 'CC-COM-002',
                     custoMensal: 'R$ 42.300',
                   },
@@ -204,7 +204,7 @@ export function PlanningPage() {
                     health: 'critico',
                     cardsParados: 4,
                     dependenciasVioladas: 3,
-                    jiraStatus: 'Blocked',
+                    adoStatus: 'Blocked',
                     centroCusto: 'CC-FIN-003',
                     custoMensal: 'R$ 72.100',
                   },
@@ -214,7 +214,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-DIG-001',
                     custoMensal: 'R$ 35.800',
                   },
@@ -224,7 +224,7 @@ export function PlanningPage() {
                     health: 'atencao',
                     cardsParados: 1,
                     dependenciasVioladas: 2,
-                    jiraStatus: 'At Risk',
+                    adoStatus: 'At Risk',
                     centroCusto: 'CC-SEC-001',
                     custoMensal: 'R$ 28.900',
                   },
@@ -234,7 +234,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-DAT-001',
                     custoMensal: 'R$ 65.200',
                   },
@@ -261,14 +261,14 @@ export function PlanningPage() {
                       }`}></div>
                     </div>
 
-                    {/* Jira Status Badge */}
+                    {/* Azure DevOps Status Badge */}
                     <div className="mb-3 mt-auto">
                       <span className={`text-xs px-2 py-1 rounded ${
-                        squad.jiraStatus === 'Blocked' ? 'bg-[#EF4444]/20 text-[#EF4444]' :
-                        squad.jiraStatus === 'At Risk' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
+                        squad.adoStatus === 'Blocked' ? 'bg-[#EF4444]/20 text-[#EF4444]' :
+                        squad.adoStatus === 'At Risk' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
                         'bg-[#10B981]/20 text-[#10B981]'
                       }`}>
-                        Jira: {squad.jiraStatus}
+                        ADO: {squad.adoStatus}
                       </span>
                     </div>
 
