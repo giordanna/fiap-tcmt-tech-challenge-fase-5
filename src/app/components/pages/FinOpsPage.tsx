@@ -1,6 +1,6 @@
 import { FinOpsChart } from '@/app/components/FinOpsChart';
 import { DollarSign, TrendingDown, AlertTriangle, Sparkles } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
@@ -102,6 +102,10 @@ export function FinOpsPage() {
                 labelStyle={{ color: '#94A3B8' }}
                 itemStyle={{ color: '#F1F5F9' }}
               />
+              <Legend 
+                wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }}
+                formatter={(value) => <span style={{ color: '#94A3B8' }}>{value}</span>}
+              />
               <Area 
                 type="monotone" 
                 dataKey="dev" 
@@ -132,7 +136,7 @@ export function FinOpsPage() {
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1">
-                <div className="text-xs text-[#A855F7] font-semibold mb-1">RECOMENDAÇÃO IA</div>
+                <div className="text-xs text-[#A855F7] font-semibold mb-1">RECOMENDAÇÃO</div>
                 <p className="text-sm text-[#F1F5F9] mb-2">
                   Ambiente de homologação possui <span className="text-[#F59E0B]">recursos sem uso</span> consumindo R$ 890/mês
                 </p>
@@ -213,7 +217,7 @@ export function FinOpsPage() {
               <h4 className="text-sm text-[#F1F5F9] font-bold">Recursos sem Uso Detectados</h4>
             </div>
             <p className="text-sm text-[#94A3B8] mb-3">
-              A IA detectou 3 servidores no ambiente de homologação com uso de processador menor que 5% nos últimos 7 dias.
+              Foi detectado 3 servidores no ambiente de homologação com uso de processador menor que 5% nos últimos 7 dias.
             </p>
             <div className="flex items-center justify-between text-xs bg-[#1E293B] p-2 rounded">
               <span className="text-[#94A3B8]">Custo Desperdiçado:</span>

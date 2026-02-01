@@ -200,8 +200,8 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                 <Workflow className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl text-[#F1F5F9] font-semibold">Caminhos Padrão</h1>
-                <p className="text-sm text-[#94A3B8] mt-1">Modelos de infraestrutura aprovados para deploy autônomo</p>
+                <h1 className="text-2xl text-[#F1F5F9] font-semibold">Golden Paths</h1>
+                <p className="text-sm text-[#94A3B8] mt-1">Templates de infraestrutura pré-aprovados para provisionamento ágil</p>
               </div>
             </div>
             
@@ -216,7 +216,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                 onClick={() => setIsNewPathModalOpen(true)}
                 className="px-4 py-2 bg-[#A855F7] justify-center hover:bg-[#9333EA] text-white rounded-lg transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap"
               >
-                <span>Solicitar Novo Caminho</span>
+                <span>Solicitar Novo Template</span>
                 <Plus className="w-4 h-4" />
               </button>
             </div>
@@ -226,9 +226,9 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
              {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 {[
-                { label: 'Total de Caminhos', value: '24', color: '#A855F7' },
-                { label: 'Publicações Ativas', value: '142', color: '#00D9FF' },
-                { label: 'Tempo Médio de Publicação', value: '11m', color: '#10B981' },
+                { label: 'Total de Templates', value: '24', color: '#A855F7' },
+                { label: 'Recursos Provisionados', value: '142', color: '#00D9FF' },
+                { label: 'Tempo Médio de Deploy', value: '11m', color: '#10B981' },
                 { label: 'Taxa de Sucesso', value: '99.2%', color: '#F59E0B' },
                 ].map((stat, i) => (
                 <div key={i} className="bg-[#131827] border border-[#1E293B] rounded-xl p-4">
@@ -504,7 +504,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
             <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#00D9FF]/10 border border-[#A855F7]/30 rounded-xl p-4">
               <div className="flex items-center gap-2 mb-3">
                 <DollarSign className="w-5 h-5 text-[#A855F7]" />
-                <span className="text-sm font-semibold text-[#F1F5F9]">Estimativa de Custo (FinOps)</span>
+                <span className="text-sm font-semibold text-[#F1F5F9]">Estimativa de Custo</span>
               </div>
               
               <div className="grid grid-cols-2 gap-4 mb-4">
@@ -526,7 +526,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
               <div className="bg-[#10B981]/10 border border-[#10B981]/30 rounded-lg p-3 flex items-start gap-2">
                 <Sparkles className="w-4 h-4 text-[#10B981] flex-shrink-0 mt-0.5" />
                 <div className="text-xs">
-                  <span className="text-[#10B981] font-semibold">Sugestão IA: </span>
+                  <span className="text-[#10B981] font-semibold">Sugestão: </span>
                   <span className="text-[#94A3B8]">
                     Use instâncias Spot para economizar até 70% no ambiente de {selectedEnv === 'development' ? 'desenvolvimento' : selectedEnv === 'staging' ? 'homologação' : 'produção'}.
                     {selectedPath?.custoMensal && selectedPath.custoMensal > 800 && ' Considere também Reserved Instances para workloads estáveis.'}
@@ -543,7 +543,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
                   <div>
                     <div className="text-sm font-semibold text-[#F59E0B] mb-1">Approval Gate Necessário</div>
                     <p className="text-xs text-[#94A3B8] mb-3">
-                      Este template possui custo elevado e requer aprovação prévia do FinOps Team antes do provisionamento.
+                      Este template possui custo elevado e requer aprovação prévia do time de FinOps antes do provisionamento.
                     </p>
                     {!approvalRequested ? (
                       <button
@@ -639,7 +639,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
       </Modal>
 
       {/* New Path Modal */}
-      <Modal isOpen={isNewPathModalOpen} onClose={() => setIsNewPathModalOpen(false)} title="Solicitar Novo Caminho Padrão">
+      <Modal isOpen={isNewPathModalOpen} onClose={() => setIsNewPathModalOpen(false)} title="Solicitar Novo Template Padrão">
         <div className="space-y-4">
           <div>
             <label className="block text-sm text-[#94A3B8] mb-1">Nome do Template</label>
@@ -666,7 +666,7 @@ export function GoldenPathsPage({ onDeploy, resources }: GoldenPathsPageProps) {
               onClick={handleCreatePath}
               className="flex-1 bg-[#A855F7] hover:bg-[#9333EA] text-white py-2 rounded-lg transition-colors font-semibold"
             >
-              Solicitar Caminho
+              Solicitar Template
             </button>
             <button
               onClick={() => setIsNewPathModalOpen(false)}

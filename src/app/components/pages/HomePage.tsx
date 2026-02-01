@@ -1,9 +1,5 @@
-import { AICopilotWidget } from '@/app/components/AICopilotWidget';
-import { AICopilotExpanded } from '@/app/components/AICopilotExpanded';
-import { ComplianceWidget } from '@/app/components/ComplianceWidget';
 import { Users } from 'lucide-react';
 import { MetricsGauges } from '@/app/components/MetricsGauges';
-import { PrioritizedBacklog } from '@/app/components/PrioritizedBacklog';
 import { ExecutiveSummary } from '@/app/components/ExecutiveSummary';
 
 export function HomePage() {
@@ -49,18 +45,6 @@ export function HomePage() {
 
       {/* DORA Metrics Row */}
       <MetricsGauges />
-
-      {/* Prioritized Backlog */}
-      <PrioritizedBacklog />
-
-      {/* AI Copilot - Main Actionable Widget */}
-      <AICopilotWidget />
-
-      {/* AI & Compliance Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AICopilotExpanded />
-        <ComplianceWidget />
-      </div>
     </div>
   );
 }

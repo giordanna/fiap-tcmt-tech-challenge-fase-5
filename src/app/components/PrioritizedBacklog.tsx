@@ -97,9 +97,9 @@ function Column({ title, cards, color, onCardClick }: ColumnProps) {
           <span className="text-xs text-[#94A3B8]">({cards.length})</span>
         </div>
         <div className="text-xs text-[#94A3B8]">
-          {title === 'Lista de Tarefas Priorizada (IA)' && 'Prioridade sugerida pela IA'}
-          {title === 'Em Progresso (Ciclo 26)' && 'Ciclo atual de trabalho'}
-          {title === 'Pronto para Testes' && 'Aguardando testes'}
+          {title === 'Lista de Tarefas Priorizada (IA)' && 'Ordem sugerida pela IA'}
+          {title === 'Em Progresso (Ciclo 26)' && 'Tarefas do ciclo atual'}
+          {title === 'Pronto para Testes' && 'Tarefas aguardando testes'}
         </div>
       </div>
 
@@ -236,7 +236,7 @@ export function PrioritizedBacklog() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Lista de Tarefas Priorizada</h2>
-          <p className="text-sm text-[#94A3B8]">Organização inteligente de tarefas</p>
+          <p className="text-sm text-[#94A3B8]">Organização inteligente com sugestões de priorização</p>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <button className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#1E293B] text-[#F1F5F9] rounded-lg text-sm transition-colors">
@@ -388,7 +388,7 @@ export function PrioritizedBacklog() {
               <span className="text-sm font-semibold text-[#00D9FF]">Prévia da Análise Inteligente</span>
             </div>
             <p className="text-xs text-[#94A3B8]">
-              Ao criar, a IA analisará automaticamente a complexidade e sugerirá a melhor posição na lista baseada no ritmo do time.
+              Ao criar, a IA analisará automaticamente a complexidade e sugerirá a melhor posição na lista baseada no ritmo da equipe.
             </p>
           </div>
           <div className="flex gap-3 pt-2">

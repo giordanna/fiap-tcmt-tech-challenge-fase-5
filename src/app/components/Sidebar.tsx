@@ -11,6 +11,8 @@ import {
   Home,
   X,
   BookOpen,
+  Activity,
+  Brain,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -36,24 +38,30 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
       label: 'Visão Geral',
       items: [
         { id: 'home', icon: Home, label: 'Início' },
-        { id: 'roi', icon: BarChart3, label: 'Dashboard Executivo' },
       ]
     },
     {
-      label: 'Gestão Operacional',
+      label: 'Gestão de Projetos',
       items: [
         { id: 'strategy', icon: FolderKanban, label: 'Projetos' },
         { id: 'planning', icon: Users, label: 'Times' },
-        { id: 'governance', icon: RefreshCw, label: 'Mudanças' },
         { id: 'gamification', icon: Trophy, label: 'Desempenho' },
+      ]
+    },
+    {
+      label: 'Operações',
+      items: [
+        { id: 'governance', icon: RefreshCw, label: 'Mudanças' },
+        { id: 'monitoring', icon: Activity, label: 'Monitoramento' },
       ]
     },
     {
       label: 'Plataforma',
       items: [
         { id: 'ingestion', icon: Database, label: 'Hub de Dados' },
-        { id: 'golden-paths', icon: Workflow, label: 'Caminhos Padrão' },
+        { id: 'golden-paths', icon: Workflow, label: 'Golden Paths' },
         { id: 'finops', icon: DollarSign, label: 'Custos Cloud' },
+        { id: 'ai-assistant', icon: Brain, label: 'Assistente IA' },
         { id: 'techdocs', icon: BookOpen, label: 'Documentação' },
       ]
     }

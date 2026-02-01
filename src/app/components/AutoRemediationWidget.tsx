@@ -96,7 +96,6 @@ export function AutoRemediationWidget() {
             </div>
             <div>
               <h3 className="text-lg text-[#F1F5F9] font-semibold">Auto-Remediation</h3>
-              <p className="text-xs text-[#94A3B8]">Dynatrace Davis AI + Ansible Automation</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">

@@ -4,6 +4,7 @@ import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
 import { AutoRemediationWidget } from '@/app/components/AutoRemediationWidget';
+import { AIOpsMonitoringWidget } from '@/app/components/AIOpsMonitoringWidget';
 
 export function GovernancePage() {
   const { showToast } = useToast();
@@ -80,7 +81,7 @@ export function GovernancePage() {
     { label: 'GMUDs Aprovadas', value: '23', sublabel: 'Este mês', color: '#10B981' },
     { label: 'Taxa de Sucesso', value: '98.2%', sublabel: 'Últimos 90 dias', color: '#00D9FF' },
     { label: 'Janelas Disponíveis', value: '12', sublabel: 'Janeiro 2026', color: '#A855F7' },
-    { label: 'Freezing Days', value: '10', sublabel: 'Ano novo + Fim de mês', color: '#EF4444' },
+    { label: 'Dias de Congelamento', value: '10', sublabel: 'Ano Novo + Fechamento', color: '#EF4444' },
   ];
 
   const upcomingGMUDs = [
@@ -138,9 +139,9 @@ export function GovernancePage() {
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Mudanças</h1>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Gestão de Mudanças</h1>
               <p className="text-sm text-[#94A3B8] mt-1">
-                Agendamento e calendário de deploys
+                Calendário de janelas de mudança e deploys
               </p>
             </div>
           </div>
@@ -164,6 +165,7 @@ export function GovernancePage() {
           </div>
         ))}
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Calendar */}
@@ -250,8 +252,8 @@ export function GovernancePage() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
               <div className="text-sm text-[#94A3B8]">
-                <span className="text-[#F1F5F9] font-semibold">Política de GMUD:</span> Janelas de mudança de Segunda a Quinta, 18h-22h. 
-                Freezing durante finais de ano (1-5 Jan) e fechamento de mês (últimos 5 dias).
+                <span className="text-[#F1F5F9] font-semibold">Política de GMUD:</span> Janelas de mudança de segunda a quinta, das 18h às 22h. 
+                Congelamento durante final de ano (1-5 Jan) e fechamento de mês (últimos 5 dias úteis).
               </div>
             </div>
           </div>
@@ -259,7 +261,7 @@ export function GovernancePage() {
 
         {/* Upcoming GMUDs */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Próximas GMUDs</h3>
+          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Próximas Janelas de Mudança</h3>
           <div className="space-y-4">
             {upcomingGMUDs.map((gmud) => {
               const statusColor = getStatusColor(gmud.status);
@@ -436,9 +438,6 @@ export function GovernancePage() {
           </div>
         </div>
       </Modal>
-
-      {/* Auto-Remediation Section */}
-      <AutoRemediationWidget />
     </div>
   );
 }

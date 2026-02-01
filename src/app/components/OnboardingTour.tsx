@@ -69,7 +69,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       target: '#sidebar-nav',
       page: 'home',
       title: 'Menu Principal',
-      description: 'Este é o seu ponto de partida! Navegue pelas seções para gerenciar projetos, custos, integrações e muito mais.',
+      description: 'Este é o seu ponto de partida! Navegue pelas seções para gerenciar projetos, custos de nuvem, integrações de dados e muito mais.',
       icon: Zap,
       position: 'right'
     },
@@ -85,7 +85,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       target: '#btn-copilot-action',
       page: 'home',
       title: 'Copiloto de IA',
-      description: 'Seu assistente inteligente identifica problemas e sugere ações. Aqui você pode notificar responsáveis sobre tarefas bloqueadas.',
+      description: 'Seu assistente inteligente identifica problemas e sugere ações. Aqui você pode notificar responsáveis sobre tarefas com atraso.',
       icon: Zap,
       position: 'top'
     },
@@ -93,7 +93,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       target: '#btn-new-card',
       page: 'home',
       title: 'Criar Nova Tarefa',
-      description: 'Adicione tarefas ao backlog. A IA sugere a prioridade com base no impacto para o negócio.',
+      description: 'Adicione tarefas à lista. A IA sugere a prioridade com base no impacto para o negócio.',
       icon: Play,
       position: 'bottom-right'
     },
@@ -142,8 +142,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-path',
       page: 'golden-paths',
-      title: 'Novo Caminho Padrão',
-      description: 'Crie templates prontos de infraestrutura para as equipes usarem sem complicação.',
+      title: 'Novo Template Padrão',
+      description: 'Solicite templates prontos de infraestrutura para as equipes usarem sem complicação.',
       icon: Rocket,
       position: 'bottom-left'
     },
@@ -153,7 +153,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       target: '#btn-apply-savings',
       page: 'finops',
       title: 'Aplicar Economia',
-      description: 'Aceite sugestões de redução de custos com um clique — como desligar recursos ociosos.',
+      description: 'Aceite sugestões de redução de custos com um clique — como desligar recursos ociosos ou subutilizados.',
       icon: DollarSign,
       position: 'top'
     },
@@ -171,7 +171,7 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
       target: 'card-achievement-0',
       page: 'gamification',
       title: 'Conquistas',
-      description: 'A equipe ganha pontos e medalhas por boas práticas — como deploys sem falhas e colaboração.',
+      description: 'As equipes ganham pontos e medalhas por boas práticas — como deploys sem falhas e colaboração.',
       icon: Trophy,
       position: 'top'
     }

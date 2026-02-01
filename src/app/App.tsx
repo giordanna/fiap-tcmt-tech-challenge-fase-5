@@ -11,8 +11,9 @@ import { UniversalIngestionPage } from '@/app/components/pages/UniversalIngestio
 import { GoldenPathsPage } from '@/app/components/pages/GoldenPathsPage';
 import { FinOpsPage } from '@/app/components/pages/FinOpsPage';
 import { GamificationPage } from '@/app/components/pages/GamificationPage';
-import { ExecutiveROIPage } from '@/app/components/pages/ExecutiveROIPage';
 import { TechDocsPage } from '@/app/components/pages/TechDocsPage';
+import { MonitoringPage } from '@/app/components/pages/MonitoringPage';
+import { AIAssistantPage } from '@/app/components/pages/AIAssistantPage';
 import { OnboardingTour } from '@/app/components/OnboardingTour';
 import { DeployedResource } from '@/app/types';
 
@@ -85,8 +86,10 @@ export default function App() {
         return <FinOpsPage />;
       case 'gamification':
         return <GamificationPage />;
-      case 'roi':
-        return <ExecutiveROIPage />;
+      case 'monitoring':
+        return <MonitoringPage />;
+      case 'ai-assistant':
+        return <AIAssistantPage />;
       case 'techdocs':
         return <TechDocsPage />;
       default:
