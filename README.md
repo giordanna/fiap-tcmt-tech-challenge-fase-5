@@ -244,17 +244,38 @@ O protótipo é totalmente responsivo:
 
 ## 📂 Estrutura de Páginas
 
-| Página                        | Descrição                                  |
-| ----------------------------- | ------------------------------------------ |
-| **Agile Engine**              | Dashboard principal com métricas e backlog |
-| **Estratégia & Priorização**  | Matriz Pugh para priorização               |
-| **Planejamento & Capacidade** | Alocação de time e capacidade              |
-| **Governança & GMUD**         | Calendário de mudanças e aprovações        |
-| **Hub de Ingestão**           | Conectores e integrações de dados          |
-| **Golden Paths**              | Templates de infraestrutura self-service   |
-| **FinOps & Observabilidade**  | Custos multi-cloud e monitoramento         |
-| **Gamificação**               | Ranking e conquistas do time               |
-| **Painel de ROI**             | Métricas executivas de retorno             |
+A navegação da plataforma está organizada em 4 grupos principais, alinhados aos módulos do documento de arquitetura:
+
+### Visão Geral
+
+| Página     | Descrição                                             |
+| ---------- | ----------------------------------------------------- |
+| **Início** | Dashboard executivo com métricas e alertas principais |
+
+### Gestão de Projetos
+
+| Página         | Descrição                                                      |
+| -------------- | -------------------------------------------------------------- |
+| **Projetos**   | Gestão de portfólio, priorização algorítmica (RICE/WSJF) e ROI |
+| **Times**      | Alocação de capacidade e gestão de dependências entre squads   |
+| **Desempenho** | Gamificação, badges, ranking e campanhas de engajamento        |
+
+### Operações
+
+| Página            | Descrição                                           |
+| ----------------- | --------------------------------------------------- |
+| **Mudanças**      | Calendário de GMUDs, aprovações e auto-remediação   |
+| **Monitoramento** | Observabilidade AIOps com diagnóstico de causa raiz |
+
+### Plataforma
+
+| Página            | Descrição                                                     |
+| ----------------- | ------------------------------------------------------------- |
+| **Hub de Dados**  | Hub de Ingestão Universal com conectores e integrações        |
+| **Golden Paths**  | Catálogo self-service de templates de infraestrutura          |
+| **Custos Cloud**  | FinOps com previsão de custos e detecção de anomalias         |
+| **Assistente IA** | IA Copilot para refinamento de requisitos e geração de código |
+| **Documentação**  | TechDocs centralizados com documentação gerada por IA         |
 
 ## 👥 Grupo 31
 
