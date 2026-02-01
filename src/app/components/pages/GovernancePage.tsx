@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Modal } from '@/app/components/Modal';
 import { useToast } from '@/app/components/Toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { AutoRemediationWidget } from '@/app/components/AutoRemediationWidget';
+import { AIOpsMonitoringWidget } from '@/app/components/AIOpsMonitoringWidget';
 
 export function GovernancePage() {
   const { showToast } = useToast();
@@ -79,15 +81,15 @@ export function GovernancePage() {
     { label: 'GMUDs Aprovadas', value: '23', sublabel: 'Este mês', color: '#10B981' },
     { label: 'Taxa de Sucesso', value: '98.2%', sublabel: 'Últimos 90 dias', color: '#00D9FF' },
     { label: 'Janelas Disponíveis', value: '12', sublabel: 'Janeiro 2026', color: '#A855F7' },
-    { label: 'Freezing Days', value: '10', sublabel: 'Ano novo + Fim de mês', color: '#EF4444' },
+    { label: 'Dias de Congelamento', value: '10', sublabel: 'Ano Novo + Fechamento', color: '#EF4444' },
   ];
 
   const upcomingGMUDs = [
     {
       id: 'GMUD-2026-002',
-      title: 'Deploy API Gateway v2.5.0',
+      title: 'Deploy Azure API Management v2.5.0',
       date: '07 Jan, 19:00',
-      system: 'API Gateway',
+      system: 'Azure API Management',
       impact: 'Médio',
       urgency: 'Normal',
       riskScore: 45,
@@ -97,9 +99,9 @@ export function GovernancePage() {
     },
     {
       id: 'GMUD-2026-005',
-      title: 'Migração Database PostgreSQL 15',
+      title: 'Migração Azure SQL Database',
       date: '14 Jan, 20:00',
-      system: 'Banco de Dados',
+      system: 'Azure SQL',
       impact: 'Alto',
       urgency: 'Alta',
       riskScore: 85,
@@ -109,9 +111,9 @@ export function GovernancePage() {
     },
     {
       id: 'GMUD-2026-007',
-      title: 'Atualização Kubernetes 1.28',
+      title: 'Atualização Azure AKS 1.28',
       date: '20 Jan, 18:00',
-      system: 'Infraestrutura',
+      system: 'Azure AKS',
       impact: 'Alto',
       urgency: 'Normal',
       riskScore: 65,
@@ -137,9 +139,9 @@ export function GovernancePage() {
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Governança & GMUD</h1>
+              <h1 className="text-2xl text-[#F1F5F9] font-semibold">Gestão de Mudanças</h1>
               <p className="text-sm text-[#94A3B8] mt-1">
-                Integrado com <span className="text-[#00D9FF]">ServiceNow</span>
+                Calendário de janelas de mudança e deploys
               </p>
             </div>
           </div>
@@ -163,6 +165,7 @@ export function GovernancePage() {
           </div>
         ))}
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Calendar */}
@@ -249,8 +252,8 @@ export function GovernancePage() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
               <div className="text-sm text-[#94A3B8]">
-                <span className="text-[#F1F5F9] font-semibold">Política de GMUD:</span> Janelas de mudança de Segunda a Quinta, 18h-22h. 
-                Freezing durante finais de ano (1-5 Jan) e fechamento de mês (últimos 5 dias).
+                <span className="text-[#F1F5F9] font-semibold">Política de GMUD:</span> Janelas de mudança de segunda a quinta, das 18h às 22h. 
+                Congelamento durante final de ano (1-5 Jan) e fechamento de mês (últimos 5 dias úteis).
               </div>
             </div>
           </div>
@@ -258,7 +261,7 @@ export function GovernancePage() {
 
         {/* Upcoming GMUDs */}
         <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
-          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Próximas GMUDs</h3>
+          <h3 className="text-lg text-[#F1F5F9] font-semibold mb-4">Próximas Janelas de Mudança</h3>
           <div className="space-y-4">
             {upcomingGMUDs.map((gmud) => {
               const statusColor = getStatusColor(gmud.status);

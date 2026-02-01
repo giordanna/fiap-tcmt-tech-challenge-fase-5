@@ -1,15 +1,18 @@
 import { 
   Database, 
   Workflow, 
-  GitBranch, 
   DollarSign, 
   Trophy, 
   BarChart3,
   Zap,
-  Target,
-  Calendar,
-  Shield,
+  FolderKanban,
+  Users,
+  RefreshCw,
+  Home,
   X,
+  BookOpen,
+  Activity,
+  Brain,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -18,17 +21,50 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+interface NavItem {
+  id: string;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+}
+
 export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
-  const navItems = [
-    { id: 'home', icon: GitBranch, label: 'Agile Engine' },
-    { id: 'strategy', icon: Target, label: 'Estratégia & Priorização' },
-    { id: 'planning', icon: Calendar, label: 'Planejamento & Capacidade' },
-    { id: 'governance', icon: Shield, label: 'Governança & GMUD' },
-    { id: 'ingestion', icon: Database, label: 'Hub de Ingestão' },
-    { id: 'golden-paths', icon: Workflow, label: 'Golden Paths' },
-    { id: 'finops', icon: DollarSign, label: 'FinOps & Observabilidade' },
-    { id: 'gamification', icon: Trophy, label: 'Gamificação' },
-    { id: 'roi', icon: BarChart3, label: 'Painel de ROI' },
+  const navGroups: NavGroup[] = [
+    {
+      label: 'Visão Geral',
+      items: [
+        { id: 'home', icon: Home, label: 'Início' },
+      ]
+    },
+    {
+      label: 'Gestão de Projetos',
+      items: [
+        { id: 'strategy', icon: FolderKanban, label: 'Projetos' },
+        { id: 'planning', icon: Users, label: 'Times' },
+        { id: 'gamification', icon: Trophy, label: 'Desempenho' },
+      ]
+    },
+    {
+      label: 'Operações',
+      items: [
+        { id: 'governance', icon: RefreshCw, label: 'Mudanças' },
+        { id: 'monitoring', icon: Activity, label: 'Monitoramento' },
+      ]
+    },
+    {
+      label: 'Plataforma',
+      items: [
+        { id: 'ingestion', icon: Database, label: 'Hub de Dados' },
+        { id: 'golden-paths', icon: Workflow, label: 'Golden Paths' },
+        { id: 'finops', icon: DollarSign, label: 'Custos Cloud' },
+        { id: 'ai-assistant', icon: Brain, label: 'Assistente IA' },
+        { id: 'techdocs', icon: BookOpen, label: 'Documentação' },
+      ]
+    }
   ];
 
   return (
@@ -57,27 +93,31 @@ export function Sidebar({ currentPage, onNavigate, onClose }: SidebarProps) {
         )}
       </div>
 
-      {/* Navigation Items */}
-      <nav id="sidebar-nav" className="flex-1 flex flex-col gap-1 px-3">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => onNavigate(item.id)}
-            className={`w-full px-3 py-3 rounded-lg flex items-center gap-3 transition-all text-left
-              ${currentPage === item.id 
-                ? 'bg-[#00D9FF]/10 text-[#00D9FF]' 
-                : 'text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F1F5F9]'
-              }
-            `}
-          >
-            <item.icon className="w-5 h-5 flex-shrink-0" />
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium truncate">{item.label}</div>
-              {item.badge && (
-                <div className="text-xs text-[#00D9FF] truncate">{item.badge}</div>
-              )}
+      {/* Grouped Navigation */}
+      <nav id="sidebar-nav" className="flex-1 flex flex-col gap-6 px-3">
+        {navGroups.map((group) => (
+          <div key={group.label}>
+            <div className="text-[10px] uppercase tracking-wider text-[#64748B] font-semibold px-3 mb-2">
+              {group.label}
             </div>
-          </button>
+            <div className="flex flex-col gap-1">
+              {group.items.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => onNavigate(item.id)}
+                  className={`w-full px-3 py-2.5 rounded-lg flex items-center gap-3 transition-all text-left
+                    ${currentPage === item.id 
+                      ? 'bg-[#00D9FF]/10 text-[#00D9FF]' 
+                      : 'text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F1F5F9]'
+                    }
+                  `}
+                >
+                  <item.icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </nav>
 

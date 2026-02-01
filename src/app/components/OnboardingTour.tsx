@@ -68,50 +68,42 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#sidebar-nav',
       page: 'home',
-      title: 'Navegação Unificada',
-      description: 'Acesse aqui todas as áreas da plataforma: Estratégia, Planejamento, Integrações, Custos e mais. Cada seção ajuda a gerenciar uma parte do trabalho da sua equipe.',
+      title: 'Menu Principal',
+      description: 'Este é o seu ponto de partida! Navegue pelas seções para gerenciar projetos, custos de nuvem, integrações de dados e muito mais.',
       icon: Zap,
       position: 'right'
     },
     {
       target: '#executive-summary',
       page: 'home',
-      title: 'Relatórios para a Diretoria',
-      description: 'Painel unificado com os principais indicadores de desempenho. Clique em "Exportar Relatório" para gerar um PDF pronto para apresentar aos gestores.',
+      title: 'Resumo Executivo',
+      description: 'Visualize os principais números da sua operação. Ideal para apresentar resultados em reuniões de liderança.',
       icon: Target,
       position: 'bottom'
     },
     {
       target: '#btn-copilot-action',
       page: 'home',
-      title: 'Assistente Ágil',
-      description: 'A Inteligência Artificial monitora bloqueios no trabalho da equipe. Clique em "Enviar Notificação" para alertar o responsável sobre uma tarefa parada.',
+      title: 'Copiloto de IA',
+      description: 'Seu assistente inteligente identifica problemas e sugere ações. Aqui você pode notificar responsáveis sobre tarefas com atraso.',
       icon: Zap,
       position: 'top'
     },
     {
       target: '#btn-new-card',
       page: 'home',
-      title: 'Lista de Tarefas Inteligente',
-      description: 'Crie uma nova tarefa e veja a IA sugerir automaticamente a prioridade baseada no valor para o negócio e no esforço necessário.',
+      title: 'Criar Nova Tarefa',
+      description: 'Adicione tarefas à lista. A IA sugere a prioridade com base no impacto para o negócio.',
       icon: Play,
-      position: 'top'
-    },
-    {
-      target: '#btn-deploy-prod',
-      page: 'home',
-      title: 'Publicação Segura',
-      description: 'Publique seu sistema em produção com verificação automática de segurança pela IA, seguindo os padrões da empresa.',
-      icon: Rocket,
-      position: 'top'
+      position: 'bottom-right'
     },
     
     // --- STRATEGY ---
     {
       target: '#btn-new-project',
       page: 'strategy',
-      title: 'Gestão de Projetos',
-      description: 'Cadastre novos projetos e veja o sistema calcular automaticamente as prioridades usando análise comparativa.',
+      title: 'Novo Projeto',
+      description: 'Cadastre iniciativas aqui. O sistema calcula automaticamente qual projeto deve ser priorizado.',
       icon: Target,
       position: 'bottom-left'
     },
@@ -120,8 +112,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-request',
       page: 'planning',
-      title: 'Solicitações para Outras Equipes',
-      description: 'Abra chamados para as equipes de Infraestrutura, Banco de Dados ou Segurança, com prazo e impacto claros no seu projeto.',
+      title: 'Nova Solicitação',
+      description: 'Precisa de apoio de Infra, DBA ou Segurança? Abra uma solicitação com prazo e urgência definidos.',
       icon: Workflow,
       position: 'bottom-left'
     },
@@ -130,8 +122,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-gmud',
       page: 'governance',
-      title: 'Agendamento de Mudanças',
-      description: 'Agende alterações em sistemas verificando automaticamente conflitos com períodos de congelamento e outras mudanças.',
+      title: 'Agendar Mudança',
+      description: 'Registre alterações em sistemas. O calendário mostra conflitos e períodos de bloqueio automaticamente.',
       icon: Shield,
       position: 'bottom-left'
     },
@@ -140,8 +132,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-add-integration',
       page: 'ingestion',
-      title: 'Central de Integrações',
-      description: 'Conecte novas ferramentas (Jira, Datadog, Sonar) em poucos cliques com configuração assistida.',
+      title: 'Adicionar Integração',
+      description: 'Conecte suas ferramentas (Azure DevOps, Jira, etc.) para centralizar dados na plataforma.',
       icon: Database,
       position: 'bottom-left'
     },
@@ -150,8 +142,8 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-new-path',
       page: 'golden-paths',
-      title: 'Catálogo de Soluções',
-      description: 'Crie modelos de infraestrutura prontos para uso que os times de desenvolvimento podem utilizar sem precisar de ajuda.',
+      title: 'Novo Template Padrão',
+      description: 'Solicite templates prontos de infraestrutura para as equipes usarem sem complicação.',
       icon: Rocket,
       position: 'bottom-left'
     },
@@ -160,26 +152,26 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
     {
       target: '#btn-apply-savings',
       page: 'finops',
-      title: 'Economia Automática',
-      description: 'Aplique sugestões de redução de custos (ex: desligar ambientes de desenvolvimento fora do horário) com um clique.',
+      title: 'Aplicar Economia',
+      description: 'Aceite sugestões de redução de custos com um clique — como desligar recursos ociosos ou subutilizados.',
       icon: DollarSign,
       position: 'top'
     },
     {
       target: '#btn-view-anomaly',
       page: 'finops',
-      title: 'Análise de Gastos Anormais',
-      description: 'Investigue aumentos inesperados de custo detectados pela IA e tome ações corretivas imediatas.',
+      title: 'Ver Anomalia',
+      description: 'Investigue picos inesperados de gastos e entenda o que aconteceu.',
       icon: DollarSign,
       position: 'top'
     },
 
     // --- GAMIFICATION ---
     {
-      target: 'card-achievement-0', // ID dynamic logic handled separately or just assume first element
+      target: 'card-achievement-0',
       page: 'gamification',
-      title: 'Engajamento da Equipe',
-      description: 'Desenvolvedores ganham medalhas e pontos por boas práticas, como revisar código de colegas ou publicar sistemas sem erros.',
+      title: 'Conquistas',
+      description: 'As equipes ganham pontos e medalhas por boas práticas — como deploys sem falhas e colaboração.',
       icon: Trophy,
       position: 'top'
     }
@@ -225,23 +217,23 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
             <Rocket className="w-10 h-10 text-white" />
           </div>
           
-          <h2 className="text-3xl font-bold text-[#F1F5F9] mb-3">Bem-vindo ao ValueFlow</h2>
+          <h2 className="text-3xl font-bold text-[#F1F5F9] mb-3">Bem-vindo ao ValueFlow!</h2>
           <p className="text-[#94A3B8] mb-6 text-lg">
-            Sua plataforma centralizada para acompanhar e otimizar o trabalho da sua equipe de tecnologia.
+            Aqui você gerencia tudo sobre a operação de TI em um só lugar — de projetos a custos.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-8">
             <div className="bg-[#0A0E1A] p-4 rounded-xl border border-[#1E293B]">
               <h3 className="text-[#00D9FF] font-semibold mb-2 flex items-center gap-2">
-                <Zap className="w-4 h-4" /> Automação Inteligente
+                <Zap className="w-4 h-4" /> IA no Dia a Dia
               </h3>
-              <p className="text-sm text-[#94A3B8]">Inteligência Artificial para decidir prioridades, identificar riscos e analisar custos.</p>
+              <p className="text-sm text-[#94A3B8]">Sugestões automáticas de prioridade, alertas de risco e economia de custos.</p>
             </div>
             <div className="bg-[#0A0E1A] p-4 rounded-xl border border-[#1E293B]">
               <h3 className="text-[#A855F7] font-semibold mb-2 flex items-center gap-2">
-                <Target className="w-4 h-4" /> Visão Estratégica
+                <Target className="w-4 h-4" /> Tudo Conectado
               </h3>
-              <p className="text-sm text-[#94A3B8]">Conecte os objetivos da empresa ao trabalho do dia a dia, acompanhando prazos e disponibilidade.</p>
+              <p className="text-sm text-[#94A3B8]">Veja como cada tarefa impacta os objetivos do negócio e a capacidade da equipe.</p>
             </div>
           </div>
           
@@ -267,47 +259,71 @@ export function OnboardingTour({ onNavigate }: OnboardingTourProps) {
 
   if (!isOpen) return null;
 
-  // Simple positioning logic based on quadrant roughly
+  // Posicionamento inteligente para não tampar elementos destacados
   const getPositionClasses = (position: string) => {
     const base = "md:w-96";
     switch (position) {
       case 'right': 
+        // Sidebar - tooltip à direita
         return `${base} md:bottom-auto md:right-auto md:top-20 md:left-72`;
       case 'top': 
-        return `${base} md:bottom-auto md:left-auto md:top-32 md:right-10`;
+        // Elementos no topo - tooltip abaixo à direita
+        return `${base} md:bottom-auto md:left-auto md:top-40 md:right-10`;
+      case 'bottom': 
+        // Elementos no meio/baixo - tooltip no canto inferior
+        return `${base} md:right-auto md:top-auto md:bottom-10 md:left-1/2 md:-translate-x-1/2`;
       case 'bottom-left': 
-        return `${base} md:left-auto md:top-auto md:bottom-20 md:right-20`;
+        // Botões de ação do header - tooltip bem afastado
+        return `${base} md:left-auto md:top-auto md:bottom-24 md:right-10`;
+      case 'bottom-right': 
+        // Cards do backlog - tooltip à esquerda
+        return `${base} md:right-auto md:top-auto md:bottom-24 md:left-72`;
       case 'center': 
         return `${base} md:bottom-auto md:right-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2`;
-      case 'bottom': 
-        return `${base} md:right-auto md:top-auto md:bottom-10 md:left-1/2 md:-translate-x-1/2`;
       default: 
         return `${base} md:right-auto md:top-auto md:bottom-10 md:left-1/2 md:-translate-x-1/2`;
     }
   };
 
-  // Override specific positions based on known layout
+  // Override específico por step para garantir que não tape elementos
   const getSmartPosition = (stepIndex: number) => {
-    // Base classes for mobile (bottom sheet style) - applied to ALL
+    // Mobile: sempre na parte inferior da tela
     const mobileClasses = "bottom-4 left-4 right-4 w-auto fixed z-[100] transition-all duration-500";
     
     let desktopClasses = "";
     
-    // Strategy/Planning/Gov/Ingestion/GP buttons are top right
-    if ([5, 6, 7, 8, 9].includes(stepIndex)) {
-      desktopClasses = getPositionClasses('top');
-    }
-    // FinOps buttons
-    else if ([10].includes(stepIndex)) {
-      // Custom for FinOps Savings - bottom rightish
-      desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-32 md:right-1/4";
-    }
-    else if ([11].includes(stepIndex)) {
-       // Custom for FinOps Anomaly - bottom leftish
-      desktopClasses = "md:w-96 md:top-auto md:right-auto md:bottom-32 md:left-1/4";
-    }
-    else {
-      desktopClasses = getPositionClasses(currentStep.position || 'center');
+    // Mapeamento específico por step para não sobrepor elementos
+    switch (stepIndex) {
+      case 0: // Sidebar
+        desktopClasses = getPositionClasses('right');
+        break;
+      case 1: // Executive Summary - tooltip à direita para não tampar cards
+        desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-20 md:right-10";
+        break;
+      case 2: // Copiloto IA - tooltip longe do card
+        desktopClasses = "md:w-96 md:top-auto md:right-auto md:bottom-20 md:left-72";
+        break;
+      case 3: // Nova Tarefa - tooltip posicionado para não tampar backlog
+        desktopClasses = "md:w-96 md:top-auto md:right-auto md:bottom-20 md:left-72";
+        break;
+      case 4: // Novo Projeto (Strategy) - header buttons
+      case 5: // Nova Solicitação (Planning)
+      case 6: // Agendar Mudança (Governance)
+      case 7: // Adicionar Integração (Ingestion)
+      case 8: // Novo Caminho (Golden Paths)
+        desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-24 md:right-10";
+        break;
+      case 9: // FinOps - Aplicar Economia
+        desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-32 md:right-1/4";
+        break;
+      case 10: // FinOps - Ver Anomalia
+        desktopClasses = "md:w-96 md:top-auto md:right-auto md:bottom-32 md:left-1/4";
+        break;
+      case 11: // Gamificação
+        desktopClasses = "md:w-96 md:top-auto md:left-auto md:bottom-20 md:right-10";
+        break;
+      default:
+        desktopClasses = getPositionClasses(currentStep?.position || 'center');
     }
     
     return `${mobileClasses} ${desktopClasses}`;

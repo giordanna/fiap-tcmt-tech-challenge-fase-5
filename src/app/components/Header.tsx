@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { Search, Sparkles, Bell, Settings, ChevronRight, LayoutGrid, Users, FileCode, Box, Target, Calendar, Shield, Database, DollarSign, Trophy, BarChart3, Workflow } from 'lucide-react';
+import { Search, Sparkles, Bell, Settings, ChevronRight, LayoutGrid, Users, FileCode, Box, Target, Calendar, Shield, Database, DollarSign, Trophy, BarChart3, Workflow, BookOpen } from 'lucide-react';
 
 interface SearchResult {
   id: string;
-  type: 'project' | 'task' | 'person' | 'resource';
+  type: 'project' | 'task' | 'person' | 'resource' | 'doc';
   title: string;
   subtitle: string;
   url?: string;
@@ -20,14 +20,17 @@ export function Header({ onNavigate }: HeaderProps) {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const mockData: SearchResult[] = [
-    { id: '1', type: 'resource', title: 'Kubernetes Cluster', subtitle: 'AWS EKS • Golden Path', page: 'golden-paths' },
+    { id: '1', type: 'resource', title: 'Kubernetes Cluster', subtitle: 'AWS EKS • Caminho Padrão', page: 'golden-paths' },
     { id: '2', type: 'resource', title: 'Microsserviço .NET', subtitle: 'Template de Backend', page: 'golden-paths' },
     { id: '3', type: 'project', title: 'Migração Legacy', subtitle: 'Projeto Estratégico', page: 'strategy' },
     { id: '4', type: 'person', title: 'Camila Santos', subtitle: 'Chefe de Operações', page: 'planning' },
     { id: '5', type: 'task', title: 'Revisar Custos AWS', subtitle: 'Sprint 42 • Em andamento', page: 'finops' },
     { id: '6', type: 'project', title: 'Data Lake V2', subtitle: 'Big Data', page: 'ingestion' },
     { id: '7', type: 'person', title: 'João Silva', subtitle: 'Tech Lead', page: 'planning' },
-    { id: '8', type: 'resource', title: 'API Gateway', subtitle: 'Kong • Golden Path', page: 'golden-paths' },
+    { id: '8', type: 'resource', title: 'API Gateway', subtitle: 'Kong • Caminho Padrão', page: 'golden-paths' },
+    { id: '9', type: 'doc', title: 'API de Pagamentos v2.5', subtitle: 'Documentação • REST API', page: 'techdocs' },
+    { id: '10', type: 'doc', title: 'Checkout Service - Arquitetura', subtitle: 'Documentação • .NET', page: 'techdocs' },
+    { id: '11', type: 'doc', title: 'Guia de Onboarding para Devs', subtitle: 'Documentação • Setup', page: 'techdocs' },
   ];
 
   const filteredResults = searchQuery.length > 0 
@@ -53,6 +56,7 @@ export function Header({ onNavigate }: HeaderProps) {
       case 'task': return <DollarSign className="w-4 h-4 text-[#00D9FF]" />; // FinOps (assuming task relates to costs often, or use CheckCircle/FileCode if more generic)
       case 'person': return <Calendar className="w-4 h-4 text-[#10B981]" />; // Planejamento (Recursos de pessoas)
       case 'resource': return <Workflow className="w-4 h-4 text-[#F59E0B]" />; // Golden Paths (Recursos técnicos)
+      case 'doc': return <BookOpen className="w-4 h-4 text-[#10B981]" />; // Documentação
     }
   };
 

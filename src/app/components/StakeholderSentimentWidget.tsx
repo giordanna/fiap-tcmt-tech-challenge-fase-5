@@ -178,7 +178,7 @@ export function StakeholderSentimentWidget() {
       <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#00D9FF]/10 border border-[#A855F7]/30 rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
           <Sparkles className="w-4 h-4 text-[#A855F7]" />
-          <span className="text-sm font-semibold text-[#F1F5F9]">Resumo Executivo (AI)</span>
+          <span className="text-sm font-semibold text-[#F1F5F9]">Resumo</span>
         </div>
         <p className="text-xs text-[#94A3B8] leading-relaxed">
           <strong className="text-[#F1F5F9]">Tendência geral positiva</strong> com 62% de aprovação. 

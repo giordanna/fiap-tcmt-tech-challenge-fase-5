@@ -1,21 +1,114 @@
 import { useState } from 'react';
-import { Brain, AlertTriangle, Send, CheckCircle2 } from 'lucide-react';
+import { Brain, AlertTriangle, Send, CheckCircle2, DollarSign, Zap, Target, TrendingUp, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/app/components/Toast';
 
-export function AICopilotWidget() {
+interface AICopilotWidgetProps {
+  currentPage?: string;
+}
+
+// Contextual messages/alerts per page
+const contextualContent: Record<string, {
+  alertType: 'warning' | 'info' | 'success';
+  alertTitle: string;
+  alertDescription: string;
+  suggestionTitle: string;
+  suggestionDescription: string;
+  actionLabel: string;
+  actionToast: string;
+  icon: React.ElementType;
+}> = {
+  strategy: {
+    alertType: 'info',
+    alertTitle: 'Oportunidade de Priorização',
+    alertDescription: 'O projeto "Motor Preditivo" tem ROI projetado alto mas está com recursos subalocados.',
+    suggestionTitle: 'SUGESTÃO DE PRIORIZAÇÃO',
+    suggestionDescription: 'Considere realocar 2 desenvolvedores do projeto "Portal Auto" para o "Motor Preditivo". Isso pode acelerar o retorno do investimento em 34%.',
+    actionLabel: 'Aplicar Sugestão',
+    actionToast: 'Sugestão de priorização aplicada! Os recursos foram realocados.',
+    icon: Target,
+  },
+  finops: {
+    alertType: 'warning',
+    alertTitle: 'Economia Potencial Detectada',
+    alertDescription: 'Identificamos R$ 12.5k/mês em recursos subutilizados no ambiente de staging.',
+    suggestionTitle: 'SUGESTÃO FINOPS',
+    suggestionDescription: 'Ativar auto-scaling no cluster de staging pode reduzir custos em 40%. Instâncias sob demanda podem economizar mais 25%.',
+    actionLabel: 'Ver Detalhes',
+    actionToast: 'Relatório de economia gerado! Verifique o dashboard FinOps.',
+    icon: DollarSign,
+  },
+  'golden-paths': {
+    alertType: 'info',
+    alertTitle: 'Template Recomendado',
+    alertDescription: 'Com base no seu último deploy, o template "Microsserviço Java" seria 23% mais eficiente.',
+    suggestionTitle: 'SUGESTÃO DE TEMPLATE',
+    suggestionDescription: 'O Golden Path "Microsserviço Java" inclui configurações otimizadas de cache que podem melhorar a performance em 35%.',
+    actionLabel: 'Ver Template',
+    actionToast: 'Abrindo detalhes do template recomendado...',
+    icon: Zap,
+  },
+  governance: {
+    alertType: 'warning',
+    alertTitle: 'Janela de Deploy Próxima',
+    alertDescription: 'A próxima janela de GMUD é em 4 horas. 2 deploys estão aguardando aprovação.',
+    suggestionTitle: 'LEMBRETE DE GMUD',
+    suggestionDescription: 'Revise e aprove a solicitação GMUD-2026-002 antes das 18h para não perder a janela de mudança desta semana.',
+    actionLabel: 'Revisar GMUDs',
+    actionToast: 'Abrindo lista de GMUDs pendentes...',
+    icon: ShieldCheck,
+  },
+  gamification: {
+    alertType: 'success',
+    alertTitle: 'Conquista Disponível!',
+    alertDescription: 'Você está a 2 PRs de desbloquear a medalha "PR Ninja" e ganhar 500 XP.',
+    suggestionTitle: 'OPORTUNIDADE DE XP',
+    suggestionDescription: 'Complete mais 2 revisões de código hoje para subir no ranking semanal. Sua equipe está em 2º lugar!',
+    actionLabel: 'Ver Ranking',
+    actionToast: 'Abrindo leaderboard atualizado...',
+    icon: TrendingUp,
+  },
+  home: {
+    alertType: 'warning',
+    alertTitle: 'Possível Bloqueio Identificado',
+    alertDescription: 'Tarefa AB#402 está parada há 48h sem atualizações',
+    suggestionTitle: 'SUGESTÃO INTELIGENTE',
+    suggestionDescription: 'Notificar Líder Técnico @rafael.costa sobre possível bloqueio. Problemas similares levaram em média 3.2 dias para resolver.',
+    actionLabel: 'Enviar Notificação',
+    actionToast: 'Notificação enviada para @rafael.costa sobre a tarefa AB#402',
+    icon: AlertTriangle,
+  },
+};
+
+export function AICopilotWidget({ currentPage = 'home' }: AICopilotWidgetProps) {
   const { showToast } = useToast();
-  const [notificationSent, setNotificationSent] = useState(false);
+  const [actionTaken, setActionTaken] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
-  const handleSendNotification = () => {
-    setNotificationSent(true);
-    showToast('Notificação enviada para @rafael.costa sobre a tarefa AB#402', 'success');
+  const content = contextualContent[currentPage] || contextualContent.home;
+  const IconComponent = content.icon;
+
+  const handleAction = () => {
+    setActionTaken(true);
+    showToast(content.actionToast, 'success');
   };
 
   const handleDismiss = () => {
     setDismissed(true);
-    showToast('Alerta ignorado. Você pode revisar alertas anteriores nas configurações.', 'info');
+    showToast('Alerta ignorado. Você pode revisar alertas anteriores nas configurações do sistema.', 'info');
   };
+
+  const getAlertColors = () => {
+    switch (content.alertType) {
+      case 'warning':
+        return { border: '#F59E0B', bg: '#F59E0B' };
+      case 'success':
+        return { border: '#10B981', bg: '#10B981' };
+      default:
+        return { border: '#00D9FF', bg: '#00D9FF' };
+    }
+  };
+
+  const alertColors = getAlertColors();
 
   if (dismissed) {
     return (
@@ -67,17 +160,23 @@ export function AICopilotWidget() {
         </div>
 
         {/* Alert Card */}
-        <div className="bg-[#0A0E1A]/40 backdrop-blur-sm border border-[#F59E0B]/30 rounded-xl p-4 mb-4">
+        <div 
+          className="bg-[#0A0E1A]/40 backdrop-blur-sm rounded-xl p-4 mb-4"
+          style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: `${alertColors.border}50` }}
+        >
           <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
-              <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />
+            <div 
+              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+              style={{ backgroundColor: `${alertColors.bg}15` }}
+            >
+              <IconComponent className="w-4 h-4" style={{ color: alertColors.bg }} />
             </div>
             <div className="flex-1">
               <div className="text-sm text-[#F1F5F9] mb-1">
-                <span className="text-[#F59E0B]">Possível Bloqueio Identificado</span>
+                <span style={{ color: alertColors.bg }}>{content.alertTitle}</span>
               </div>
               <p className="text-sm text-[#94A3B8] leading-relaxed">
-                Tarefa <span className="text-[#00D9FF] font-mono">AB#402</span> está parada há <span className="text-[#F59E0B]">48h</span> sem atualizações
+                {content.alertDescription}
               </p>
             </div>
           </div>
@@ -88,30 +187,29 @@ export function AICopilotWidget() {
           <div className="flex items-start gap-2 mb-2">
             <div className="w-1.5 h-1.5 rounded-full bg-[#A855F7] mt-1.5"></div>
             <div>
-              <span className="text-xs text-[#A855F7] font-semibold">SUGESTÃO INTELIGENTE</span>
+              <span className="text-xs text-[#A855F7] font-semibold">{content.suggestionTitle}</span>
             </div>
           </div>
           <p className="text-sm text-[#F1F5F9] pl-3.5">
-            Notificar Líder Técnico <span className="text-[#00D9FF]">@rafael.costa</span> sobre possível bloqueio. Problemas similares levaram em média 3.2 dias para resolver.
+            {content.suggestionDescription}
           </p>
         </div>
 
         {/* Actions */}
         <div className="flex gap-2">
-          {notificationSent ? (
+          {actionTaken ? (
             <div className="flex-1 bg-[#10B981]/20 border border-[#10B981]/30 text-[#10B981] py-2.5 px-4 rounded-lg flex items-center justify-center gap-2">
               <CheckCircle2 className="w-4 h-4" />
-              <span className="text-sm">Notificação Enviada</span>
+              <span className="text-sm">Ação Realizada</span>
             </div>
           ) : (
             <button 
               id="btn-copilot-action"
-              onClick={handleSendNotification}
+              onClick={handleAction}
               className="flex-1 bg-[#00D9FF] hover:bg-[#00C4E6] text-[#0A0E1A] py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-            
-              <span className="text-sm">Enviar Notificação</span>
-                <Send className="w-4 h-4" />
+              <span className="text-sm">{content.actionLabel}</span>
+              <Send className="w-4 h-4" />
             </button>
           )}
           <button 
@@ -125,4 +223,3 @@ export function AICopilotWidget() {
     </div>
   );
 }
-

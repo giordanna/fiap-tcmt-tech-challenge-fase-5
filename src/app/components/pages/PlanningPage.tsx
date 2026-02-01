@@ -117,8 +117,8 @@ export function PlanningPage() {
             <Calendar className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Planejamento & Capacidade</h1>
-            <p className="text-sm text-[#94A3B8] mt-1">Gestão de recursos e dependências</p>
+            <h1 className="text-2xl text-[#F1F5F9] font-semibold">Times</h1>
+            <p className="text-sm text-[#94A3B8] mt-1">Saúde das equipes e alocação de capacidade</p>
           </div>
         </div>
       </div>
@@ -148,8 +148,8 @@ export function PlanningPage() {
                 <Activity className="w-5 h-5 text-[#00D9FF]" />
               </div>
               <div>
-                <h2 className="text-lg text-[#F1F5F9] font-semibold">Squads e Pessoas Ativas</h2>
-                <p className="text-xs text-[#94A3B8]">Importadas do Azure DevOps • Atualizado há 5 min</p>
+                <h2 className="text-lg text-[#F1F5F9] font-semibold">Equipes e Pessoas Ativas</h2>
+                <p className="text-xs text-[#94A3B8]">Sincronizado com Azure DevOps • Atualizado há 5 min</p>
               </div>
             </div>
 
@@ -184,7 +184,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-FIN-001',
                     custoMensal: 'R$ 48.500',
                   },
@@ -194,7 +194,7 @@ export function PlanningPage() {
                     health: 'atencao',
                     cardsParados: 2,
                     dependenciasVioladas: 1,
-                    jiraStatus: 'At Risk',
+                    adoStatus: 'At Risk',
                     centroCusto: 'CC-COM-002',
                     custoMensal: 'R$ 42.300',
                   },
@@ -204,7 +204,7 @@ export function PlanningPage() {
                     health: 'critico',
                     cardsParados: 4,
                     dependenciasVioladas: 3,
-                    jiraStatus: 'Blocked',
+                    adoStatus: 'Blocked',
                     centroCusto: 'CC-FIN-003',
                     custoMensal: 'R$ 72.100',
                   },
@@ -214,7 +214,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-DIG-001',
                     custoMensal: 'R$ 35.800',
                   },
@@ -224,7 +224,7 @@ export function PlanningPage() {
                     health: 'atencao',
                     cardsParados: 1,
                     dependenciasVioladas: 2,
-                    jiraStatus: 'At Risk',
+                    adoStatus: 'At Risk',
                     centroCusto: 'CC-SEC-001',
                     custoMensal: 'R$ 28.900',
                   },
@@ -234,7 +234,7 @@ export function PlanningPage() {
                     health: 'saudavel',
                     cardsParados: 0,
                     dependenciasVioladas: 0,
-                    jiraStatus: 'On Track',
+                    adoStatus: 'On Track',
                     centroCusto: 'CC-DAT-001',
                     custoMensal: 'R$ 65.200',
                   },
@@ -261,14 +261,14 @@ export function PlanningPage() {
                       }`}></div>
                     </div>
 
-                    {/* Jira Status Badge */}
+                    {/* Azure DevOps Status Badge */}
                     <div className="mb-3 mt-auto">
                       <span className={`text-xs px-2 py-1 rounded ${
-                        squad.jiraStatus === 'Blocked' ? 'bg-[#EF4444]/20 text-[#EF4444]' :
-                        squad.jiraStatus === 'At Risk' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
+                        squad.adoStatus === 'Blocked' ? 'bg-[#EF4444]/20 text-[#EF4444]' :
+                        squad.adoStatus === 'At Risk' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
                         'bg-[#10B981]/20 text-[#10B981]'
                       }`}>
-                        Jira: {squad.jiraStatus}
+                        ADO: {squad.adoStatus}
                       </span>
                     </div>
 
@@ -278,13 +278,13 @@ export function PlanningPage() {
                         {squad.cardsParados > 0 && (
                           <div className="flex items-center gap-2 text-xs">
                             <AlertTriangle className="w-3 h-3 text-[#F59E0B]" />
-                            <span className="text-[#F59E0B]">{squad.cardsParados} cards parados (+5 dias)</span>
+                            <span className="text-[#F59E0B]">{squad.cardsParados} tarefas paradas (há mais de 5 dias)</span>
                           </div>
                         )}
                         {squad.dependenciasVioladas > 0 && (
                           <div className="flex items-center gap-2 text-xs">
                             <XCircle className="w-3 h-3 text-[#EF4444]" />
-                            <span className="text-[#EF4444]">{squad.dependenciasVioladas} dep. cross-team SLA violado</span>
+                            <span className="text-[#EF4444]">{squad.dependenciasVioladas} dependências entre equipes com SLA violado</span>
                           </div>
                         )}
                       </div>
@@ -309,16 +309,17 @@ export function PlanningPage() {
                     <AlertTriangle className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="text-sm text-[#F1F5F9]">
-                        <span className="text-[#F59E0B] font-semibold">3 squads</span> precisam de atenção: 
-                        <span className="text-[#EF4444]"> 7 cards parados</span> e 
-                        <span className="text-[#EF4444]"> 6 dependências violadas</span>
+                        <span className="text-[#F59E0B] font-semibold">3 equipes</span> precisam de atenção: 
+                        <span className="text-[#EF4444]"> 7 tarefas paradas</span> e 
+                        <span className="text-[#EF4444]"> 6 SLAs de dependências violados</span>
                       </div>
-                      <p className="text-xs text-[#94A3B8] mt-1">Custo total: R$ 293.800/mês (6 squads)</p>
+                      <p className="text-xs text-[#94A3B8] mt-1">Custo total: R$ 293.800/mês (6 equipes)</p>
                     </div>
                   </div>
                   <button 
                     onClick={() => showToast('Relatório de saúde das squads exportado', 'success')}
                     className="px-4 py-2 text-sm bg-[#00D9FF]/10 text-[#00D9FF] hover:bg-[#00D9FF]/20 rounded-lg transition-colors whitespace-nowrap"
+                    title="Exportar relatório de saúde das equipes em formato PDF"
                   >
                     Exportar Relatório
                   </button>
@@ -457,12 +458,12 @@ export function PlanningPage() {
       </div>
 
       {/* Dependencies Management */}
-      <div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
+      {/*<div className="bg-[#131827] border border-[#1E293B] rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl text-[#F1F5F9] font-semibold mb-1">Gestão de Dependências</h2>
             <p className="text-sm text-[#94A3B8]">Rastreamento de solicitações para DBAs e Infraestrutura</p>
-          </div>
+          </div> 
           <button 
             id="btn-new-request"
             onClick={() => setIsRequestModalOpen(true)}
@@ -485,13 +486,11 @@ export function PlanningPage() {
                 className="bg-[#0A0E1A]/50 border border-[#1E293B] rounded-xl p-4 hover:border-[#94A3B8]/30 transition-all"
               >
                 <div className="flex items-start gap-4">
-                  {/* Priority Indicator */}
                   <div 
                     className="w-1 h-full rounded-full flex-shrink-0"
                     style={{ backgroundColor: getPriorityColor(dep.priority) }}
                   ></div>
 
-                  {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <div className="flex-1 min-w-0">
@@ -513,7 +512,6 @@ export function PlanningPage() {
                         </div>
                       </div>
 
-                      {/* Status Badge */}
                       <div 
                         className="flex items-center gap-2 px-3 py-1.5 rounded-lg flex-shrink-0 self-start"
                         style={{ backgroundColor: `${statusConfig.bg}20` }}
@@ -525,7 +523,6 @@ export function PlanningPage() {
                       </div>
                     </div>
 
-                    {/* SLA */}
                     <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#1E293B]">
                       <Clock className="w-4 h-4 text-[#94A3B8]" />
                       <span className={`text-sm ${
@@ -540,7 +537,7 @@ export function PlanningPage() {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
       {/* New Request Modal */}
       <Modal isOpen={isRequestModalOpen} onClose={() => setIsRequestModalOpen(false)} title="Nova Solicitação de Dependência">
